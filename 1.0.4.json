@@ -1107,6 +1107,48 @@
     }
   },
   "definitions": {
+    "TariffItem": {
+      "type": "object",
+      "description": "Tariff element as returned in ShipmentRateOutput.tariffs",
+      "properties": {
+        "price_netto": { "type": "number", "format": "float" },
+        "price_brutto": { "type": "number", "format": "float" },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "packageId": { "type": "integer" },
+              "volumeWeight": { "type": "number", "format": "float" }
+            },
+            "additionalProperties": true
+          }
+        },
+
+        "id": { "type": "string" },
+        "shipper_id": { "type": "integer" },
+        "tariff_type_id": { "type": "integer" },
+        "dispatch_id": { "type": "integer" },
+        "package_type_ids": { "type": "string" },
+        "country_id": { "type": "integer" },
+        "transfer": { "type": "string" },
+
+        "printer_required": { "type": "integer" },
+        "calculate_volume_weight": { "type": "integer" },
+        "volume_weight_factor": { "type": "integer" },
+
+        "marketing_discount": { "type": "number", "format": "float", "x-nullable": true },
+        "marketing_discount_valid_until": { "type": "string", "format": "date-time", "x-nullable": true },
+
+        "pickup_surcharge": { "type": "number", "format": "float", "x-nullable": true },
+
+        "settings": { "type": "object", "additionalProperties": true, "x-nullable": true },
+
+        "shipper": { "type": "object", "additionalProperties": true, "x-nullable": true },
+        "dates": { "type": "object", "additionalProperties": true, "x-nullable": true }
+      },
+      "additionalProperties": true
+    },
     "AccessPoints": {
       "type": "object",
       "description": "Contains the data of the carrier access points.",
@@ -3913,6 +3955,8 @@
         "document",
         "bulk",
         "pallet",
+        "n_s_pallet",
+        "tire",
         "tires",
         "suitcase"
       ],
@@ -4781,30 +4825,22 @@
         "shipperGroups": {
           "type": "object",
           "description": "Map of shipper groups keyed by index",
-          "items": {
+          "additionalProperties": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "integer",
-                "description": "Shipper group id",
-                "example": 2
-              },
-              "name": {
-                "type": "string",
-                "description": "Shipper group name",
-                "example": "DHL Express"
-              },
-              "logo": {
-                "type": "string",
-                "description": "Shipper group logo",
-                "example": "/img/versandrechner/versender/dhlexpress.png"
-              },
-              "url_converted": {
-                "type": "string",
-                "description": "Shipper group url",
-                "example": "dhl-express"
-              }
-            }
+              "id": { "type": "integer", "example": 2 },
+              "name": { "type": "string", "example": "DHL Express" },
+              "logo": { "type": "string", "example": "/img/versandrechner/versender/dhlexpress.png" },
+
+              "email": { "type": "string", "x-nullable": true, "example": null },
+              "settings": { "type": "string", "description": "JSON string", "example": "{\"important\": true}" },
+              "machine_name": { "type": "string", "example": "dhlexpress" },
+              "isShopDeliveryPossible": { "type": "boolean", "example": false },
+              "urlConverted": { "type": "string", "example": "dhl-express" },
+
+              "url_converted": { "type": "string", "description": "Legacy field name", "example": "dhl-express" }
+            },
+            "additionalProperties": true
           }
         },
         "countries": {
@@ -4937,7 +4973,7 @@
         "tariffs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Tariff"
+            "$ref": "#/definitions/TariffItem"
           }
         },
         "summary": {
@@ -5383,8 +5419,9 @@
               }
             },
             "id": {
-              "type": "integer",
-              "example": 1
+              "type": "string",
+              "description": "Tariff id can be numeric or prefixed string (e.g. 3107 or s-3080)",
+              "example": "3107"
             },
             "shipper_id": {
               "type": "integer",
@@ -5457,9 +5494,10 @@
             },
             "marketing_discount_valid_until": {
               "type": "string",
-              "format": "date",
-              "description": "Last date for marketing discount",
-              "example": "2020-02-07"
+              "format": "date-time",
+              "description": "Last date/time for marketing discount (nullable)",
+              "example": "2026-02-12 23:55:00",
+              "x-nullable": true
             },
             "delivery_on_saturday": {
               "type": "integer",
@@ -5552,8 +5590,9 @@
               "example": 1
             },
             "pickup_surcharge": {
-              "type": "integer",
-              "example": 0
+              "type": "number",
+              "format": "float",
+              "example": 0.5
             },
             "shipper_tariff_zone_country_id": {
               "type": "integer",

@@ -61,7 +61,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
         'price_netto' => 'float',
         'price_brutto' => 'float',
         'packages' => '\kruegge82\jumingo\Model\TariffTariffPackagesInner[]',
-        'id' => 'int',
+        'id' => 'string',
         'shipper_id' => 'int',
         'tariff_type_id' => 'int',
         'dispatch_id' => 'int',
@@ -102,7 +102,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
         'transit_time_max' => 'int',
         'delivery_time_until' => 'string',
         'store_delivery' => 'int',
-        'pickup_surcharge' => 'int',
+        'pickup_surcharge' => 'float',
         'shipper_tariff_zone_country_id' => 'int',
         'shipping_type' => 'int',
         'currency' => '\kruegge82\jumingo\Model\CurrencyCode',
@@ -179,7 +179,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
         'calculate_volume_weight' => null,
         'volume_weight_factor' => null,
         'marketing_discount' => 'float',
-        'marketing_discount_valid_until' => 'date',
+        'marketing_discount_valid_until' => 'date-time',
         'delivery_on_saturday' => null,
         'guaranteed_delivery_date' => null,
         'loading_aid' => null,
@@ -202,7 +202,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
         'transit_time_max' => null,
         'delivery_time_until' => null,
         'store_delivery' => null,
-        'pickup_surcharge' => null,
+        'pickup_surcharge' => 'float',
         'shipper_tariff_zone_country_id' => null,
         'shipping_type' => null,
         'currency' => null,
@@ -277,7 +277,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
         'calculate_volume_weight' => false,
         'volume_weight_factor' => false,
         'marketing_discount' => false,
-        'marketing_discount_valid_until' => false,
+        'marketing_discount_valid_until' => true,
         'delivery_on_saturday' => false,
         'guaranteed_delivery_date' => false,
         'loading_aid' => false,
@@ -997,7 +997,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return string|null
      */
     public function getId()
     {
@@ -1007,7 +1007,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param string|null $id Tariff id can be numeric or prefixed string (e.g. 3107 or s-3080)
      *
      * @return self
      */
@@ -1493,14 +1493,21 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets marketing_discount_valid_until
      *
-     * @param \DateTime|null $marketing_discount_valid_until Last date for marketing discount
+     * @param \DateTime|null $marketing_discount_valid_until Last date/time for marketing discount (nullable)
      *
      * @return self
      */
     public function setMarketingDiscountValidUntil($marketing_discount_valid_until)
     {
         if (is_null($marketing_discount_valid_until)) {
-            throw new \InvalidArgumentException('non-nullable marketing_discount_valid_until cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'marketing_discount_valid_until');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('marketing_discount_valid_until', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['marketing_discount_valid_until'] = $marketing_discount_valid_until;
 
@@ -2104,7 +2111,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets pickup_surcharge
      *
-     * @return int|null
+     * @return float|null
      */
     public function getPickupSurcharge()
     {
@@ -2114,7 +2121,7 @@ class TariffTariff implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets pickup_surcharge
      *
-     * @param int|null $pickup_surcharge pickup_surcharge
+     * @param float|null $pickup_surcharge pickup_surcharge
      *
      * @return self
      */

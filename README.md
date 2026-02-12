@@ -237,6 +237,7 @@ Class | Method | HTTP request | Description
 - [State](docs/Model/State.md)
 - [StateCode](docs/Model/StateCode.md)
 - [Tariff](docs/Model/Tariff.md)
+- [TariffItem](docs/Model/TariffItem.md)
 - [TariffPickupCountryHolidays](docs/Model/TariffPickupCountryHolidays.md)
 - [TariffTariff](docs/Model/TariffTariff.md)
 - [TariffTariffDates](docs/Model/TariffTariffDates.md)

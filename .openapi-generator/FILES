@@ -101,6 +101,7 @@ docs/Model/ShipmentTrackingProgressPoints.md
 docs/Model/State.md
 docs/Model/StateCode.md
 docs/Model/Tariff.md
+docs/Model/TariffItem.md
 docs/Model/TariffPickupCountryHolidays.md
 docs/Model/TariffTariff.md
 docs/Model/TariffTariffDates.md
@@ -223,6 +224,7 @@ lib/Model/ShipmentTrackingProgressPoints.php
 lib/Model/State.php
 lib/Model/StateCode.php
 lib/Model/Tariff.php
+lib/Model/TariffItem.php
 lib/Model/TariffPickupCountryHolidays.php
 lib/Model/TariffTariff.php
 lib/Model/TariffTariffDates.php
@@ -340,6 +342,7 @@ test/Model/ShipmentTrackingProgressTest.php
 test/Model/ShipmentTrackingTest.php
 test/Model/StateCodeTest.php
 test/Model/StateTest.php
+test/Model/TariffItemTest.php
 test/Model/TariffPickupCountryHolidaysTest.php
 test/Model/TariffTariffDatesDeliveryTest.php
 test/Model/TariffTariffDatesPickupTest.php

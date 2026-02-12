@@ -59,7 +59,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'uuid' => 'string',
-        'shipper_groups' => 'object',
+        'shipper_groups' => 'array<string,array<string,mixed>>',
         'countries' => '\kruegge82\jumingo\Model\ShipmentRateOutputCountriesInner[]',
         'status' => 'string',
         'from_country_code' => 'string',
@@ -76,7 +76,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
         'from' => '\kruegge82\jumingo\Model\ShipmentAddress',
         'to' => '\kruegge82\jumingo\Model\ShipmentAddress',
         'packages' => '\kruegge82\jumingo\Model\ShipmentPackage[]',
-        'tariffs' => '\kruegge82\jumingo\Model\Tariff[]',
+        'tariffs' => '\kruegge82\jumingo\Model\TariffItem[]',
         'summary' => '\kruegge82\jumingo\Model\ShipmentRateSummary',
         'quick_filters' => '\kruegge82\jumingo\Model\ShipmentRateOutputQuickFiltersInner[]',
         'seo_data' => 'bool',
@@ -474,7 +474,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets shipper_groups
      *
-     * @return object|null
+     * @return array<string,array<string,mixed>>|null
      */
     public function getShipperGroups()
     {
@@ -484,7 +484,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets shipper_groups
      *
-     * @param object|null $shipper_groups Map of shipper groups keyed by index
+     * @param array<string,array<string,mixed>>|null $shipper_groups Map of shipper groups keyed by index
      *
      * @return self
      */
@@ -933,7 +933,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets tariffs
      *
-     * @return \kruegge82\jumingo\Model\Tariff[]|null
+     * @return \kruegge82\jumingo\Model\TariffItem[]|null
      */
     public function getTariffs()
     {
@@ -943,7 +943,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets tariffs
      *
-     * @param \kruegge82\jumingo\Model\Tariff[]|null $tariffs tariffs
+     * @param \kruegge82\jumingo\Model\TariffItem[]|null $tariffs tariffs
      *
      * @return self
      */

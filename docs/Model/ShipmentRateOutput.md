@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **string** | identifier of shipment rate | [optional]
-**shipper_groups** | **object** | Map of shipper groups keyed by index | [optional]
+**shipper_groups** | **array<string,array<string,mixed>>** | Map of shipper groups keyed by index | [optional]
 **countries** | [**\kruegge82\jumingo\Model\ShipmentRateOutputCountriesInner[]**](ShipmentRateOutputCountriesInner.md) |  | [optional]
 **status** | **string** | Status of response | [optional]
 **from_country_code** | **string** | From country code | [optional]
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **from** | [**\kruegge82\jumingo\Model\ShipmentAddress**](ShipmentAddress.md) |  | [optional]
 **to** | [**\kruegge82\jumingo\Model\ShipmentAddress**](ShipmentAddress.md) |  | [optional]
 **packages** | [**\kruegge82\jumingo\Model\ShipmentPackage[]**](ShipmentPackage.md) |  | [optional]
-**tariffs** | [**\kruegge82\jumingo\Model\Tariff[]**](Tariff.md) |  | [optional]
+**tariffs** | [**\kruegge82\jumingo\Model\TariffItem[]**](TariffItem.md) |  | [optional]
 **summary** | [**\kruegge82\jumingo\Model\ShipmentRateSummary**](ShipmentRateSummary.md) |  | [optional]
 **quick_filters** | [**\kruegge82\jumingo\Model\ShipmentRateOutputQuickFiltersInner[]**](ShipmentRateOutputQuickFiltersInner.md) |  | [optional]
 **seo_data** | **bool** |  | [optional]
