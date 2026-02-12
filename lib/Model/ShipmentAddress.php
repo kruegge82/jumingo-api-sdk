@@ -67,7 +67,7 @@ class ShipmentAddress implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => '\kruegge82\jumingo\Model\State',
         'country' => '\kruegge82\jumingo\Model\Country',
         'phone' => 'string',
-        'settings' => 'object[]'
+        'settings' => 'array<string,mixed>'
     ];
 
     /**
@@ -105,7 +105,7 @@ class ShipmentAddress implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => false,
         'country' => false,
         'phone' => false,
-        'settings' => false
+        'settings' => true
     ];
 
     /**
@@ -655,7 +655,7 @@ class ShipmentAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets settings
      *
-     * @return object[]|null
+     * @return array<string,mixed>|null
      */
     public function getSettings()
     {
@@ -665,14 +665,21 @@ class ShipmentAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets settings
      *
-     * @param object[]|null $settings Custom address data
+     * @param array<string,mixed>|null $settings Custom settings returned by the API (may contain arbitrary keys)
      *
      * @return self
      */
     public function setSettings($settings)
     {
         if (is_null($settings)) {
-            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['settings'] = $settings;
 

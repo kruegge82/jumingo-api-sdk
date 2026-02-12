@@ -67,12 +67,12 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'email_label_copy' => 'string',
         'insurance_amount' => 'int',
         'insurance_currency' => 'string',
-        'extra_insurance_price_netto' => 'string',
-        'extra_insurance_price_brutto' => 'string',
+        'extra_insurance_price_netto' => 'float',
+        'extra_insurance_price_brutto' => 'float',
         'export_license' => 'bool',
-        'extra_insurance_value' => 'int',
+        'extra_insurance_value' => 'float',
         'extra_insurance_type' => 'string',
-        'export_license_price_brutto' => 'string',
+        'export_license_price_brutto' => 'float',
         'shipment_order_number_short' => 'string',
         'shipment_order_number' => 'string',
         'packaging_type' => '\kruegge82\jumingo\Model\PackagingType',
@@ -98,12 +98,12 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'email_label_copy' => null,
         'insurance_amount' => 'int32',
         'insurance_currency' => null,
-        'extra_insurance_price_netto' => null,
-        'extra_insurance_price_brutto' => null,
+        'extra_insurance_price_netto' => 'float',
+        'extra_insurance_price_brutto' => 'float',
         'export_license' => null,
-        'extra_insurance_value' => null,
+        'extra_insurance_value' => 'float',
         'extra_insurance_type' => null,
-        'export_license_price_brutto' => null,
+        'export_license_price_brutto' => 'float',
         'shipment_order_number_short' => null,
         'shipment_order_number' => null,
         'packaging_type' => null,
@@ -772,7 +772,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets extra_insurance_price_netto
      *
-     * @return string|null
+     * @return float|null
      */
     public function getExtraInsurancePriceNetto()
     {
@@ -782,7 +782,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets extra_insurance_price_netto
      *
-     * @param string|null $extra_insurance_price_netto Amount of extra insurance value netto
+     * @param float|null $extra_insurance_price_netto Amount of extra insurance value netto
      *
      * @return self
      */
@@ -799,7 +799,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets extra_insurance_price_brutto
      *
-     * @return string|null
+     * @return float|null
      */
     public function getExtraInsurancePriceBrutto()
     {
@@ -809,7 +809,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets extra_insurance_price_brutto
      *
-     * @param string|null $extra_insurance_price_brutto Amount of extra insurance value brutto
+     * @param float|null $extra_insurance_price_brutto Amount of extra insurance value brutto
      *
      * @return self
      */
@@ -853,7 +853,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets extra_insurance_value
      *
-     * @return int|null
+     * @return float|null
      */
     public function getExtraInsuranceValue()
     {
@@ -863,7 +863,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets extra_insurance_value
      *
-     * @param int|null $extra_insurance_value Amount of extra insurance value
+     * @param float|null $extra_insurance_value Amount of extra insurance value
      *
      * @return self
      */
@@ -917,7 +917,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets export_license_price_brutto
      *
-     * @return string|null
+     * @return float|null
      */
     public function getExportLicensePriceBrutto()
     {
@@ -927,7 +927,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets export_license_price_brutto
      *
-     * @param string|null $export_license_price_brutto Amount of extra license price brutto
+     * @param float|null $export_license_price_brutto Amount of extra license price brutto
      *
      * @return self
      */

@@ -13,6 +13,6 @@ Name | Type | Description | Notes
 **state** | [**\kruegge82\jumingo\Model\State**](State.md) |  | [optional]
 **country** | [**\kruegge82\jumingo\Model\Country**](Country.md) |  | [optional]
 **phone** | **string** | Phone number | [optional]
-**settings** | **object[]** | Custom address data | [optional]
+**settings** | **array<string,mixed>** | Custom settings returned by the API (may contain arbitrary keys) | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

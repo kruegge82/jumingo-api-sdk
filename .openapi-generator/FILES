@@ -92,7 +92,6 @@ docs/Model/ShipmentRateOutputQuickFiltersInner.md
 docs/Model/ShipmentRateSummary.md
 docs/Model/ShipmentRateSummaryPackage.md
 docs/Model/ShipmentRateSummaryTax.md
-docs/Model/ShipmentSettings.md
 docs/Model/ShipmentTracking.md
 docs/Model/ShipmentTrackingData.md
 docs/Model/ShipmentTrackingDataCarrier.md
@@ -215,7 +214,6 @@ lib/Model/ShipmentRateOutputQuickFiltersInner.php
 lib/Model/ShipmentRateSummary.php
 lib/Model/ShipmentRateSummaryPackage.php
 lib/Model/ShipmentRateSummaryTax.php
-lib/Model/ShipmentSettings.php
 lib/Model/ShipmentTracking.php
 lib/Model/ShipmentTrackingData.php
 lib/Model/ShipmentTrackingDataCarrier.php
@@ -333,7 +331,6 @@ test/Model/ShipmentRateSummaryPackageTest.php
 test/Model/ShipmentRateSummaryTaxTest.php
 test/Model/ShipmentRateSummaryTest.php
 test/Model/ShipmentRateTest.php
-test/Model/ShipmentSettingsTest.php
 test/Model/ShipmentTest.php
 test/Model/ShipmentTrackingDataCarrierTest.php
 test/Model/ShipmentTrackingDataTest.php

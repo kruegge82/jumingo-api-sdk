@@ -4,6 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** | Package id | [optional]
+**volume_weight** | **float** | Volumetric weight of the package | [optional]
+**type** | **string** | Package type machine name | [optional]
+**type_id** | **int** | Package type id | [optional]
+**name** | **string** | Optional package name | [optional]
+**api_shipment_ids** | **string[]** | Optional list of related api shipment ids | [optional]
+**quantity** | **int** | Quantity of identical packages | [optional]
 **weight** | **float** | Weight of the package in kg |
 **length** | **int** | Length of the package in cm |
 **width** | **int** | Width of the package in cm |

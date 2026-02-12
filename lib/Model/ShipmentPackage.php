@@ -58,6 +58,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'int',
+        'volume_weight' => 'float',
+        'type' => 'string',
+        'type_id' => 'int',
+        'name' => 'string',
+        'api_shipment_ids' => 'string[]',
+        'quantity' => 'int',
         'weight' => 'float',
         'length' => 'int',
         'width' => 'int',
@@ -75,6 +82,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => 'int32',
+        'volume_weight' => 'float',
+        'type' => null,
+        'type_id' => 'int32',
+        'name' => null,
+        'api_shipment_ids' => null,
+        'quantity' => 'int32',
         'weight' => 'float',
         'length' => 'int32',
         'width' => 'int32',
@@ -90,6 +104,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'id' => false,
+        'volume_weight' => false,
+        'type' => false,
+        'type_id' => false,
+        'name' => true,
+        'api_shipment_ids' => true,
+        'quantity' => false,
         'weight' => false,
         'length' => false,
         'width' => false,
@@ -185,6 +206,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
+        'volume_weight' => 'volume_weight',
+        'type' => 'type',
+        'type_id' => 'type_id',
+        'name' => 'name',
+        'api_shipment_ids' => 'api_shipment_ids',
+        'quantity' => 'quantity',
         'weight' => 'weight',
         'length' => 'length',
         'width' => 'width',
@@ -200,6 +228,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
+        'volume_weight' => 'setVolumeWeight',
+        'type' => 'setType',
+        'type_id' => 'setTypeId',
+        'name' => 'setName',
+        'api_shipment_ids' => 'setApiShipmentIds',
+        'quantity' => 'setQuantity',
         'weight' => 'setWeight',
         'length' => 'setLength',
         'width' => 'setWidth',
@@ -215,6 +250,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
+        'volume_weight' => 'getVolumeWeight',
+        'type' => 'getType',
+        'type_id' => 'getTypeId',
+        'name' => 'getName',
+        'api_shipment_ids' => 'getApiShipmentIds',
+        'quantity' => 'getQuantity',
         'weight' => 'getWeight',
         'length' => 'getLength',
         'width' => 'getWidth',
@@ -281,6 +323,13 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('volume_weight', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('type_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('api_shipment_ids', $data ?? [], null);
+        $this->setIfExists('quantity', $data ?? [], null);
         $this->setIfExists('weight', $data ?? [], null);
         $this->setIfExists('length', $data ?? [], null);
         $this->setIfExists('width', $data ?? [], null);
@@ -387,6 +436,209 @@ class ShipmentPackage implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id Package id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets volume_weight
+     *
+     * @return float|null
+     */
+    public function getVolumeWeight()
+    {
+        return $this->container['volume_weight'];
+    }
+
+    /**
+     * Sets volume_weight
+     *
+     * @param float|null $volume_weight Volumetric weight of the package
+     *
+     * @return self
+     */
+    public function setVolumeWeight($volume_weight)
+    {
+        if (is_null($volume_weight)) {
+            throw new \InvalidArgumentException('non-nullable volume_weight cannot be null');
+        }
+        $this->container['volume_weight'] = $volume_weight;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string|null $type Package type machine name
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets type_id
+     *
+     * @return int|null
+     */
+    public function getTypeId()
+    {
+        return $this->container['type_id'];
+    }
+
+    /**
+     * Sets type_id
+     *
+     * @param int|null $type_id Package type id
+     *
+     * @return self
+     */
+    public function setTypeId($type_id)
+    {
+        if (is_null($type_id)) {
+            throw new \InvalidArgumentException('non-nullable type_id cannot be null');
+        }
+        $this->container['type_id'] = $type_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Optional package name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_shipment_ids
+     *
+     * @return string[]|null
+     */
+    public function getApiShipmentIds()
+    {
+        return $this->container['api_shipment_ids'];
+    }
+
+    /**
+     * Sets api_shipment_ids
+     *
+     * @param string[]|null $api_shipment_ids Optional list of related api shipment ids
+     *
+     * @return self
+     */
+    public function setApiShipmentIds($api_shipment_ids)
+    {
+        if (is_null($api_shipment_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'api_shipment_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('api_shipment_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['api_shipment_ids'] = $api_shipment_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets quantity
+     *
+     * @return int|null
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
+
+    /**
+     * Sets quantity
+     *
+     * @param int|null $quantity Quantity of identical packages
+     *
+     * @return self
+     */
+    public function setQuantity($quantity)
+    {
+        if (is_null($quantity)) {
+            throw new \InvalidArgumentException('non-nullable quantity cannot be null');
+        }
+        $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
 
     /**
      * Gets weight

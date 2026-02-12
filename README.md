@@ -228,7 +228,6 @@ Class | Method | HTTP request | Description
 - [ShipmentRateSummary](docs/Model/ShipmentRateSummary.md)
 - [ShipmentRateSummaryPackage](docs/Model/ShipmentRateSummaryPackage.md)
 - [ShipmentRateSummaryTax](docs/Model/ShipmentRateSummaryTax.md)
-- [ShipmentSettings](docs/Model/ShipmentSettings.md)
 - [ShipmentTracking](docs/Model/ShipmentTracking.md)
 - [ShipmentTrackingData](docs/Model/ShipmentTrackingData.md)
 - [ShipmentTrackingDataCarrier](docs/Model/ShipmentTrackingDataCarrier.md)

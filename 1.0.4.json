@@ -4053,16 +4053,27 @@
           "example": "completed"
         },
         "source": {
-          "type": "string",
-          "description": "The data source of the shipment",
-          "enum": [
-            "Excel",
-            "CSV",
-            "API",
-            "Calculator",
-            "Tracking"
-          ],
-          "example": "API"
+          "type": "object",
+          "description": "Source information returned by the API",
+          "properties": {
+            "type": { "type": "string" },
+            "id": { "type": "integer", "format": "int32", "x-nullable": true },
+            "original_filename": { "type": "string", "x-nullable": true }
+          },
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "import_messages": {
+          "type": "object",
+          "description": "Validation/import messages (structure may vary)",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "import_messages_text": {
+          "type": "object",
+          "description": "Human readable import messages (structure may vary)",
+          "additionalProperties": true,
+          "x-nullable": true
         },
         "from_address": {
           "$ref": "#/definitions/ShipmentAddress"
@@ -4097,28 +4108,23 @@
           "description": "Is pickup or delivery dates in the past according country timezones.",
           "example": true
         },
+        "dates": {
+          "type": "object",
+          "description": "Aggregated date/time information returned by the API",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "dates_aggregation": {
+          "type": "object",
+          "description": "Date aggregation map (keys like created/last_modified)",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
         "settings": {
           "type": "object",
-          "description": "Shipment settings",
-          "properties": {
-            "source_type": {
-              "type": "string",
-              "description": "Source of shipment",
-              "example": "SCC"
-            },
-            "label_format": {
-              "type": "string",
-              "description": "Prefered label format",
-              "enum": [
-                "A4",
-                "A6"
-              ]
-            },
-            "use_commercial_invoice": {
-              "type": "boolean",
-              "description": "An indicator that shows whether to use a commercial invoice or a proforma invoice"
-            }
-          }
+          "description": "Shipment settings (arbitrary key/value map)",
+          "additionalProperties": true,
+          "x-nullable": true
         },
         "picked_up": {
           "type": "boolean",
@@ -4129,6 +4135,24 @@
           "type": "boolean",
           "description": "Parameter to show can we update delivery address for an already ordered shipment or not",
           "example": false
+        },
+        "documents": {
+          "type": "object",
+          "description": "Shipment documents container (keys may be null or objects)",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "order": {
+          "type": "object",
+          "description": "Related order data (structure may vary)",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "shipment_issues": {
+          "type": "array",
+          "description": "List of shipment issues",
+          "items": { "type": "object", "additionalProperties": true },
+          "x-nullable": true
         },
         "pickup_status": {
           "type": "integer",
@@ -4189,12 +4213,11 @@
           "example": "1234567890"
         },
         "settings": {
-          "type": "array",
-          "description": "Custom address data",
-          "items": {
-            "type": "object"
-          },
-          "example": []
+          "type": "object",
+          "description": "Custom settings returned by the API (may contain arbitrary keys)",
+          "additionalProperties": true,
+          "x-nullable": true,
+          "example": { "source_sender_address_id": 123, "email": "email@email.com" }
         }
       }
     },
@@ -4389,12 +4412,14 @@
           "example": "EUR"
         },
         "extra_insurance_price_netto": {
-          "type": "string",
+          "type": "number",
+          "format": "float",
           "description": "Amount of extra insurance value netto",
           "example": 8.2
         },
         "extra_insurance_price_brutto": {
-          "type": "string",
+          "type": "number",
+          "format": "float",
           "description": "Amount of extra insurance value brutto",
           "example": 10
         },
@@ -4403,7 +4428,8 @@
           "description": "Indicate if you need an export license and want to buy it along with the shipment"
         },
         "extra_insurance_value": {
-          "type": "integer",
+          "type": "number",
+          "format": "float",
           "description": "Amount of extra insurance value",
           "example": 300
         },
@@ -4417,7 +4443,8 @@
           "default": "standard"
         },
         "export_license_price_brutto": {
-          "type": "string",
+          "type": "number",
+          "format": "float",
           "description": "Amount of extra license price brutto",
           "example": 11
         },
@@ -4480,6 +4507,48 @@
         "width"
       ],
       "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Package id",
+          "example": 14123511
+        },
+        "volume_weight": {
+          "type": "number",
+          "format": "float",
+          "description": "Volumetric weight of the package",
+          "example": 0.2
+        },
+        "type": {
+          "type": "string",
+          "description": "Package type machine name",
+          "example": "parcel"
+        },
+        "type_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Package type id",
+          "example": 7
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional package name",
+          "x-nullable": true,
+          "example": null
+        },
+        "api_shipment_ids": {
+          "type": "array",
+          "description": "Optional list of related api shipment ids",
+          "items": { "type": "string" },
+          "x-nullable": true,
+          "example": null
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of identical packages",
+          "example": 1
+        },
         "weight": {
           "type": "number",
           "format": "float",

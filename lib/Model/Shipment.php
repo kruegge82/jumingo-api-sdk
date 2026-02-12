@@ -64,7 +64,9 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'created' => '\DateTime',
         'last_modified' => '\DateTime',
         'status' => 'string',
-        'source' => 'string',
+        'source' => 'array<string,mixed>',
+        'import_messages' => 'array<string,mixed>',
+        'import_messages_text' => 'array<string,mixed>',
         'from_address' => '\kruegge82\jumingo\Model\ShipmentAddress',
         'to_address' => '\kruegge82\jumingo\Model\ShipmentAddress',
         'details' => '\kruegge82\jumingo\Model\ShipmentDetails',
@@ -74,9 +76,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => '\kruegge82\jumingo\Model\ShipmentRate',
         'tracking' => '\kruegge82\jumingo\Model\ShipmentTracking',
         'dates_in_the_past' => 'bool',
-        'settings' => '\kruegge82\jumingo\Model\ShipmentSettings',
+        'dates' => 'array<string,mixed>',
+        'dates_aggregation' => 'array<string,mixed>',
+        'settings' => 'array<string,mixed>',
         'picked_up' => 'bool',
         'update_ordered_delivery_address_allowed' => 'bool',
+        'documents' => 'array<string,mixed>',
+        'order' => 'array<string,mixed>',
+        'shipment_issues' => 'array<string,mixed>[]',
         'pickup_status' => 'int'
     ];
 
@@ -95,6 +102,8 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_modified' => 'date-time',
         'status' => null,
         'source' => null,
+        'import_messages' => null,
+        'import_messages_text' => null,
         'from_address' => null,
         'to_address' => null,
         'details' => null,
@@ -104,9 +113,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => null,
         'tracking' => null,
         'dates_in_the_past' => null,
+        'dates' => null,
+        'dates_aggregation' => null,
         'settings' => null,
         'picked_up' => null,
         'update_ordered_delivery_address_allowed' => null,
+        'documents' => null,
+        'order' => null,
+        'shipment_issues' => null,
         'pickup_status' => null
     ];
 
@@ -122,7 +136,9 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'created' => false,
         'last_modified' => false,
         'status' => false,
-        'source' => false,
+        'source' => true,
+        'import_messages' => true,
+        'import_messages_text' => true,
         'from_address' => false,
         'to_address' => false,
         'details' => false,
@@ -132,9 +148,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => false,
         'tracking' => false,
         'dates_in_the_past' => false,
-        'settings' => false,
+        'dates' => true,
+        'dates_aggregation' => true,
+        'settings' => true,
         'picked_up' => false,
         'update_ordered_delivery_address_allowed' => false,
+        'documents' => true,
+        'order' => true,
+        'shipment_issues' => true,
         'pickup_status' => false
     ];
 
@@ -231,6 +252,8 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_modified' => 'last_modified',
         'status' => 'status',
         'source' => 'source',
+        'import_messages' => 'import_messages',
+        'import_messages_text' => 'import_messages_text',
         'from_address' => 'from_address',
         'to_address' => 'to_address',
         'details' => 'details',
@@ -240,9 +263,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => 'rate',
         'tracking' => 'tracking',
         'dates_in_the_past' => 'dates_in_the_past',
+        'dates' => 'dates',
+        'dates_aggregation' => 'dates_aggregation',
         'settings' => 'settings',
         'picked_up' => 'picked_up',
         'update_ordered_delivery_address_allowed' => 'update_ordered_delivery_address_allowed',
+        'documents' => 'documents',
+        'order' => 'order',
+        'shipment_issues' => 'shipment_issues',
         'pickup_status' => 'pickup_status'
     ];
 
@@ -259,6 +287,8 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_modified' => 'setLastModified',
         'status' => 'setStatus',
         'source' => 'setSource',
+        'import_messages' => 'setImportMessages',
+        'import_messages_text' => 'setImportMessagesText',
         'from_address' => 'setFromAddress',
         'to_address' => 'setToAddress',
         'details' => 'setDetails',
@@ -268,9 +298,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => 'setRate',
         'tracking' => 'setTracking',
         'dates_in_the_past' => 'setDatesInThePast',
+        'dates' => 'setDates',
+        'dates_aggregation' => 'setDatesAggregation',
         'settings' => 'setSettings',
         'picked_up' => 'setPickedUp',
         'update_ordered_delivery_address_allowed' => 'setUpdateOrderedDeliveryAddressAllowed',
+        'documents' => 'setDocuments',
+        'order' => 'setOrder',
+        'shipment_issues' => 'setShipmentIssues',
         'pickup_status' => 'setPickupStatus'
     ];
 
@@ -287,6 +322,8 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_modified' => 'getLastModified',
         'status' => 'getStatus',
         'source' => 'getSource',
+        'import_messages' => 'getImportMessages',
+        'import_messages_text' => 'getImportMessagesText',
         'from_address' => 'getFromAddress',
         'to_address' => 'getToAddress',
         'details' => 'getDetails',
@@ -296,9 +333,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rate' => 'getRate',
         'tracking' => 'getTracking',
         'dates_in_the_past' => 'getDatesInThePast',
+        'dates' => 'getDates',
+        'dates_aggregation' => 'getDatesAggregation',
         'settings' => 'getSettings',
         'picked_up' => 'getPickedUp',
         'update_ordered_delivery_address_allowed' => 'getUpdateOrderedDeliveryAddressAllowed',
+        'documents' => 'getDocuments',
+        'order' => 'getOrder',
+        'shipment_issues' => 'getShipmentIssues',
         'pickup_status' => 'getPickupStatus'
     ];
 
@@ -350,11 +392,6 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     public const STATUS_IN_DELIVERY = 'in_delivery';
     public const STATUS_DELIVERED = 'delivered';
     public const STATUS_IN_PROGRESS = 'in_progress';
-    public const SOURCE_EXCEL = 'Excel';
-    public const SOURCE_CSV = 'CSV';
-    public const SOURCE_API = 'API';
-    public const SOURCE_CALCULATOR = 'Calculator';
-    public const SOURCE_TRACKING = 'Tracking';
 
     /**
      * Gets allowable values of the enum
@@ -371,22 +408,6 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
             self::STATUS_IN_DELIVERY,
             self::STATUS_DELIVERED,
             self::STATUS_IN_PROGRESS,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSourceAllowableValues()
-    {
-        return [
-            self::SOURCE_EXCEL,
-            self::SOURCE_CSV,
-            self::SOURCE_API,
-            self::SOURCE_CALCULATOR,
-            self::SOURCE_TRACKING,
         ];
     }
 
@@ -412,6 +433,8 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('last_modified', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
+        $this->setIfExists('import_messages', $data ?? [], null);
+        $this->setIfExists('import_messages_text', $data ?? [], null);
         $this->setIfExists('from_address', $data ?? [], null);
         $this->setIfExists('to_address', $data ?? [], null);
         $this->setIfExists('details', $data ?? [], null);
@@ -421,9 +444,14 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('rate', $data ?? [], null);
         $this->setIfExists('tracking', $data ?? [], null);
         $this->setIfExists('dates_in_the_past', $data ?? [], null);
+        $this->setIfExists('dates', $data ?? [], null);
+        $this->setIfExists('dates_aggregation', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('picked_up', $data ?? [], null);
         $this->setIfExists('update_ordered_delivery_address_allowed', $data ?? [], null);
+        $this->setIfExists('documents', $data ?? [], null);
+        $this->setIfExists('order', $data ?? [], null);
+        $this->setIfExists('shipment_issues', $data ?? [], null);
         $this->setIfExists('pickup_status', $data ?? [], null);
     }
 
@@ -459,15 +487,6 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getSourceAllowableValues();
-        if (!is_null($this->container['source']) && !in_array($this->container['source'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'source', must be one of '%s'",
-                $this->container['source'],
                 implode("', '", $allowedValues)
             );
         }
@@ -662,7 +681,7 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source
      *
-     * @return string|null
+     * @return array<string,mixed>|null
      */
     public function getSource()
     {
@@ -672,26 +691,91 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source
      *
-     * @param string|null $source The data source of the shipment
+     * @param array<string,mixed>|null $source Source information returned by the API
      *
      * @return self
      */
     public function setSource($source)
     {
         if (is_null($source)) {
-            throw new \InvalidArgumentException('non-nullable source cannot be null');
-        }
-        $allowedValues = $this->getSourceAllowableValues();
-        if (!in_array($source, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'source', must be one of '%s'",
-                    $source,
-                    implode("', '", $allowedValues)
-                )
-            );
+            array_push($this->openAPINullablesSetToNull, 'source');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['source'] = $source;
+
+        return $this;
+    }
+
+    /**
+     * Gets import_messages
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getImportMessages()
+    {
+        return $this->container['import_messages'];
+    }
+
+    /**
+     * Sets import_messages
+     *
+     * @param array<string,mixed>|null $import_messages Validation/import messages (structure may vary)
+     *
+     * @return self
+     */
+    public function setImportMessages($import_messages)
+    {
+        if (is_null($import_messages)) {
+            array_push($this->openAPINullablesSetToNull, 'import_messages');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('import_messages', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['import_messages'] = $import_messages;
+
+        return $this;
+    }
+
+    /**
+     * Gets import_messages_text
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getImportMessagesText()
+    {
+        return $this->container['import_messages_text'];
+    }
+
+    /**
+     * Sets import_messages_text
+     *
+     * @param array<string,mixed>|null $import_messages_text Human readable import messages (structure may vary)
+     *
+     * @return self
+     */
+    public function setImportMessagesText($import_messages_text)
+    {
+        if (is_null($import_messages_text)) {
+            array_push($this->openAPINullablesSetToNull, 'import_messages_text');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('import_messages_text', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['import_messages_text'] = $import_messages_text;
 
         return $this;
     }
@@ -940,9 +1024,77 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets dates
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getDates()
+    {
+        return $this->container['dates'];
+    }
+
+    /**
+     * Sets dates
+     *
+     * @param array<string,mixed>|null $dates Aggregated date/time information returned by the API
+     *
+     * @return self
+     */
+    public function setDates($dates)
+    {
+        if (is_null($dates)) {
+            array_push($this->openAPINullablesSetToNull, 'dates');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dates', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['dates'] = $dates;
+
+        return $this;
+    }
+
+    /**
+     * Gets dates_aggregation
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getDatesAggregation()
+    {
+        return $this->container['dates_aggregation'];
+    }
+
+    /**
+     * Sets dates_aggregation
+     *
+     * @param array<string,mixed>|null $dates_aggregation Date aggregation map (keys like created/last_modified)
+     *
+     * @return self
+     */
+    public function setDatesAggregation($dates_aggregation)
+    {
+        if (is_null($dates_aggregation)) {
+            array_push($this->openAPINullablesSetToNull, 'dates_aggregation');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dates_aggregation', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['dates_aggregation'] = $dates_aggregation;
+
+        return $this;
+    }
+
+    /**
      * Gets settings
      *
-     * @return \kruegge82\jumingo\Model\ShipmentSettings|null
+     * @return array<string,mixed>|null
      */
     public function getSettings()
     {
@@ -952,14 +1104,21 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets settings
      *
-     * @param \kruegge82\jumingo\Model\ShipmentSettings|null $settings settings
+     * @param array<string,mixed>|null $settings Shipment settings (arbitrary key/value map)
      *
      * @return self
      */
     public function setSettings($settings)
     {
         if (is_null($settings)) {
-            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['settings'] = $settings;
 
@@ -1016,6 +1175,108 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable update_ordered_delivery_address_allowed cannot be null');
         }
         $this->container['update_ordered_delivery_address_allowed'] = $update_ordered_delivery_address_allowed;
+
+        return $this;
+    }
+
+    /**
+     * Gets documents
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getDocuments()
+    {
+        return $this->container['documents'];
+    }
+
+    /**
+     * Sets documents
+     *
+     * @param array<string,mixed>|null $documents Shipment documents container (keys may be null or objects)
+     *
+     * @return self
+     */
+    public function setDocuments($documents)
+    {
+        if (is_null($documents)) {
+            array_push($this->openAPINullablesSetToNull, 'documents');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('documents', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['documents'] = $documents;
+
+        return $this;
+    }
+
+    /**
+     * Gets order
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getOrder()
+    {
+        return $this->container['order'];
+    }
+
+    /**
+     * Sets order
+     *
+     * @param array<string,mixed>|null $order Related order data (structure may vary)
+     *
+     * @return self
+     */
+    public function setOrder($order)
+    {
+        if (is_null($order)) {
+            array_push($this->openAPINullablesSetToNull, 'order');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['order'] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Gets shipment_issues
+     *
+     * @return array<string,mixed>[]|null
+     */
+    public function getShipmentIssues()
+    {
+        return $this->container['shipment_issues'];
+    }
+
+    /**
+     * Sets shipment_issues
+     *
+     * @param array<string,mixed>[]|null $shipment_issues List of shipment issues
+     *
+     * @return self
+     */
+    public function setShipmentIssues($shipment_issues)
+    {
+        if (is_null($shipment_issues)) {
+            array_push($this->openAPINullablesSetToNull, 'shipment_issues');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('shipment_issues', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['shipment_issues'] = $shipment_issues;
 
         return $this;
     }
