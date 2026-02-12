@@ -225,7 +225,6 @@ Class | Method | HTTP request | Description
 - [ShipmentRateOutputInsurance](docs/Model/ShipmentRateOutputInsurance.md)
 - [ShipmentRateOutputPickupCountryHolidays](docs/Model/ShipmentRateOutputPickupCountryHolidays.md)
 - [ShipmentRateOutputQuickFiltersInner](docs/Model/ShipmentRateOutputQuickFiltersInner.md)
-- [ShipmentRateOutputShipperGroupsInner](docs/Model/ShipmentRateOutputShipperGroupsInner.md)
 - [ShipmentRateSummary](docs/Model/ShipmentRateSummary.md)
 - [ShipmentRateSummaryPackage](docs/Model/ShipmentRateSummaryPackage.md)
 - [ShipmentRateSummaryTax](docs/Model/ShipmentRateSummaryTax.md)

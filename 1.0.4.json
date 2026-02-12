@@ -4779,7 +4779,8 @@
           "example": "8a43a995-bade-4222-8dc3-5089774fc069"
         },
         "shipperGroups": {
-          "type": "array",
+          "type": "object",
+          "description": "Map of shipper groups keyed by index",
           "items": {
             "type": "object",
             "properties": {

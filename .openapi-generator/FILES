@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .php-cs-fixer.dist.php
 .travis.yml
 README.md
@@ -90,7 +89,6 @@ docs/Model/ShipmentRateOutputExportDeclaration.md
 docs/Model/ShipmentRateOutputInsurance.md
 docs/Model/ShipmentRateOutputPickupCountryHolidays.md
 docs/Model/ShipmentRateOutputQuickFiltersInner.md
-docs/Model/ShipmentRateOutputShipperGroupsInner.md
 docs/Model/ShipmentRateSummary.md
 docs/Model/ShipmentRateSummaryPackage.md
 docs/Model/ShipmentRateSummaryTax.md
@@ -213,7 +211,6 @@ lib/Model/ShipmentRateOutputExportDeclaration.php
 lib/Model/ShipmentRateOutputInsurance.php
 lib/Model/ShipmentRateOutputPickupCountryHolidays.php
 lib/Model/ShipmentRateOutputQuickFiltersInner.php
-lib/Model/ShipmentRateOutputShipperGroupsInner.php
 lib/Model/ShipmentRateSummary.php
 lib/Model/ShipmentRateSummaryPackage.php
 lib/Model/ShipmentRateSummaryTax.php
@@ -329,7 +326,6 @@ test/Model/ShipmentRateOutputExportDeclarationTest.php
 test/Model/ShipmentRateOutputInsuranceTest.php
 test/Model/ShipmentRateOutputPickupCountryHolidaysTest.php
 test/Model/ShipmentRateOutputQuickFiltersInnerTest.php
-test/Model/ShipmentRateOutputShipperGroupsInnerTest.php
 test/Model/ShipmentRateOutputTest.php
 test/Model/ShipmentRateSummaryPackageTest.php
 test/Model/ShipmentRateSummaryTaxTest.php

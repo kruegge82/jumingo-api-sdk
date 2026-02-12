@@ -59,7 +59,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'uuid' => 'string',
-        'shipper_groups' => '\kruegge82\jumingo\Model\ShipmentRateOutputShipperGroupsInner[]',
+        'shipper_groups' => 'object',
         'countries' => '\kruegge82\jumingo\Model\ShipmentRateOutputCountriesInner[]',
         'status' => 'string',
         'from_country_code' => 'string',
@@ -474,7 +474,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets shipper_groups
      *
-     * @return \kruegge82\jumingo\Model\ShipmentRateOutputShipperGroupsInner[]|null
+     * @return object|null
      */
     public function getShipperGroups()
     {
@@ -484,7 +484,7 @@ class ShipmentRateOutput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets shipper_groups
      *
-     * @param \kruegge82\jumingo\Model\ShipmentRateOutputShipperGroupsInner[]|null $shipper_groups shipper_groups
+     * @param object|null $shipper_groups Map of shipper groups keyed by index
      *
      * @return self
      */

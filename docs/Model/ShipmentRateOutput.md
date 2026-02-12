@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **string** | identifier of shipment rate | [optional]
-**shipper_groups** | [**\kruegge82\jumingo\Model\ShipmentRateOutputShipperGroupsInner[]**](ShipmentRateOutputShipperGroupsInner.md) |  | [optional]
+**shipper_groups** | **object** | Map of shipper groups keyed by index | [optional]
 **countries** | [**\kruegge82\jumingo\Model\ShipmentRateOutputCountriesInner[]**](ShipmentRateOutputCountriesInner.md) |  | [optional]
 **status** | **string** | Status of response | [optional]
 **from_country_code** | **string** | From country code | [optional]
