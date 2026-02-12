@@ -52,6 +52,10 @@ class PackagingType
 
     public const PALLET = 'pallet';
 
+    public const N_S_PALLET = 'n_s_pallet';
+
+    public const TIRE = 'tire';
+
     public const TIRES = 'tires';
 
     public const SUITCASE = 'suitcase';
@@ -67,6 +71,8 @@ class PackagingType
             self::DOCUMENT,
             self::BULK,
             self::PALLET,
+            self::N_S_PALLET,
+            self::TIRE,
             self::TIRES,
             self::SUITCASE
         ];
