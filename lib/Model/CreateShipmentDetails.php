@@ -360,7 +360,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('insurance_amount', $data ?? [], null);
         $this->setIfExists('insurance_currency', $data ?? [], null);
         $this->setIfExists('extra_insurance_value', $data ?? [], null);
-        $this->setIfExists('extra_insurance_type', $data ?? [], 'standard');
+        $this->setIfExists('extra_insurance_type', $data ?? [], null);
         $this->setIfExists('export_license', $data ?? [], null);
         $this->setIfExists('packaging_type', $data ?? [], null);
         $this->setIfExists('hs_tariff_number', $data ?? [], null);
