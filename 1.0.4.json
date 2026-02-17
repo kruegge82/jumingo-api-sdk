@@ -4709,6 +4709,12 @@
           "description": "Specifies the minimum and maximum delivery time in working days that the shipment is expected to be on its way.",
           "example": "1-6"
         },
+        "max_liability": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum included liability amount of this rate",
+          "example": 510
+        },
         "max_included_liability_amount": {
           "type": "integer",
           "format": "int32",
@@ -4723,9 +4729,40 @@
           "description": "Indicates whether a printer is required to print the shipping label.",
           "example": true
         },
-        "company_only": {
+        "parcel_content_required": {
+          "type": "boolean",
+          "example": true
+        },
+        "from_company_only": {
           "type": "boolean",
           "description": "A commercial pick-up address is required for this rate.",
+          "example": true
+        },
+        "to_company_only": {
+          "type": "boolean",
+          "description": "A commercial receiver address is required for this rate.",
+          "example": true
+        },
+        "from_private_only": {
+          "type": "boolean",
+          "description": "A private pick-up address is required for this rate.",
+          "example": true
+        },
+        "to_private_only": {
+          "type": "boolean",
+          "description": "A private receiver address is required for this rate.",
+          "example": true
+        },
+        "from_phone_number_required": {
+          "type": "boolean",
+          "example": true
+        },
+        "to_phone_number_required": {
+          "type": "boolean",
+          "example": true
+        },
+        "hs_tariff_number_required": {
+          "type": "boolean",
           "example": true
         },
         "price_net": {
@@ -4758,10 +4795,7 @@
           "example": 19
         },
         "tax_country": {
-          "type": "string",
-          "description": "Tax country (API may return an empty string)",
-          "x-nullable": true,
-          "example": "DE"
+          "$ref": "#/definitions/Country"
         },
         "tax_name": {
           "type": "string",
@@ -4806,10 +4840,80 @@
           "description": "Latest delivery time",
           "example": "18:00:00"
         },
+        "distanceFormatted": {
+          "type": "string"
+        },
+        "durationFormatted": {
+          "type": "string"
+        },
+        "delivery_time_until": {
+          "type": "string",
+          "description": "Latest delivery time",
+          "example": "18:00:00"
+        },
         "durationFormatted": {
           "type": "string",
           "description": "A formatted duration description with translation",
           "example": "4 hours"
+        },
+        "is_jumingo_express": {
+          "type": "boolean",
+          "example": false
+        },
+        "jum_disp": {
+          "type": "boolean",
+          "example": false
+        },
+        "marketing_discount": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "marketing_discount_description": {
+          "type": "string"
+        },
+        "uvp_discount_value": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "uvp_discount_percent": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "uvp_extra_insurance_price_brutto_preselect": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "uvp_extra_insurance_premium_price_brutto_preselect": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "extra_export_license_price_brutto_old": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "price_brutto_uvp": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
+        },
+        "price_netto_uvp": {
+          "type": "number",
+          "format": "float",
+          "description": "Marketing Discpunt",
+          "example": 19
         }
       },
       "description": "The shipment rate object is only available if a tariff has been selected."

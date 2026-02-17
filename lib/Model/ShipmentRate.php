@@ -63,17 +63,25 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => 'array<string,mixed>',
         'shipping_type' => 'string',
         'transit_time_range_days' => 'string',
+        'max_liability' => 'int',
         'max_included_liability_amount' => 'int',
         'max_included_liability_currency' => '\kruegge82\jumingo\Model\Currency',
         'printer_required' => 'bool',
-        'company_only' => 'bool',
+        'parcel_content_required' => 'bool',
+        'from_company_only' => 'bool',
+        'to_company_only' => 'bool',
+        'from_private_only' => 'bool',
+        'to_private_only' => 'bool',
+        'from_phone_number_required' => 'bool',
+        'to_phone_number_required' => 'bool',
+        'hs_tariff_number_required' => 'bool',
         'price_net' => 'float',
         'price_net_currency' => '\kruegge82\jumingo\Model\Currency',
         'price_total' => 'float',
         'price_total_currency' => '\kruegge82\jumingo\Model\Currency',
         'tax_free' => 'bool',
         'tax_rate' => 'float',
-        'tax_country' => 'string',
+        'tax_country' => '\kruegge82\jumingo\Model\Country',
         'tax_name' => 'string',
         'pickup_date' => '\DateTime',
         'pickup_min_time' => 'string',
@@ -82,7 +90,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => '\DateTime',
         'delivery_date_max' => '\DateTime',
         'delivery_time_until' => 'string',
-        'duration_formatted' => 'string'
+        'distance_formatted' => 'string',
+        'duration_formatted' => 'string',
+        'is_jumingo_express' => 'bool',
+        'jum_disp' => 'bool',
+        'marketing_discount' => 'float',
+        'marketing_discount_description' => 'string',
+        'uvp_discount_value' => 'float',
+        'uvp_discount_percent' => 'float',
+        'uvp_extra_insurance_price_brutto_preselect' => 'float',
+        'uvp_extra_insurance_premium_price_brutto_preselect' => 'float',
+        'extra_export_license_price_brutto_old' => 'float',
+        'price_brutto_uvp' => 'float',
+        'price_netto_uvp' => 'float'
     ];
 
     /**
@@ -97,10 +117,18 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => null,
         'shipping_type' => null,
         'transit_time_range_days' => null,
+        'max_liability' => 'int32',
         'max_included_liability_amount' => 'int32',
         'max_included_liability_currency' => null,
         'printer_required' => null,
-        'company_only' => null,
+        'parcel_content_required' => null,
+        'from_company_only' => null,
+        'to_company_only' => null,
+        'from_private_only' => null,
+        'to_private_only' => null,
+        'from_phone_number_required' => null,
+        'to_phone_number_required' => null,
+        'hs_tariff_number_required' => null,
         'price_net' => 'float',
         'price_net_currency' => null,
         'price_total' => 'float',
@@ -116,7 +144,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => 'date-time',
         'delivery_date_max' => 'date-time',
         'delivery_time_until' => null,
-        'duration_formatted' => null
+        'distance_formatted' => null,
+        'duration_formatted' => null,
+        'is_jumingo_express' => null,
+        'jum_disp' => null,
+        'marketing_discount' => 'float',
+        'marketing_discount_description' => null,
+        'uvp_discount_value' => 'float',
+        'uvp_discount_percent' => 'float',
+        'uvp_extra_insurance_price_brutto_preselect' => 'float',
+        'uvp_extra_insurance_premium_price_brutto_preselect' => 'float',
+        'extra_export_license_price_brutto_old' => 'float',
+        'price_brutto_uvp' => 'float',
+        'price_netto_uvp' => 'float'
     ];
 
     /**
@@ -129,17 +169,25 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => true,
         'shipping_type' => false,
         'transit_time_range_days' => false,
+        'max_liability' => false,
         'max_included_liability_amount' => false,
         'max_included_liability_currency' => false,
         'printer_required' => false,
-        'company_only' => false,
+        'parcel_content_required' => false,
+        'from_company_only' => false,
+        'to_company_only' => false,
+        'from_private_only' => false,
+        'to_private_only' => false,
+        'from_phone_number_required' => false,
+        'to_phone_number_required' => false,
+        'hs_tariff_number_required' => false,
         'price_net' => false,
         'price_net_currency' => false,
         'price_total' => false,
         'price_total_currency' => false,
         'tax_free' => false,
         'tax_rate' => false,
-        'tax_country' => true,
+        'tax_country' => false,
         'tax_name' => false,
         'pickup_date' => false,
         'pickup_min_time' => false,
@@ -148,7 +196,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => false,
         'delivery_date_max' => false,
         'delivery_time_until' => false,
-        'duration_formatted' => false
+        'distance_formatted' => false,
+        'duration_formatted' => false,
+        'is_jumingo_express' => false,
+        'jum_disp' => false,
+        'marketing_discount' => false,
+        'marketing_discount_description' => false,
+        'uvp_discount_value' => false,
+        'uvp_discount_percent' => false,
+        'uvp_extra_insurance_price_brutto_preselect' => false,
+        'uvp_extra_insurance_premium_price_brutto_preselect' => false,
+        'extra_export_license_price_brutto_old' => false,
+        'price_brutto_uvp' => false,
+        'price_netto_uvp' => false
     ];
 
     /**
@@ -241,10 +301,18 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => 'service',
         'shipping_type' => 'shipping_type',
         'transit_time_range_days' => 'transit_time_range_days',
+        'max_liability' => 'max_liability',
         'max_included_liability_amount' => 'max_included_liability_amount',
         'max_included_liability_currency' => 'max_included_liability_currency',
         'printer_required' => 'printer_required',
-        'company_only' => 'company_only',
+        'parcel_content_required' => 'parcel_content_required',
+        'from_company_only' => 'from_company_only',
+        'to_company_only' => 'to_company_only',
+        'from_private_only' => 'from_private_only',
+        'to_private_only' => 'to_private_only',
+        'from_phone_number_required' => 'from_phone_number_required',
+        'to_phone_number_required' => 'to_phone_number_required',
+        'hs_tariff_number_required' => 'hs_tariff_number_required',
         'price_net' => 'price_net',
         'price_net_currency' => 'price_net_currency',
         'price_total' => 'price_total',
@@ -260,7 +328,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => 'delivery_date_min',
         'delivery_date_max' => 'delivery_date_max',
         'delivery_time_until' => 'delivery_time_until',
-        'duration_formatted' => 'durationFormatted'
+        'distance_formatted' => 'distanceFormatted',
+        'duration_formatted' => 'durationFormatted',
+        'is_jumingo_express' => 'is_jumingo_express',
+        'jum_disp' => 'jum_disp',
+        'marketing_discount' => 'marketing_discount',
+        'marketing_discount_description' => 'marketing_discount_description',
+        'uvp_discount_value' => 'uvp_discount_value',
+        'uvp_discount_percent' => 'uvp_discount_percent',
+        'uvp_extra_insurance_price_brutto_preselect' => 'uvp_extra_insurance_price_brutto_preselect',
+        'uvp_extra_insurance_premium_price_brutto_preselect' => 'uvp_extra_insurance_premium_price_brutto_preselect',
+        'extra_export_license_price_brutto_old' => 'extra_export_license_price_brutto_old',
+        'price_brutto_uvp' => 'price_brutto_uvp',
+        'price_netto_uvp' => 'price_netto_uvp'
     ];
 
     /**
@@ -273,10 +353,18 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => 'setService',
         'shipping_type' => 'setShippingType',
         'transit_time_range_days' => 'setTransitTimeRangeDays',
+        'max_liability' => 'setMaxLiability',
         'max_included_liability_amount' => 'setMaxIncludedLiabilityAmount',
         'max_included_liability_currency' => 'setMaxIncludedLiabilityCurrency',
         'printer_required' => 'setPrinterRequired',
-        'company_only' => 'setCompanyOnly',
+        'parcel_content_required' => 'setParcelContentRequired',
+        'from_company_only' => 'setFromCompanyOnly',
+        'to_company_only' => 'setToCompanyOnly',
+        'from_private_only' => 'setFromPrivateOnly',
+        'to_private_only' => 'setToPrivateOnly',
+        'from_phone_number_required' => 'setFromPhoneNumberRequired',
+        'to_phone_number_required' => 'setToPhoneNumberRequired',
+        'hs_tariff_number_required' => 'setHsTariffNumberRequired',
         'price_net' => 'setPriceNet',
         'price_net_currency' => 'setPriceNetCurrency',
         'price_total' => 'setPriceTotal',
@@ -292,7 +380,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => 'setDeliveryDateMin',
         'delivery_date_max' => 'setDeliveryDateMax',
         'delivery_time_until' => 'setDeliveryTimeUntil',
-        'duration_formatted' => 'setDurationFormatted'
+        'distance_formatted' => 'setDistanceFormatted',
+        'duration_formatted' => 'setDurationFormatted',
+        'is_jumingo_express' => 'setIsJumingoExpress',
+        'jum_disp' => 'setJumDisp',
+        'marketing_discount' => 'setMarketingDiscount',
+        'marketing_discount_description' => 'setMarketingDiscountDescription',
+        'uvp_discount_value' => 'setUvpDiscountValue',
+        'uvp_discount_percent' => 'setUvpDiscountPercent',
+        'uvp_extra_insurance_price_brutto_preselect' => 'setUvpExtraInsurancePriceBruttoPreselect',
+        'uvp_extra_insurance_premium_price_brutto_preselect' => 'setUvpExtraInsurancePremiumPriceBruttoPreselect',
+        'extra_export_license_price_brutto_old' => 'setExtraExportLicensePriceBruttoOld',
+        'price_brutto_uvp' => 'setPriceBruttoUvp',
+        'price_netto_uvp' => 'setPriceNettoUvp'
     ];
 
     /**
@@ -305,10 +405,18 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'service' => 'getService',
         'shipping_type' => 'getShippingType',
         'transit_time_range_days' => 'getTransitTimeRangeDays',
+        'max_liability' => 'getMaxLiability',
         'max_included_liability_amount' => 'getMaxIncludedLiabilityAmount',
         'max_included_liability_currency' => 'getMaxIncludedLiabilityCurrency',
         'printer_required' => 'getPrinterRequired',
-        'company_only' => 'getCompanyOnly',
+        'parcel_content_required' => 'getParcelContentRequired',
+        'from_company_only' => 'getFromCompanyOnly',
+        'to_company_only' => 'getToCompanyOnly',
+        'from_private_only' => 'getFromPrivateOnly',
+        'to_private_only' => 'getToPrivateOnly',
+        'from_phone_number_required' => 'getFromPhoneNumberRequired',
+        'to_phone_number_required' => 'getToPhoneNumberRequired',
+        'hs_tariff_number_required' => 'getHsTariffNumberRequired',
         'price_net' => 'getPriceNet',
         'price_net_currency' => 'getPriceNetCurrency',
         'price_total' => 'getPriceTotal',
@@ -324,7 +432,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         'delivery_date_min' => 'getDeliveryDateMin',
         'delivery_date_max' => 'getDeliveryDateMax',
         'delivery_time_until' => 'getDeliveryTimeUntil',
-        'duration_formatted' => 'getDurationFormatted'
+        'distance_formatted' => 'getDistanceFormatted',
+        'duration_formatted' => 'getDurationFormatted',
+        'is_jumingo_express' => 'getIsJumingoExpress',
+        'jum_disp' => 'getJumDisp',
+        'marketing_discount' => 'getMarketingDiscount',
+        'marketing_discount_description' => 'getMarketingDiscountDescription',
+        'uvp_discount_value' => 'getUvpDiscountValue',
+        'uvp_discount_percent' => 'getUvpDiscountPercent',
+        'uvp_extra_insurance_price_brutto_preselect' => 'getUvpExtraInsurancePriceBruttoPreselect',
+        'uvp_extra_insurance_premium_price_brutto_preselect' => 'getUvpExtraInsurancePremiumPriceBruttoPreselect',
+        'extra_export_license_price_brutto_old' => 'getExtraExportLicensePriceBruttoOld',
+        'price_brutto_uvp' => 'getPriceBruttoUvp',
+        'price_netto_uvp' => 'getPriceNettoUvp'
     ];
 
     /**
@@ -403,10 +523,18 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('service', $data ?? [], null);
         $this->setIfExists('shipping_type', $data ?? [], null);
         $this->setIfExists('transit_time_range_days', $data ?? [], null);
+        $this->setIfExists('max_liability', $data ?? [], null);
         $this->setIfExists('max_included_liability_amount', $data ?? [], null);
         $this->setIfExists('max_included_liability_currency', $data ?? [], null);
         $this->setIfExists('printer_required', $data ?? [], null);
-        $this->setIfExists('company_only', $data ?? [], null);
+        $this->setIfExists('parcel_content_required', $data ?? [], null);
+        $this->setIfExists('from_company_only', $data ?? [], null);
+        $this->setIfExists('to_company_only', $data ?? [], null);
+        $this->setIfExists('from_private_only', $data ?? [], null);
+        $this->setIfExists('to_private_only', $data ?? [], null);
+        $this->setIfExists('from_phone_number_required', $data ?? [], null);
+        $this->setIfExists('to_phone_number_required', $data ?? [], null);
+        $this->setIfExists('hs_tariff_number_required', $data ?? [], null);
         $this->setIfExists('price_net', $data ?? [], null);
         $this->setIfExists('price_net_currency', $data ?? [], null);
         $this->setIfExists('price_total', $data ?? [], null);
@@ -422,7 +550,19 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('delivery_date_min', $data ?? [], null);
         $this->setIfExists('delivery_date_max', $data ?? [], null);
         $this->setIfExists('delivery_time_until', $data ?? [], null);
+        $this->setIfExists('distance_formatted', $data ?? [], null);
         $this->setIfExists('duration_formatted', $data ?? [], null);
+        $this->setIfExists('is_jumingo_express', $data ?? [], null);
+        $this->setIfExists('jum_disp', $data ?? [], null);
+        $this->setIfExists('marketing_discount', $data ?? [], null);
+        $this->setIfExists('marketing_discount_description', $data ?? [], null);
+        $this->setIfExists('uvp_discount_value', $data ?? [], null);
+        $this->setIfExists('uvp_discount_percent', $data ?? [], null);
+        $this->setIfExists('uvp_extra_insurance_price_brutto_preselect', $data ?? [], null);
+        $this->setIfExists('uvp_extra_insurance_premium_price_brutto_preselect', $data ?? [], null);
+        $this->setIfExists('extra_export_license_price_brutto_old', $data ?? [], null);
+        $this->setIfExists('price_brutto_uvp', $data ?? [], null);
+        $this->setIfExists('price_netto_uvp', $data ?? [], null);
     }
 
     /**
@@ -609,6 +749,33 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets max_liability
+     *
+     * @return int|null
+     */
+    public function getMaxLiability()
+    {
+        return $this->container['max_liability'];
+    }
+
+    /**
+     * Sets max_liability
+     *
+     * @param int|null $max_liability The maximum included liability amount of this rate
+     *
+     * @return self
+     */
+    public function setMaxLiability($max_liability)
+    {
+        if (is_null($max_liability)) {
+            throw new \InvalidArgumentException('non-nullable max_liability cannot be null');
+        }
+        $this->container['max_liability'] = $max_liability;
+
+        return $this;
+    }
+
+    /**
      * Gets max_included_liability_amount
      *
      * @return int|null
@@ -690,28 +857,217 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets company_only
+     * Gets parcel_content_required
      *
      * @return bool|null
      */
-    public function getCompanyOnly()
+    public function getParcelContentRequired()
     {
-        return $this->container['company_only'];
+        return $this->container['parcel_content_required'];
     }
 
     /**
-     * Sets company_only
+     * Sets parcel_content_required
      *
-     * @param bool|null $company_only A commercial pick-up address is required for this rate.
+     * @param bool|null $parcel_content_required parcel_content_required
      *
      * @return self
      */
-    public function setCompanyOnly($company_only)
+    public function setParcelContentRequired($parcel_content_required)
     {
-        if (is_null($company_only)) {
-            throw new \InvalidArgumentException('non-nullable company_only cannot be null');
+        if (is_null($parcel_content_required)) {
+            throw new \InvalidArgumentException('non-nullable parcel_content_required cannot be null');
         }
-        $this->container['company_only'] = $company_only;
+        $this->container['parcel_content_required'] = $parcel_content_required;
+
+        return $this;
+    }
+
+    /**
+     * Gets from_company_only
+     *
+     * @return bool|null
+     */
+    public function getFromCompanyOnly()
+    {
+        return $this->container['from_company_only'];
+    }
+
+    /**
+     * Sets from_company_only
+     *
+     * @param bool|null $from_company_only A commercial pick-up address is required for this rate.
+     *
+     * @return self
+     */
+    public function setFromCompanyOnly($from_company_only)
+    {
+        if (is_null($from_company_only)) {
+            throw new \InvalidArgumentException('non-nullable from_company_only cannot be null');
+        }
+        $this->container['from_company_only'] = $from_company_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets to_company_only
+     *
+     * @return bool|null
+     */
+    public function getToCompanyOnly()
+    {
+        return $this->container['to_company_only'];
+    }
+
+    /**
+     * Sets to_company_only
+     *
+     * @param bool|null $to_company_only A commercial receiver address is required for this rate.
+     *
+     * @return self
+     */
+    public function setToCompanyOnly($to_company_only)
+    {
+        if (is_null($to_company_only)) {
+            throw new \InvalidArgumentException('non-nullable to_company_only cannot be null');
+        }
+        $this->container['to_company_only'] = $to_company_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets from_private_only
+     *
+     * @return bool|null
+     */
+    public function getFromPrivateOnly()
+    {
+        return $this->container['from_private_only'];
+    }
+
+    /**
+     * Sets from_private_only
+     *
+     * @param bool|null $from_private_only A private pick-up address is required for this rate.
+     *
+     * @return self
+     */
+    public function setFromPrivateOnly($from_private_only)
+    {
+        if (is_null($from_private_only)) {
+            throw new \InvalidArgumentException('non-nullable from_private_only cannot be null');
+        }
+        $this->container['from_private_only'] = $from_private_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets to_private_only
+     *
+     * @return bool|null
+     */
+    public function getToPrivateOnly()
+    {
+        return $this->container['to_private_only'];
+    }
+
+    /**
+     * Sets to_private_only
+     *
+     * @param bool|null $to_private_only A private receiver address is required for this rate.
+     *
+     * @return self
+     */
+    public function setToPrivateOnly($to_private_only)
+    {
+        if (is_null($to_private_only)) {
+            throw new \InvalidArgumentException('non-nullable to_private_only cannot be null');
+        }
+        $this->container['to_private_only'] = $to_private_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets from_phone_number_required
+     *
+     * @return bool|null
+     */
+    public function getFromPhoneNumberRequired()
+    {
+        return $this->container['from_phone_number_required'];
+    }
+
+    /**
+     * Sets from_phone_number_required
+     *
+     * @param bool|null $from_phone_number_required from_phone_number_required
+     *
+     * @return self
+     */
+    public function setFromPhoneNumberRequired($from_phone_number_required)
+    {
+        if (is_null($from_phone_number_required)) {
+            throw new \InvalidArgumentException('non-nullable from_phone_number_required cannot be null');
+        }
+        $this->container['from_phone_number_required'] = $from_phone_number_required;
+
+        return $this;
+    }
+
+    /**
+     * Gets to_phone_number_required
+     *
+     * @return bool|null
+     */
+    public function getToPhoneNumberRequired()
+    {
+        return $this->container['to_phone_number_required'];
+    }
+
+    /**
+     * Sets to_phone_number_required
+     *
+     * @param bool|null $to_phone_number_required to_phone_number_required
+     *
+     * @return self
+     */
+    public function setToPhoneNumberRequired($to_phone_number_required)
+    {
+        if (is_null($to_phone_number_required)) {
+            throw new \InvalidArgumentException('non-nullable to_phone_number_required cannot be null');
+        }
+        $this->container['to_phone_number_required'] = $to_phone_number_required;
+
+        return $this;
+    }
+
+    /**
+     * Gets hs_tariff_number_required
+     *
+     * @return bool|null
+     */
+    public function getHsTariffNumberRequired()
+    {
+        return $this->container['hs_tariff_number_required'];
+    }
+
+    /**
+     * Sets hs_tariff_number_required
+     *
+     * @param bool|null $hs_tariff_number_required hs_tariff_number_required
+     *
+     * @return self
+     */
+    public function setHsTariffNumberRequired($hs_tariff_number_required)
+    {
+        if (is_null($hs_tariff_number_required)) {
+            throw new \InvalidArgumentException('non-nullable hs_tariff_number_required cannot be null');
+        }
+        $this->container['hs_tariff_number_required'] = $hs_tariff_number_required;
 
         return $this;
     }
@@ -881,7 +1237,7 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tax_country
      *
-     * @return string|null
+     * @return \kruegge82\jumingo\Model\Country|null
      */
     public function getTaxCountry()
     {
@@ -891,21 +1247,14 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tax_country
      *
-     * @param string|null $tax_country Tax country (API may return an empty string)
+     * @param \kruegge82\jumingo\Model\Country|null $tax_country tax_country
      *
      * @return self
      */
     public function setTaxCountry($tax_country)
     {
         if (is_null($tax_country)) {
-            array_push($this->openAPINullablesSetToNull, 'tax_country');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tax_country', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable tax_country cannot be null');
         }
         $this->container['tax_country'] = $tax_country;
 
@@ -1129,6 +1478,33 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets distance_formatted
+     *
+     * @return string|null
+     */
+    public function getDistanceFormatted()
+    {
+        return $this->container['distance_formatted'];
+    }
+
+    /**
+     * Sets distance_formatted
+     *
+     * @param string|null $distance_formatted distance_formatted
+     *
+     * @return self
+     */
+    public function setDistanceFormatted($distance_formatted)
+    {
+        if (is_null($distance_formatted)) {
+            throw new \InvalidArgumentException('non-nullable distance_formatted cannot be null');
+        }
+        $this->container['distance_formatted'] = $distance_formatted;
+
+        return $this;
+    }
+
+    /**
      * Gets duration_formatted
      *
      * @return string|null
@@ -1151,6 +1527,303 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable duration_formatted cannot be null');
         }
         $this->container['duration_formatted'] = $duration_formatted;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_jumingo_express
+     *
+     * @return bool|null
+     */
+    public function getIsJumingoExpress()
+    {
+        return $this->container['is_jumingo_express'];
+    }
+
+    /**
+     * Sets is_jumingo_express
+     *
+     * @param bool|null $is_jumingo_express is_jumingo_express
+     *
+     * @return self
+     */
+    public function setIsJumingoExpress($is_jumingo_express)
+    {
+        if (is_null($is_jumingo_express)) {
+            throw new \InvalidArgumentException('non-nullable is_jumingo_express cannot be null');
+        }
+        $this->container['is_jumingo_express'] = $is_jumingo_express;
+
+        return $this;
+    }
+
+    /**
+     * Gets jum_disp
+     *
+     * @return bool|null
+     */
+    public function getJumDisp()
+    {
+        return $this->container['jum_disp'];
+    }
+
+    /**
+     * Sets jum_disp
+     *
+     * @param bool|null $jum_disp jum_disp
+     *
+     * @return self
+     */
+    public function setJumDisp($jum_disp)
+    {
+        if (is_null($jum_disp)) {
+            throw new \InvalidArgumentException('non-nullable jum_disp cannot be null');
+        }
+        $this->container['jum_disp'] = $jum_disp;
+
+        return $this;
+    }
+
+    /**
+     * Gets marketing_discount
+     *
+     * @return float|null
+     */
+    public function getMarketingDiscount()
+    {
+        return $this->container['marketing_discount'];
+    }
+
+    /**
+     * Sets marketing_discount
+     *
+     * @param float|null $marketing_discount Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setMarketingDiscount($marketing_discount)
+    {
+        if (is_null($marketing_discount)) {
+            throw new \InvalidArgumentException('non-nullable marketing_discount cannot be null');
+        }
+        $this->container['marketing_discount'] = $marketing_discount;
+
+        return $this;
+    }
+
+    /**
+     * Gets marketing_discount_description
+     *
+     * @return string|null
+     */
+    public function getMarketingDiscountDescription()
+    {
+        return $this->container['marketing_discount_description'];
+    }
+
+    /**
+     * Sets marketing_discount_description
+     *
+     * @param string|null $marketing_discount_description marketing_discount_description
+     *
+     * @return self
+     */
+    public function setMarketingDiscountDescription($marketing_discount_description)
+    {
+        if (is_null($marketing_discount_description)) {
+            throw new \InvalidArgumentException('non-nullable marketing_discount_description cannot be null');
+        }
+        $this->container['marketing_discount_description'] = $marketing_discount_description;
+
+        return $this;
+    }
+
+    /**
+     * Gets uvp_discount_value
+     *
+     * @return float|null
+     */
+    public function getUvpDiscountValue()
+    {
+        return $this->container['uvp_discount_value'];
+    }
+
+    /**
+     * Sets uvp_discount_value
+     *
+     * @param float|null $uvp_discount_value Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setUvpDiscountValue($uvp_discount_value)
+    {
+        if (is_null($uvp_discount_value)) {
+            throw new \InvalidArgumentException('non-nullable uvp_discount_value cannot be null');
+        }
+        $this->container['uvp_discount_value'] = $uvp_discount_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets uvp_discount_percent
+     *
+     * @return float|null
+     */
+    public function getUvpDiscountPercent()
+    {
+        return $this->container['uvp_discount_percent'];
+    }
+
+    /**
+     * Sets uvp_discount_percent
+     *
+     * @param float|null $uvp_discount_percent Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setUvpDiscountPercent($uvp_discount_percent)
+    {
+        if (is_null($uvp_discount_percent)) {
+            throw new \InvalidArgumentException('non-nullable uvp_discount_percent cannot be null');
+        }
+        $this->container['uvp_discount_percent'] = $uvp_discount_percent;
+
+        return $this;
+    }
+
+    /**
+     * Gets uvp_extra_insurance_price_brutto_preselect
+     *
+     * @return float|null
+     */
+    public function getUvpExtraInsurancePriceBruttoPreselect()
+    {
+        return $this->container['uvp_extra_insurance_price_brutto_preselect'];
+    }
+
+    /**
+     * Sets uvp_extra_insurance_price_brutto_preselect
+     *
+     * @param float|null $uvp_extra_insurance_price_brutto_preselect Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setUvpExtraInsurancePriceBruttoPreselect($uvp_extra_insurance_price_brutto_preselect)
+    {
+        if (is_null($uvp_extra_insurance_price_brutto_preselect)) {
+            throw new \InvalidArgumentException('non-nullable uvp_extra_insurance_price_brutto_preselect cannot be null');
+        }
+        $this->container['uvp_extra_insurance_price_brutto_preselect'] = $uvp_extra_insurance_price_brutto_preselect;
+
+        return $this;
+    }
+
+    /**
+     * Gets uvp_extra_insurance_premium_price_brutto_preselect
+     *
+     * @return float|null
+     */
+    public function getUvpExtraInsurancePremiumPriceBruttoPreselect()
+    {
+        return $this->container['uvp_extra_insurance_premium_price_brutto_preselect'];
+    }
+
+    /**
+     * Sets uvp_extra_insurance_premium_price_brutto_preselect
+     *
+     * @param float|null $uvp_extra_insurance_premium_price_brutto_preselect Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setUvpExtraInsurancePremiumPriceBruttoPreselect($uvp_extra_insurance_premium_price_brutto_preselect)
+    {
+        if (is_null($uvp_extra_insurance_premium_price_brutto_preselect)) {
+            throw new \InvalidArgumentException('non-nullable uvp_extra_insurance_premium_price_brutto_preselect cannot be null');
+        }
+        $this->container['uvp_extra_insurance_premium_price_brutto_preselect'] = $uvp_extra_insurance_premium_price_brutto_preselect;
+
+        return $this;
+    }
+
+    /**
+     * Gets extra_export_license_price_brutto_old
+     *
+     * @return float|null
+     */
+    public function getExtraExportLicensePriceBruttoOld()
+    {
+        return $this->container['extra_export_license_price_brutto_old'];
+    }
+
+    /**
+     * Sets extra_export_license_price_brutto_old
+     *
+     * @param float|null $extra_export_license_price_brutto_old Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setExtraExportLicensePriceBruttoOld($extra_export_license_price_brutto_old)
+    {
+        if (is_null($extra_export_license_price_brutto_old)) {
+            throw new \InvalidArgumentException('non-nullable extra_export_license_price_brutto_old cannot be null');
+        }
+        $this->container['extra_export_license_price_brutto_old'] = $extra_export_license_price_brutto_old;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_brutto_uvp
+     *
+     * @return float|null
+     */
+    public function getPriceBruttoUvp()
+    {
+        return $this->container['price_brutto_uvp'];
+    }
+
+    /**
+     * Sets price_brutto_uvp
+     *
+     * @param float|null $price_brutto_uvp Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setPriceBruttoUvp($price_brutto_uvp)
+    {
+        if (is_null($price_brutto_uvp)) {
+            throw new \InvalidArgumentException('non-nullable price_brutto_uvp cannot be null');
+        }
+        $this->container['price_brutto_uvp'] = $price_brutto_uvp;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_netto_uvp
+     *
+     * @return float|null
+     */
+    public function getPriceNettoUvp()
+    {
+        return $this->container['price_netto_uvp'];
+    }
+
+    /**
+     * Sets price_netto_uvp
+     *
+     * @param float|null $price_netto_uvp Marketing Discpunt
+     *
+     * @return self
+     */
+    public function setPriceNettoUvp($price_netto_uvp)
+    {
+        if (is_null($price_netto_uvp)) {
+            throw new \InvalidArgumentException('non-nullable price_netto_uvp cannot be null');
+        }
+        $this->container['price_netto_uvp'] = $price_netto_uvp;
 
         return $this;
     }
