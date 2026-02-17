@@ -10,6 +10,13 @@ composer.phar
 # php-cs-fixer cache
 .php_cs.cache
 .php-cs-fixer.cache
+.openapi-generator-ignore
+git_push.sh
+.travis.yml
+1.0.4.json
+1.0.4.original.json
+generate.sh
+response.json
 
 # PHPUnit cache
 .phpunit.result.cache
