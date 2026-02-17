@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**carrier** | **string** | Name of the carrier | [optional]
-**service** | **string** | Name of the service | [optional]
+**carrier** | **array<string,mixed>** | Carrier object returned by the API (structure may vary) | [optional]
+**service** | **array<string,mixed>** | Service object returned by the API (structure may vary) | [optional]
 **shipping_type** | **string** | The shipping type indicates whether the shipment must be delivered in a shop or picked up by a driver. | [optional]
 **transit_time_range_days** | **string** | Specifies the minimum and maximum delivery time in working days that the shipment is expected to be on its way. | [optional]
 **max_included_liability_amount** | **int** | The maximum included liability amount of this rate | [optional]
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **price_total_currency** | [**\kruegge82\jumingo\Model\Currency**](Currency.md) |  | [optional]
 **tax_free** | **bool** | Indicates whether the shipment is tax-free | [optional]
 **tax_rate** | **float** | Tax rate in percent | [optional]
-**tax_country** | [**\kruegge82\jumingo\Model\Country**](Country.md) |  | [optional]
+**tax_country** | **string** | Tax country (API may return an empty string) | [optional]
 **tax_name** | **string** | Name of the tax | [optional]
 **pickup_date** | **\DateTime** | The date for which the collection was arranged. | [optional]
 **pickup_min_time** | **string** | The earliest time at which the shipment is picked up. | [optional]

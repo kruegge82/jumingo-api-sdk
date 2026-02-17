@@ -4616,14 +4616,27 @@
       "type": "object",
       "properties": {
         "carrier": {
-          "type": "string",
-          "description": "Name of the carrier",
-          "example": "UPS"
+          "type": "object",
+          "description": "Carrier object returned by the API (structure may vary)",
+          "additionalProperties": true,
+          "x-nullable": true,
+          "example": {
+            "shipper_group_id": 1,
+            "shipper_group_name": "UPS",
+            "shipper_id": 741,
+            "shipper_tariff_id": 3792
+          }
         },
         "service": {
-          "type": "string",
-          "description": "Name of the service",
-          "example": "UPS Ground ®"
+          "type": "object",
+          "description": "Service object returned by the API (structure may vary)",
+          "additionalProperties": true,
+          "x-nullable": true,
+          "example": {
+            "name": "EXPEDITED",
+            "image": "/img/versandrechner/tarife/upsneu.svg",
+            "is_trackable_product": true
+          }
         },
         "shipping_type": {
           "type": "string",
@@ -4688,7 +4701,10 @@
           "example": 19
         },
         "tax_country": {
-          "$ref": "#/definitions/Country"
+          "type": "string",
+          "description": "Tax country (API may return an empty string)",
+          "x-nullable": true,
+          "example": "DE"
         },
         "tax_name": {
           "type": "string",
@@ -4718,13 +4734,13 @@
         },
         "delivery_date_min": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "Earliest delivery date",
           "example": "2018-07-10"
         },
         "delivery_date_max": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "Latest delivery date",
           "example": "2018-07-13"
         },
