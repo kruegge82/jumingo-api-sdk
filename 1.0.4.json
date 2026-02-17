@@ -1111,41 +1111,90 @@
       "type": "object",
       "description": "Tariff element as returned in ShipmentRateOutput.tariffs",
       "properties": {
-        "price_netto": { "type": "number", "format": "float" },
-        "price_brutto": { "type": "number", "format": "float" },
+        "price_netto": {
+          "type": "number",
+          "format": "float"
+        },
+        "price_brutto": {
+          "type": "number",
+          "format": "float"
+        },
         "packages": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "packageId": { "type": "integer" },
-              "volumeWeight": { "type": "number", "format": "float" }
+              "packageId": {
+                "type": "integer"
+              },
+              "volumeWeight": {
+                "type": "number",
+                "format": "float"
+              }
             },
             "additionalProperties": true
           }
         },
-
-        "id": { "type": "string" },
-        "shipper_id": { "type": "integer" },
-        "tariff_type_id": { "type": "integer" },
-        "dispatch_id": { "type": "integer" },
-        "package_type_ids": { "type": "string" },
-        "country_id": { "type": "integer" },
-        "transfer": { "type": "string" },
-
-        "printer_required": { "type": "integer" },
-        "calculate_volume_weight": { "type": "integer" },
-        "volume_weight_factor": { "type": "integer" },
-
-        "marketing_discount": { "type": "number", "format": "float", "x-nullable": true },
-        "marketing_discount_valid_until": { "type": "string", "format": "date-time", "x-nullable": true },
-
-        "pickup_surcharge": { "type": "number", "format": "float", "x-nullable": true },
-
-        "settings": { "type": "object", "additionalProperties": true, "x-nullable": true },
-
-        "shipper": { "type": "object", "additionalProperties": true, "x-nullable": true },
-        "dates": { "type": "object", "additionalProperties": true, "x-nullable": true }
+        "id": {
+          "type": "string"
+        },
+        "shipper_id": {
+          "type": "integer"
+        },
+        "tariff_type_id": {
+          "type": "integer"
+        },
+        "dispatch_id": {
+          "type": "integer"
+        },
+        "package_type_ids": {
+          "type": "string"
+        },
+        "country_id": {
+          "type": "integer"
+        },
+        "transfer": {
+          "type": "string"
+        },
+        "printer_required": {
+          "type": "integer"
+        },
+        "calculate_volume_weight": {
+          "type": "integer"
+        },
+        "volume_weight_factor": {
+          "type": "integer"
+        },
+        "marketing_discount": {
+          "type": "number",
+          "format": "float",
+          "x-nullable": true
+        },
+        "marketing_discount_valid_until": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "pickup_surcharge": {
+          "type": "number",
+          "format": "float",
+          "x-nullable": true
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "shipper": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-nullable": true
+        },
+        "dates": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-nullable": true
+        }
       },
       "additionalProperties": true
     },
@@ -2656,11 +2705,6 @@
           "type": "string",
           "description": "Extra export license number",
           "example": "4200042"
-        },
-        "settings": {
-          "type": "object",
-          "description": "Custom settings",
-          "example": []
         }
       }
     },
@@ -4055,9 +4099,18 @@
           "type": "object",
           "description": "Source information returned by the API",
           "properties": {
-            "type": { "type": "string" },
-            "id": { "type": "integer", "format": "int32", "x-nullable": true },
-            "original_filename": { "type": "string", "x-nullable": true }
+            "type": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer",
+              "format": "int32",
+              "x-nullable": true
+            },
+            "original_filename": {
+              "type": "string",
+              "x-nullable": true
+            }
           },
           "additionalProperties": true,
           "x-nullable": true
@@ -4121,9 +4174,10 @@
         },
         "settings": {
           "type": "object",
-          "description": "Shipment settings (arbitrary key/value map)",
+          "description": "Shipment settings (custom key/value map). Does not include tariff/rate information; selected rate is returned in `rate`.",
           "additionalProperties": true,
-          "x-nullable": true
+          "x-nullable": true,
+          "example": {}
         },
         "picked_up": {
           "type": "boolean",
@@ -4150,7 +4204,10 @@
         "shipment_issues": {
           "type": "array",
           "description": "List of shipment issues",
-          "items": { "type": "object", "additionalProperties": true },
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          },
           "x-nullable": true
         },
         "pickup_status": {
@@ -4216,7 +4273,10 @@
           "description": "Custom settings returned by the API (may contain arbitrary keys)",
           "additionalProperties": true,
           "x-nullable": true,
-          "example": { "source_sender_address_id": 123, "email": "email@email.com" }
+          "example": {
+            "source_sender_address_id": 123,
+            "email": "email@email.com"
+          }
         }
       }
     },
@@ -4469,11 +4529,6 @@
           "type": "string",
           "description": "Extra export license number",
           "example": "4200042"
-        },
-        "settings": {
-          "type": "object",
-          "description": "Custom settings",
-          "example": []
         }
       }
     },
@@ -4538,7 +4593,9 @@
         "api_shipment_ids": {
           "type": "array",
           "description": "Optional list of related api shipment ids",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "x-nullable": true,
           "example": null
         },
@@ -4912,17 +4969,45 @@
           "additionalProperties": {
             "type": "object",
             "properties": {
-              "id": { "type": "integer", "example": 2 },
-              "name": { "type": "string", "example": "DHL Express" },
-              "logo": { "type": "string", "example": "/img/versandrechner/versender/dhlexpress.png" },
-
-              "email": { "type": "string", "x-nullable": true, "example": null },
-              "settings": { "type": "string", "description": "JSON string", "example": "{\"important\": true}" },
-              "machine_name": { "type": "string", "example": "dhlexpress" },
-              "isShopDeliveryPossible": { "type": "boolean", "example": false },
-              "urlConverted": { "type": "string", "example": "dhl-express" },
-
-              "url_converted": { "type": "string", "description": "Legacy field name", "example": "dhl-express" }
+              "id": {
+                "type": "integer",
+                "example": 2
+              },
+              "name": {
+                "type": "string",
+                "example": "DHL Express"
+              },
+              "logo": {
+                "type": "string",
+                "example": "/img/versandrechner/versender/dhlexpress.png"
+              },
+              "email": {
+                "type": "string",
+                "x-nullable": true,
+                "example": null
+              },
+              "settings": {
+                "type": "string",
+                "description": "JSON string",
+                "example": "{\"important\": true}"
+              },
+              "machine_name": {
+                "type": "string",
+                "example": "dhlexpress"
+              },
+              "isShopDeliveryPossible": {
+                "type": "boolean",
+                "example": false
+              },
+              "urlConverted": {
+                "type": "string",
+                "example": "dhl-express"
+              },
+              "url_converted": {
+                "type": "string",
+                "description": "Legacy field name",
+                "example": "dhl-express"
+              }
             },
             "additionalProperties": true
           }

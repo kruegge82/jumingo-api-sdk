@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **dates_in_the_past** | **bool** | Is pickup or delivery dates in the past according country timezones. | [optional]
 **dates** | **array<string,mixed>** | Aggregated date/time information returned by the API | [optional]
 **dates_aggregation** | **array<string,mixed>** | Date aggregation map (keys like created/last_modified) | [optional]
-**settings** | **array<string,mixed>** | Shipment settings (arbitrary key/value map) | [optional]
+**settings** | **array<string,mixed>** | Shipment settings (custom key/value map). Does not include tariff/rate information; selected rate is returned in &#x60;rate&#x60;. | [optional]
 **picked_up** | **bool** | The parcel had not been collected successfully during the initial pickup time frame. | [optional]
 **update_ordered_delivery_address_allowed** | **bool** | Parameter to show can we update delivery address for an already ordered shipment or not | [optional]
 **documents** | **array<string,mixed>** | Shipment documents container (keys may be null or objects) | [optional]

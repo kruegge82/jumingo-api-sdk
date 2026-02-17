@@ -19,6 +19,5 @@ Name | Type | Description | Notes
 **packaging_type** | [**\kruegge82\jumingo\Model\PackagingType**](PackagingType.md) |  | [optional]
 **hs_tariff_number** | **string** | Hs number for import/export goods defining the type of the good for customs. | [optional]
 **extra_export_license_number** | **string** | Extra export license number | [optional]
-**settings** | **object** | Custom settings | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

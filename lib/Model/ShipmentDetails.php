@@ -77,8 +77,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => 'string',
         'packaging_type' => '\kruegge82\jumingo\Model\PackagingType',
         'hs_tariff_number' => 'string',
-        'extra_export_license_number' => 'string',
-        'settings' => 'object'
+        'extra_export_license_number' => 'string'
     ];
 
     /**
@@ -108,8 +107,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => null,
         'packaging_type' => null,
         'hs_tariff_number' => null,
-        'extra_export_license_number' => null,
-        'settings' => null
+        'extra_export_license_number' => null
     ];
 
     /**
@@ -137,8 +135,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => false,
         'packaging_type' => false,
         'hs_tariff_number' => false,
-        'extra_export_license_number' => false,
-        'settings' => false
+        'extra_export_license_number' => false
     ];
 
     /**
@@ -246,8 +243,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => 'shipment_order_number',
         'packaging_type' => 'packaging_type',
         'hs_tariff_number' => 'hs_tariff_number',
-        'extra_export_license_number' => 'extra_export_license_number',
-        'settings' => 'settings'
+        'extra_export_license_number' => 'extra_export_license_number'
     ];
 
     /**
@@ -275,8 +271,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => 'setShipmentOrderNumber',
         'packaging_type' => 'setPackagingType',
         'hs_tariff_number' => 'setHsTariffNumber',
-        'extra_export_license_number' => 'setExtraExportLicenseNumber',
-        'settings' => 'setSettings'
+        'extra_export_license_number' => 'setExtraExportLicenseNumber'
     ];
 
     /**
@@ -304,8 +299,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'shipment_order_number' => 'getShipmentOrderNumber',
         'packaging_type' => 'getPackagingType',
         'hs_tariff_number' => 'getHsTariffNumber',
-        'extra_export_license_number' => 'getExtraExportLicenseNumber',
-        'settings' => 'getSettings'
+        'extra_export_license_number' => 'getExtraExportLicenseNumber'
     ];
 
     /**
@@ -400,7 +394,6 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('packaging_type', $data ?? [], null);
         $this->setIfExists('hs_tariff_number', $data ?? [], null);
         $this->setIfExists('extra_export_license_number', $data ?? [], null);
-        $this->setIfExists('settings', $data ?? [], null);
     }
 
     /**
@@ -1072,33 +1065,6 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable extra_export_license_number cannot be null');
         }
         $this->container['extra_export_license_number'] = $extra_export_license_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets settings
-     *
-     * @return object|null
-     */
-    public function getSettings()
-    {
-        return $this->container['settings'];
-    }
-
-    /**
-     * Sets settings
-     *
-     * @param object|null $settings Custom settings
-     *
-     * @return self
-     */
-    public function setSettings($settings)
-    {
-        if (is_null($settings)) {
-            throw new \InvalidArgumentException('non-nullable settings cannot be null');
-        }
-        $this->container['settings'] = $settings;
 
         return $this;
     }

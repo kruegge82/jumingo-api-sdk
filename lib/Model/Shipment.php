@@ -1104,7 +1104,7 @@ class Shipment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets settings
      *
-     * @param array<string,mixed>|null $settings Shipment settings (arbitrary key/value map)
+     * @param array<string,mixed>|null $settings Shipment settings (custom key/value map). Does not include tariff/rate information; selected rate is returned in `rate`.
      *
      * @return self
      */
