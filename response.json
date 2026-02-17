@@ -1,0 +1,380 @@
+{
+  "id": "s_aa3ab9fb0e434fe892305ae4bc6837a1",
+  "customer_number": 1381435,
+  "customer_personal_name": null,
+  "customer_initials": null,
+  "created": "2026-02-17 11:11:05",
+  "last_modified": "2026-02-17 11:11:07",
+  "internal_status": "open",
+  "status": "ready",
+  "isCancellationPossible": false,
+  "source": {
+    "type": "Tracking",
+    "id": null,
+    "original_filename": null
+  },
+  "from_address": {
+    "company": "noto studio",
+    "name": "Tobias von Werne",
+    "country": "DE",
+    "id": 46547490,
+    "street": "Carl-Benz-Ring 16",
+    "street2": "C/O SendAgents GmbH",
+    "zip": "50374",
+    "city": "Erftstadt",
+    "state": null,
+    "phone": "022198655077",
+    "settings": {
+      "email": "info@sendagents.com"
+    }
+  },
+  "to_address": {
+    "company": null,
+    "name": "Chandler Blankenship",
+    "country": "US",
+    "id": 46547492,
+    "street": "350 W 42nd",
+    "street2": null,
+    "zip": "10036",
+    "city": "New York",
+    "state": "NY",
+    "phone": null,
+    "settings": {
+      "email": "chandlerb114@gmail.com"
+    }
+  },
+  "billing_address": {
+    "company": "SendAgents GmbH",
+    "name": "Jahn Nietzke",
+    "country": "DE",
+    "id": 46547493,
+    "street": "Alte Schulstr. 23c",
+    "street2": null,
+    "zip": "40789",
+    "city": "Monheim",
+    "state": null,
+    "phone": null,
+    "settings": null
+  },
+  "details": {
+    "value_amount": 85,
+    "value_currency": "EUR",
+    "content_description": "Kaffeezubehoer",
+    "reference_number": null,
+    "email": "info@sendagents.com",
+    "email_tracking": null,
+    "email_label_copy": null,
+    "insurance_amount": 510,
+    "insurance_currency": "EUR",
+    "extra_insurance_price_netto": 0,
+    "extra_insurance_price_brutto": 0,
+    "extra_insurance_value": 0,
+    "extra_insurance_type": null,
+    "extra_insurance_provider": null,
+    "export_license": false,
+    "export_license_price_brutto": 0,
+    "shipment_order_number": null,
+    "shipment_order_number_short": null,
+    "packaging_type": "parcel",
+    "hs_tariff_number": null,
+    "extra_export_license_number": null,
+    "settings": {
+      "tariff": {
+        "distance": null,
+        "settings": {
+          "shopdelivery_prohibited": true
+        },
+        "loading_aid": 0,
+        "delivery_date": "2026-03-19",
+        "pickup_max_time": "2026-02-17 17:00:00",
+        "pickup_min_time": "2026-02-17 10:30:00",
+        "price_netto_uvp": 31.67,
+        "same_day_pickup": true,
+        "price_brutto_uvp": 31.67,
+        "marketing_discount": 0,
+        "uvp_discount_value": 3.8000000000000007,
+        "uvp_discount_percent": 11.99873697505526,
+        "calculate_volume_weight": 1,
+        "individual_customer_tariff": false,
+        "marketing_discount_description": null,
+        "extra_export_license_price_brutto_old": 69.99,
+        "uvp_extra_insurance_price_brutto_preselect": 7.99,
+        "uvp_extra_insurance_premium_price_brutto_preselect": 11.99
+      },
+      "source_type": "API",
+      "label_format": "A6",
+      "offer_valid_until": "2026-02-17 11:19:59",
+      "extra_insurance_type": null,
+      "use_commercial_invoice": false
+    }
+  },
+  "customs_invoice": {
+    "invoiceNumber": "#1713_1",
+    "invoiceDate": "2026-02-17",
+    "currency": "EUR",
+    "exportReason": "Commercial",
+    "remarks": null,
+    "lineItems": [
+      {
+        "id": 11912007,
+        "content": "Tamperstation for La Marzocco Linea Micra & Mini R Black",
+        "quantity": 1,
+        "unitOfMeasurement": "PCS",
+        "netWeight": 0.48,
+        "value": 85,
+        "hsTariffNumber": "76129080",
+        "manufacturingCountry": "DE"
+      }
+    ]
+  },
+  "packages": [
+    {
+      "id": 14146357,
+      "weight": 0.54,
+      "length": 14,
+      "width": 11,
+      "height": 11,
+      "volume_weight": 0.3388,
+      "girth": 58,
+      "first_length": 14,
+      "second_length": 11,
+      "type": "parcel",
+      "type_id": 7,
+      "name": null,
+      "api_shipment_ids": null,
+      "quantity": 1
+    }
+  ],
+  "connection": null,
+  "rate": {
+    "carrier": {
+      "shipper_group_id": 1,
+      "shipper_group_name": "UPS",
+      "shipper_id": 741,
+      "shipper_tariff_id": 3792,
+      "shipper_tariff_full_id": "3792",
+      "shipper_tariff_type_id": 5,
+      "shipper_tariff_type_name": "Economy",
+      "shipper_tariff_zone_id": 15624,
+      "limits": [
+        {
+          "operand": "weight",
+          "operator": "<=",
+          "value": 70
+        },
+        {
+          "operand": "girth",
+          "operator": "<=",
+          "value": 400
+        },
+        {
+          "operand": "first_length",
+          "operator": "<=",
+          "value": 270
+        }
+      ]
+    },
+    "service": {
+      "name": "EXPEDITED ®",
+      "description": null,
+      "image": "/img/versandrechner/tarife/upsneu.svg",
+      "dispatch_id": 1,
+      "agb_link": "https://www.ups.com/media/de/terms_carriage_ger.pdf",
+      "is_plus_product": false,
+      "is_trackable_product": true,
+      "is_insurable_product": true,
+      "has_shop_finder": true
+    },
+    "shipping_type": "pickup",
+    "transit_time_range_days": "3-4",
+    "max_liability": 510,
+    "max_included_liability_currency": "EUR",
+    "printer_required": true,
+    "parcel_content_required": true,
+    "from_company_only": false,
+    "to_company_only": false,
+    "from_private_only": false,
+    "to_private_only": false,
+    "from_phone_number_required": false,
+    "to_phone_number_required": false,
+    "hs_tariff_number_required": false,
+    "price_net": 27.87,
+    "price_net_currency": "EUR",
+    "price_total": 27.87,
+    "price_total_currency": "EUR",
+    "tax_free": true,
+    "tax_rate": 0,
+    "tax_country": "",
+    "tax_name": "MwSt.",
+    "pickup_date": "2026-02-17",
+    "pickup_min_time": "2026-02-17 11:30:00",
+    "pickup_max_time": "2026-02-17 18:00:00",
+    "pickup_reference_number": null,
+    "delivery_date_min": "2026-02-20T01:00:00Z",
+    "delivery_date_max": "2026-02-23T01:00:00Z",
+    "delivery_time_until": "2026-02-23 17:00:00",
+    "distance": 0,
+    "distanceFormatted": null,
+    "durationFormatted": "3-4 Arbeitstage",
+    "carType": null,
+    "jumingo_express_carrier": null,
+    "is_jumingo_express": false,
+    "jum_disp": false,
+    "marketing_discount": 0,
+    "marketing_discount_description": null,
+    "uvp_discount_value": 3.8000000000000007,
+    "uvp_discount_percent": 11.99873697505526,
+    "uvp_extra_insurance_price_brutto_preselect": 7.99,
+    "uvp_extra_insurance_premium_price_brutto_preselect": 11.99,
+    "extra_export_license_price_brutto_old": 69.99,
+    "price_brutto_uvp": 31.67,
+    "price_netto_uvp": 31.67
+  },
+  "tracking": null,
+  "tax_free_reason": "third_country_transfer",
+  "tax_id": null,
+  "import_status": "ready",
+  "import_progress_status": "get_rates",
+  "import_checkout_id": null,
+  "order": {
+    "number": null,
+    "unpaid": false,
+    "canceled": null,
+    "created": null
+  },
+  "import_messages": {
+    "parcel": [],
+    "addresses": {
+      "pickup": [],
+      "delivery": [],
+      "return": [],
+      "billing": []
+    },
+    "details": [],
+    "packages": [
+      []
+    ],
+    "customsInvoice": []
+  },
+  "import_messages_text": {
+    "parcel": [],
+    "addresses": {
+      "pickup": [],
+      "delivery": [],
+      "return": [],
+      "billing": []
+    },
+    "details": [],
+    "packages": [],
+    "customsInvoice": []
+  },
+  "type": 2,
+  "canceled": false,
+  "dates": {
+    "pickup": {
+      "date": "2026-02-17",
+      "day_format": "Tuesday",
+      "day_format_short": "Tue",
+      "date_format_short": "Tue 17 Feb",
+      "month": "Feb",
+      "month_format": "February",
+      "min_pickup_date": "2026-02-17",
+      "pickup_min_time": "11:30",
+      "pickup_max_time": "18:00",
+      "pickup_min_time_minutes": 690,
+      "pickup_max_time_minutes": 1080
+    },
+    "transit_date_min": {
+      "date": "2026-02-20",
+      "day_format": "Friday",
+      "day_format_short": "Fri",
+      "month": "Feb",
+      "month_format": "February"
+    },
+    "transit_date_max": {
+      "date": "2026-02-23",
+      "day_format": "Monday",
+      "day_format_short": "Mon",
+      "month": "Feb",
+      "month_format": "February"
+    },
+    "delivery": {
+      "time_until_format": "5:00 PM",
+      "time_until_minutes": 1020,
+      "day": "20 - 23",
+      "day_format": "Fri / Mon",
+      "month_format": "Feb",
+      "min_delivery_date": "2026-02-20 00:00:00",
+      "max_delivery_date": "2026-02-23 00:00:00",
+      "date_format_short": "Fri., 20. Feb. - Mon., 23. Feb."
+    },
+    "transit_time_range": {
+      "days": "3-4",
+      "days_string": "Arbeitstage",
+      "days_string_short": "Tage"
+    }
+  },
+  "label_sent_on": null,
+  "has_label": false,
+  "label_generation_status": "waiting",
+  "has_proforma": false,
+  "has_export_cert_vat": false,
+  "has_commercial_invoice": false,
+  "has_export_declaration": false,
+  "dates_aggregation": {
+    "created": {
+      "date": "2026-02-17",
+      "time": "11:11:05",
+      "minutes": 671
+    },
+    "last_modified": {
+      "date": "2026-02-17",
+      "time": "11:11:07",
+      "minutes": 671
+    }
+  },
+  "dates_in_the_past": false,
+  "delayed": false,
+  "settings": {
+    "tariff": {
+      "distance": null,
+      "settings": {
+        "shopdelivery_prohibited": true
+      },
+      "loading_aid": 0,
+      "delivery_date": "2026-03-19",
+      "pickup_max_time": "2026-02-17 17:00:00",
+      "pickup_min_time": "2026-02-17 10:30:00",
+      "price_netto_uvp": 31.67,
+      "same_day_pickup": true,
+      "price_brutto_uvp": 31.67,
+      "marketing_discount": 0,
+      "uvp_discount_value": 3.8000000000000007,
+      "uvp_discount_percent": 11.99873697505526,
+      "calculate_volume_weight": 1,
+      "individual_customer_tariff": false,
+      "marketing_discount_description": null,
+      "extra_export_license_price_brutto_old": 69.99,
+      "uvp_extra_insurance_price_brutto_preselect": 7.99,
+      "uvp_extra_insurance_premium_price_brutto_preselect": 11.99
+    },
+    "source_type": "API",
+    "label_format": "A6",
+    "offer_valid_until": "2026-02-17 11:19:59",
+    "extra_insurance_type": null,
+    "use_commercial_invoice": false
+  },
+  "post_order_update_allowed": false,
+  "export_cert_vat_possible": false,
+  "picked_up": false,
+  "update_ordered_delivery_address_allowed": false,
+  "pickup_status": 0,
+  "shipment_issues": [],
+  "is_return_possible": true,
+  "documents": {
+    "proforma": null,
+    "commercial_invoice": null,
+    "export_declaration": null,
+    "export_cert_vat": null
+  }
+}
