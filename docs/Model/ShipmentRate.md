@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **delivery_date_max** | **\DateTime** | Latest delivery date | [optional]
 **delivery_time_until** | **string** | Latest delivery time | [optional]
 **distance_formatted** | **string** |  | [optional]
-**duration_formatted** | **string** | A formatted duration description with translation | [optional]
+**duration_formatted** | **string** |  | [optional]
 **is_jumingo_express** | **bool** |  | [optional]
 **jum_disp** | **bool** |  | [optional]
 **marketing_discount** | **float** | Marketing Discpunt | [optional]

@@ -1517,7 +1517,7 @@ class ShipmentRate implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets duration_formatted
      *
-     * @param string|null $duration_formatted A formatted duration description with translation
+     * @param string|null $duration_formatted duration_formatted
      *
      * @return self
      */
