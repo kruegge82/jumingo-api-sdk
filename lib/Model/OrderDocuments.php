@@ -64,10 +64,10 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
         'confirmations_count' => 'int',
         'invoices' => '\kruegge82\jumingo\Model\InvoiceDocument[]',
         'confirmations' => '\kruegge82\jumingo\Model\ConfirmationDocument[]',
-        'proformas' => 'object',
-        'labels' => 'object',
-        'commercial_invoices' => 'object',
-        'export_declarations' => 'object'
+        'proformas' => 'array<string,\kruegge82\jumingo\Model\ProformaDocument>',
+        'labels' => 'array<string,\kruegge82\jumingo\Model\LabelDocument>',
+        'commercial_invoices' => 'array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>',
+        'export_declarations' => 'array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>'
     ];
 
     /**
@@ -518,7 +518,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets proformas
      *
-     * @return object|null
+     * @return array<string,\kruegge82\jumingo\Model\ProformaDocument>|null
      */
     public function getProformas()
     {
@@ -528,7 +528,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets proformas
      *
-     * @param object|null $proformas proformas
+     * @param array<string,\kruegge82\jumingo\Model\ProformaDocument>|null $proformas Map of proforma documents keyed by document id (e.g. s_...).
      *
      * @return self
      */
@@ -545,7 +545,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets labels
      *
-     * @return object|null
+     * @return array<string,\kruegge82\jumingo\Model\LabelDocument>|null
      */
     public function getLabels()
     {
@@ -555,7 +555,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets labels
      *
-     * @param object|null $labels labels
+     * @param array<string,\kruegge82\jumingo\Model\LabelDocument>|null $labels Map of label documents keyed by document id (e.g. s_...).
      *
      * @return self
      */
@@ -572,7 +572,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets commercial_invoices
      *
-     * @return object|null
+     * @return array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>|null
      */
     public function getCommercialInvoices()
     {
@@ -582,7 +582,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets commercial_invoices
      *
-     * @param object|null $commercial_invoices commercial_invoices
+     * @param array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>|null $commercial_invoices Map of commercial invoice documents keyed by document id (e.g. s_...).
      *
      * @return self
      */
@@ -599,7 +599,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets export_declarations
      *
-     * @return object|null
+     * @return array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>|null
      */
     public function getExportDeclarations()
     {
@@ -609,7 +609,7 @@ class OrderDocuments implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets export_declarations
      *
-     * @param object|null $export_declarations export_declarations
+     * @param array<string,\kruegge82\jumingo\Model\ShipmentFileDocument>|null $export_declarations Map of export declaration documents keyed by document id (e.g. s_...).
      *
      * @return self
      */
