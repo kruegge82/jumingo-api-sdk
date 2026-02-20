@@ -102,7 +102,7 @@ class CreateShipmentAddress implements ModelInterface, ArrayAccess, \JsonSeriali
         'street2' => false,
         'zip' => false,
         'city' => false,
-        'state' => false,
+        'state' => true,
         'country' => false,
         'phone' => false,
         'settings' => false
@@ -599,7 +599,14 @@ class CreateShipmentAddress implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setState($state)
     {
         if (is_null($state)) {
-            throw new \InvalidArgumentException('non-nullable state cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'state');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('state', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['state'] = $state;
 
