@@ -75,7 +75,7 @@ class CarrierApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v1CarrierAccessPointsSearchPost' => [
+        'postAccessPointsSearch' => [
             'application/json',
         ],
     ];
@@ -127,38 +127,38 @@ class CarrierApi
     }
 
     /**
-     * Operation v1CarrierAccessPointsSearchPost
+     * Operation postAccessPointsSearch
      *
      * Get carrier aaccess points by an address with some radius in kilometers
      *
-     * @param  \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest $access_point_search access_point_search (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1CarrierAccessPointsSearchPost'] to see the possible values for this operation
+     * @param  \kruegge82\jumingo\Model\PostAccessPointsSearchRequest $access_point_search access_point_search (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccessPointsSearch'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \kruegge82\jumingo\Model\AccessPointsResponse[]
      */
-    public function v1CarrierAccessPointsSearchPost($access_point_search, string $contentType = self::contentTypes['v1CarrierAccessPointsSearchPost'][0])
+    public function postAccessPointsSearch($access_point_search, string $contentType = self::contentTypes['postAccessPointsSearch'][0])
     {
-        list($response) = $this->v1CarrierAccessPointsSearchPostWithHttpInfo($access_point_search, $contentType);
+        list($response) = $this->postAccessPointsSearchWithHttpInfo($access_point_search, $contentType);
         return $response;
     }
 
     /**
-     * Operation v1CarrierAccessPointsSearchPostWithHttpInfo
+     * Operation postAccessPointsSearchWithHttpInfo
      *
      * Get carrier aaccess points by an address with some radius in kilometers
      *
-     * @param  \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest $access_point_search (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1CarrierAccessPointsSearchPost'] to see the possible values for this operation
+     * @param  \kruegge82\jumingo\Model\PostAccessPointsSearchRequest $access_point_search (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccessPointsSearch'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \kruegge82\jumingo\Model\AccessPointsResponse[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function v1CarrierAccessPointsSearchPostWithHttpInfo($access_point_search, string $contentType = self::contentTypes['v1CarrierAccessPointsSearchPost'][0])
+    public function postAccessPointsSearchWithHttpInfo($access_point_search, string $contentType = self::contentTypes['postAccessPointsSearch'][0])
     {
-        $request = $this->v1CarrierAccessPointsSearchPostRequest($access_point_search, $contentType);
+        $request = $this->postAccessPointsSearchRequest($access_point_search, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,19 +230,19 @@ class CarrierApi
     }
 
     /**
-     * Operation v1CarrierAccessPointsSearchPostAsync
+     * Operation postAccessPointsSearchAsync
      *
      * Get carrier aaccess points by an address with some radius in kilometers
      *
-     * @param  \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest $access_point_search (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1CarrierAccessPointsSearchPost'] to see the possible values for this operation
+     * @param  \kruegge82\jumingo\Model\PostAccessPointsSearchRequest $access_point_search (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccessPointsSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1CarrierAccessPointsSearchPostAsync($access_point_search, string $contentType = self::contentTypes['v1CarrierAccessPointsSearchPost'][0])
+    public function postAccessPointsSearchAsync($access_point_search, string $contentType = self::contentTypes['postAccessPointsSearch'][0])
     {
-        return $this->v1CarrierAccessPointsSearchPostAsyncWithHttpInfo($access_point_search, $contentType)
+        return $this->postAccessPointsSearchAsyncWithHttpInfo($access_point_search, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -251,20 +251,20 @@ class CarrierApi
     }
 
     /**
-     * Operation v1CarrierAccessPointsSearchPostAsyncWithHttpInfo
+     * Operation postAccessPointsSearchAsyncWithHttpInfo
      *
      * Get carrier aaccess points by an address with some radius in kilometers
      *
-     * @param  \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest $access_point_search (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1CarrierAccessPointsSearchPost'] to see the possible values for this operation
+     * @param  \kruegge82\jumingo\Model\PostAccessPointsSearchRequest $access_point_search (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccessPointsSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1CarrierAccessPointsSearchPostAsyncWithHttpInfo($access_point_search, string $contentType = self::contentTypes['v1CarrierAccessPointsSearchPost'][0])
+    public function postAccessPointsSearchAsyncWithHttpInfo($access_point_search, string $contentType = self::contentTypes['postAccessPointsSearch'][0])
     {
         $returnType = '\kruegge82\jumingo\Model\AccessPointsResponse[]';
-        $request = $this->v1CarrierAccessPointsSearchPostRequest($access_point_search, $contentType);
+        $request = $this->postAccessPointsSearchRequest($access_point_search, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -303,21 +303,21 @@ class CarrierApi
     }
 
     /**
-     * Create request for operation 'v1CarrierAccessPointsSearchPost'
+     * Create request for operation 'postAccessPointsSearch'
      *
-     * @param  \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest $access_point_search (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1CarrierAccessPointsSearchPost'] to see the possible values for this operation
+     * @param  \kruegge82\jumingo\Model\PostAccessPointsSearchRequest $access_point_search (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccessPointsSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v1CarrierAccessPointsSearchPostRequest($access_point_search, string $contentType = self::contentTypes['v1CarrierAccessPointsSearchPost'][0])
+    public function postAccessPointsSearchRequest($access_point_search, string $contentType = self::contentTypes['postAccessPointsSearch'][0])
     {
 
         // verify the required parameter 'access_point_search' is set
         if ($access_point_search === null || (is_array($access_point_search) && count($access_point_search) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $access_point_search when calling v1CarrierAccessPointsSearchPost'
+                'Missing the required parameter $access_point_search when calling postAccessPointsSearch'
             );
         }
 

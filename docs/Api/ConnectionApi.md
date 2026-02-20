@@ -7,8 +7,8 @@ All URIs are relative to https://api.jumingo.com, except if the operation define
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createConnection()**](ConnectionApi.md#createConnection) | **POST** /v1/connections | Create a Connection |
-| [**v1ConnectionsGet()**](ConnectionApi.md#v1ConnectionsGet) | **GET** /v1/connections | Retrieves the collection of Connection resources. |
-| [**v1ConnectionsUuidGet()**](ConnectionApi.md#v1ConnectionsUuidGet) | **GET** /v1/connections/{uuid} | Get the Connection |
+| [**getConnection()**](ConnectionApi.md#getConnection) | **GET** /v1/connections/{uuid} | Get the Connection |
+| [**getConnections()**](ConnectionApi.md#getConnections) | **GET** /v1/connections | Retrieves the collection of Connection resources. |
 
 
 ## `createConnection()`
@@ -73,10 +73,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `v1ConnectionsGet()`
+## `getConnection()`
 
 ```php
-v1ConnectionsGet($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page): array[]
+getConnection($uuid): \kruegge82\jumingo\Model\Connection
+```
+
+Get the Connection
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\ConnectionApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$uuid = 'uuid_example'; // string | Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c
+
+try {
+    $result = $apiInstance->getConnection($uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConnectionApi->getConnection: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **uuid** | **string**| Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c | |
+
+### Return type
+
+[**\kruegge82\jumingo\Model\Connection**](../Model/Connection.md)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getConnections()`
+
+```php
+getConnections($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page): array[]
 ```
 
 Retrieves the collection of Connection resources.
@@ -109,10 +169,10 @@ $page = 56; // int | The collection page number
 $items_per_page = 56; // int | The number of items per page
 
 try {
-    $result = $apiInstance->v1ConnectionsGet($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page);
+    $result = $apiInstance->getConnections($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ConnectionApi->v1ConnectionsGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ConnectionApi->getConnections: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -131,66 +191,6 @@ try {
 ### Return type
 
 **array[]**
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1ConnectionsUuidGet()`
-
-```php
-v1ConnectionsUuidGet($uuid): \kruegge82\jumingo\Model\Connection
-```
-
-Get the Connection
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\ConnectionApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$uuid = 'uuid_example'; // string | Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c
-
-try {
-    $result = $apiInstance->v1ConnectionsUuidGet($uuid);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ConnectionApi->v1ConnectionsUuidGet: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **uuid** | **string**| Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c | |
-
-### Return type
-
-[**\kruegge82\jumingo\Model\Connection**](../Model/Connection.md)
 
 ### Authorization
 

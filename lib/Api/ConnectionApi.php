@@ -78,10 +78,10 @@ class ConnectionApi
         'createConnection' => [
             'application/json',
         ],
-        'v1ConnectionsGet' => [
+        'getConnection' => [
             'application/json',
         ],
-        'v1ConnectionsUuidGet' => [
+        'getConnections' => [
             'application/json',
         ],
     ];
@@ -419,396 +419,38 @@ class ConnectionApi
     }
 
     /**
-     * Operation v1ConnectionsGet
-     *
-     * Retrieves the collection of Connection resources.
-     *
-     * @param  string|null $status Status of connections (optional)
-     * @param  float|null $connection_type Connection type ID (optional)
-     * @param  string|null $sort_status Sort by status (optional)
-     * @param  string|null $sort_connection_type Sort by connectionType (optional)
-     * @param  string|null $sort_modified Sort by modified (optional)
-     * @param  int|null $page The collection page number (optional)
-     * @param  int|null $items_per_page The number of items per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array[]
-     */
-    public function v1ConnectionsGet($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['v1ConnectionsGet'][0])
-    {
-        list($response) = $this->v1ConnectionsGetWithHttpInfo($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v1ConnectionsGetWithHttpInfo
-     *
-     * Retrieves the collection of Connection resources.
-     *
-     * @param  string|null $status Status of connections (optional)
-     * @param  float|null $connection_type Connection type ID (optional)
-     * @param  string|null $sort_status Sort by status (optional)
-     * @param  string|null $sort_connection_type Sort by connectionType (optional)
-     * @param  string|null $sort_modified Sort by modified (optional)
-     * @param  int|null $page The collection page number (optional)
-     * @param  int|null $items_per_page The number of items per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of array[], HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1ConnectionsGetWithHttpInfo($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['v1ConnectionsGet'][0])
-    {
-        $request = $this->v1ConnectionsGetRequest($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'array[]',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                'array[]',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'array[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1ConnectionsGetAsync
-     *
-     * Retrieves the collection of Connection resources.
-     *
-     * @param  string|null $status Status of connections (optional)
-     * @param  float|null $connection_type Connection type ID (optional)
-     * @param  string|null $sort_status Sort by status (optional)
-     * @param  string|null $sort_connection_type Sort by connectionType (optional)
-     * @param  string|null $sort_modified Sort by modified (optional)
-     * @param  int|null $page The collection page number (optional)
-     * @param  int|null $items_per_page The number of items per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ConnectionsGetAsync($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['v1ConnectionsGet'][0])
-    {
-        return $this->v1ConnectionsGetAsyncWithHttpInfo($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1ConnectionsGetAsyncWithHttpInfo
-     *
-     * Retrieves the collection of Connection resources.
-     *
-     * @param  string|null $status Status of connections (optional)
-     * @param  float|null $connection_type Connection type ID (optional)
-     * @param  string|null $sort_status Sort by status (optional)
-     * @param  string|null $sort_connection_type Sort by connectionType (optional)
-     * @param  string|null $sort_modified Sort by modified (optional)
-     * @param  int|null $page The collection page number (optional)
-     * @param  int|null $items_per_page The number of items per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ConnectionsGetAsyncWithHttpInfo($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['v1ConnectionsGet'][0])
-    {
-        $returnType = 'array[]';
-        $request = $this->v1ConnectionsGetRequest($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1ConnectionsGet'
-     *
-     * @param  string|null $status Status of connections (optional)
-     * @param  float|null $connection_type Connection type ID (optional)
-     * @param  string|null $sort_status Sort by status (optional)
-     * @param  string|null $sort_connection_type Sort by connectionType (optional)
-     * @param  string|null $sort_modified Sort by modified (optional)
-     * @param  int|null $page The collection page number (optional)
-     * @param  int|null $items_per_page The number of items per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1ConnectionsGetRequest($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['v1ConnectionsGet'][0])
-    {
-
-
-
-
-
-
-
-
-
-        $resourcePath = '/v1/connections';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $status,
-            'status', // param base name
-            'string', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $connection_type,
-            'connectionType', // param base name
-            'number', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $sort_status,
-            'sort[status]', // param base name
-            'string', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $sort_connection_type,
-            'sort[connectionType]', // param base name
-            'string', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $sort_modified,
-            'sort[modified]', // param base name
-            'string', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page,
-            'page', // param base name
-            'integer', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $items_per_page,
-            'itemsPerPage', // param base name
-            'integer', // openApiType
-            '', // style
-            false, // explode
-            false // required
-        ) ?? []);
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1ConnectionsUuidGet
+     * Operation getConnection
      *
      * Get the Connection
      *
      * @param  string $uuid Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsUuidGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnection'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \kruegge82\jumingo\Model\Connection|\kruegge82\jumingo\Model\Exception
      */
-    public function v1ConnectionsUuidGet($uuid, string $contentType = self::contentTypes['v1ConnectionsUuidGet'][0])
+    public function getConnection($uuid, string $contentType = self::contentTypes['getConnection'][0])
     {
-        list($response) = $this->v1ConnectionsUuidGetWithHttpInfo($uuid, $contentType);
+        list($response) = $this->getConnectionWithHttpInfo($uuid, $contentType);
         return $response;
     }
 
     /**
-     * Operation v1ConnectionsUuidGetWithHttpInfo
+     * Operation getConnectionWithHttpInfo
      *
      * Get the Connection
      *
      * @param  string $uuid Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsUuidGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnection'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \kruegge82\jumingo\Model\Connection|\kruegge82\jumingo\Model\Exception, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v1ConnectionsUuidGetWithHttpInfo($uuid, string $contentType = self::contentTypes['v1ConnectionsUuidGet'][0])
+    public function getConnectionWithHttpInfo($uuid, string $contentType = self::contentTypes['getConnection'][0])
     {
-        $request = $this->v1ConnectionsUuidGetRequest($uuid, $contentType);
+        $request = $this->getConnectionRequest($uuid, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -894,19 +536,19 @@ class ConnectionApi
     }
 
     /**
-     * Operation v1ConnectionsUuidGetAsync
+     * Operation getConnectionAsync
      *
      * Get the Connection
      *
      * @param  string $uuid Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsUuidGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnection'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ConnectionsUuidGetAsync($uuid, string $contentType = self::contentTypes['v1ConnectionsUuidGet'][0])
+    public function getConnectionAsync($uuid, string $contentType = self::contentTypes['getConnection'][0])
     {
-        return $this->v1ConnectionsUuidGetAsyncWithHttpInfo($uuid, $contentType)
+        return $this->getConnectionAsyncWithHttpInfo($uuid, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -915,20 +557,20 @@ class ConnectionApi
     }
 
     /**
-     * Operation v1ConnectionsUuidGetAsyncWithHttpInfo
+     * Operation getConnectionAsyncWithHttpInfo
      *
      * Get the Connection
      *
      * @param  string $uuid Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsUuidGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnection'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ConnectionsUuidGetAsyncWithHttpInfo($uuid, string $contentType = self::contentTypes['v1ConnectionsUuidGet'][0])
+    public function getConnectionAsyncWithHttpInfo($uuid, string $contentType = self::contentTypes['getConnection'][0])
     {
         $returnType = '\kruegge82\jumingo\Model\Connection';
-        $request = $this->v1ConnectionsUuidGetRequest($uuid, $contentType);
+        $request = $this->getConnectionRequest($uuid, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -967,25 +609,25 @@ class ConnectionApi
     }
 
     /**
-     * Create request for operation 'v1ConnectionsUuidGet'
+     * Create request for operation 'getConnection'
      *
      * @param  string $uuid Connection uuid. For example: s_d6694ae6eb37465a81c35ebaa0045b8c (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ConnectionsUuidGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnection'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v1ConnectionsUuidGetRequest($uuid, string $contentType = self::contentTypes['v1ConnectionsUuidGet'][0])
+    public function getConnectionRequest($uuid, string $contentType = self::contentTypes['getConnection'][0])
     {
 
         // verify the required parameter 'uuid' is set
         if ($uuid === null || (is_array($uuid) && count($uuid) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $uuid when calling v1ConnectionsUuidGet'
+                'Missing the required parameter $uuid when calling getConnection'
             );
         }
         if (strlen($uuid) > 34) {
-            throw new \InvalidArgumentException('invalid length for "$uuid" when calling ConnectionApi.v1ConnectionsUuidGet, must be smaller than or equal to 34.');
+            throw new \InvalidArgumentException('invalid length for "$uuid" when calling ConnectionApi.getConnection, must be smaller than or equal to 34.');
         }
         
 
@@ -1006,6 +648,364 @@ class ConnectionApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getConnections
+     *
+     * Retrieves the collection of Connection resources.
+     *
+     * @param  string|null $status Status of connections (optional)
+     * @param  float|null $connection_type Connection type ID (optional)
+     * @param  string|null $sort_status Sort by status (optional)
+     * @param  string|null $sort_connection_type Sort by connectionType (optional)
+     * @param  string|null $sort_modified Sort by modified (optional)
+     * @param  int|null $page The collection page number (optional)
+     * @param  int|null $items_per_page The number of items per page (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnections'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array[]
+     */
+    public function getConnections($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['getConnections'][0])
+    {
+        list($response) = $this->getConnectionsWithHttpInfo($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getConnectionsWithHttpInfo
+     *
+     * Retrieves the collection of Connection resources.
+     *
+     * @param  string|null $status Status of connections (optional)
+     * @param  float|null $connection_type Connection type ID (optional)
+     * @param  string|null $sort_status Sort by status (optional)
+     * @param  string|null $sort_connection_type Sort by connectionType (optional)
+     * @param  string|null $sort_modified Sort by modified (optional)
+     * @param  int|null $page The collection page number (optional)
+     * @param  int|null $items_per_page The number of items per page (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnections'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of array[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getConnectionsWithHttpInfo($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['getConnections'][0])
+    {
+        $request = $this->getConnectionsRequest($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'array[]',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'array[]',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'array[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getConnectionsAsync
+     *
+     * Retrieves the collection of Connection resources.
+     *
+     * @param  string|null $status Status of connections (optional)
+     * @param  float|null $connection_type Connection type ID (optional)
+     * @param  string|null $sort_status Sort by status (optional)
+     * @param  string|null $sort_connection_type Sort by connectionType (optional)
+     * @param  string|null $sort_modified Sort by modified (optional)
+     * @param  int|null $page The collection page number (optional)
+     * @param  int|null $items_per_page The number of items per page (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnections'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getConnectionsAsync($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['getConnections'][0])
+    {
+        return $this->getConnectionsAsyncWithHttpInfo($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getConnectionsAsyncWithHttpInfo
+     *
+     * Retrieves the collection of Connection resources.
+     *
+     * @param  string|null $status Status of connections (optional)
+     * @param  float|null $connection_type Connection type ID (optional)
+     * @param  string|null $sort_status Sort by status (optional)
+     * @param  string|null $sort_connection_type Sort by connectionType (optional)
+     * @param  string|null $sort_modified Sort by modified (optional)
+     * @param  int|null $page The collection page number (optional)
+     * @param  int|null $items_per_page The number of items per page (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnections'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getConnectionsAsyncWithHttpInfo($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['getConnections'][0])
+    {
+        $returnType = 'array[]';
+        $request = $this->getConnectionsRequest($status, $connection_type, $sort_status, $sort_connection_type, $sort_modified, $page, $items_per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getConnections'
+     *
+     * @param  string|null $status Status of connections (optional)
+     * @param  float|null $connection_type Connection type ID (optional)
+     * @param  string|null $sort_status Sort by status (optional)
+     * @param  string|null $sort_connection_type Sort by connectionType (optional)
+     * @param  string|null $sort_modified Sort by modified (optional)
+     * @param  int|null $page The collection page number (optional)
+     * @param  int|null $items_per_page The number of items per page (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnections'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getConnectionsRequest($status = null, $connection_type = null, $sort_status = null, $sort_connection_type = null, $sort_modified = null, $page = null, $items_per_page = null, string $contentType = self::contentTypes['getConnections'][0])
+    {
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/connections';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $connection_type,
+            'connectionType', // param base name
+            'number', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort_status,
+            'sort[status]', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort_connection_type,
+            'sort[connectionType]', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort_modified,
+            'sort[modified]', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $items_per_page,
+            'itemsPerPage', // param base name
+            'integer', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(

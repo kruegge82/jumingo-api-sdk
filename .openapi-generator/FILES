@@ -67,6 +67,7 @@ docs/Model/PackageType.md
 docs/Model/PackageTypeDescription.md
 docs/Model/PackagingType.md
 docs/Model/PaymentMethodsOutput.md
+docs/Model/PostAccessPointsSearchRequest.md
 docs/Model/ProformaDocument.md
 docs/Model/Shipment.md
 docs/Model/ShipmentAddress.md
@@ -118,7 +119,6 @@ docs/Model/TrackingDates.md
 docs/Model/TrackingStep.md
 docs/Model/UpdateShipment.md
 docs/Model/UpdateShipmentRateCheapestTariffV1Request.md
-docs/Model/V1CarrierAccessPointsSearchPostRequest.md
 git_push.sh
 lib/Api/CarrierApi.php
 lib/Api/CartApi.php
@@ -189,6 +189,7 @@ lib/Model/PackageType.php
 lib/Model/PackageTypeDescription.php
 lib/Model/PackagingType.php
 lib/Model/PaymentMethodsOutput.php
+lib/Model/PostAccessPointsSearchRequest.php
 lib/Model/ProformaDocument.php
 lib/Model/Shipment.php
 lib/Model/ShipmentAddress.php
@@ -240,7 +241,6 @@ lib/Model/TrackingDates.php
 lib/Model/TrackingStep.php
 lib/Model/UpdateShipment.php
 lib/Model/UpdateShipmentRateCheapestTariffV1Request.php
-lib/Model/V1CarrierAccessPointsSearchPostRequest.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
 test/Api/CarrierApiTest.php
@@ -307,6 +307,7 @@ test/Model/PackageTypeDescriptionTest.php
 test/Model/PackageTypeTest.php
 test/Model/PackagingTypeTest.php
 test/Model/PaymentMethodsOutputTest.php
+test/Model/PostAccessPointsSearchRequestTest.php
 test/Model/ProformaDocumentTest.php
 test/Model/ShipmentAddressTest.php
 test/Model/ShipmentCheapestRateInputFilterDataTest.php
@@ -358,4 +359,3 @@ test/Model/TrackingDatesTest.php
 test/Model/TrackingStepTest.php
 test/Model/UpdateShipmentRateCheapestTariffV1RequestTest.php
 test/Model/UpdateShipmentTest.php
-test/Model/V1CarrierAccessPointsSearchPostRequestTest.php

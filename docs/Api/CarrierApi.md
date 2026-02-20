@@ -6,13 +6,13 @@ All URIs are relative to https://api.jumingo.com, except if the operation define
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**v1CarrierAccessPointsSearchPost()**](CarrierApi.md#v1CarrierAccessPointsSearchPost) | **POST** /v1/carrier/access-points-search | Get carrier aaccess points by an address with some radius in kilometers |
+| [**postAccessPointsSearch()**](CarrierApi.md#postAccessPointsSearch) | **POST** /v1/carrier/access-points-search | Get carrier aaccess points by an address with some radius in kilometers |
 
 
-## `v1CarrierAccessPointsSearchPost()`
+## `postAccessPointsSearch()`
 
 ```php
-v1CarrierAccessPointsSearchPost($access_point_search): \kruegge82\jumingo\Model\AccessPointsResponse[]
+postAccessPointsSearch($access_point_search): \kruegge82\jumingo\Model\AccessPointsResponse[]
 ```
 
 Get carrier aaccess points by an address with some radius in kilometers
@@ -36,13 +36,13 @@ $apiInstance = new kruegge82\jumingo\Api\CarrierApi(
     new GuzzleHttp\Client(),
     $config
 );
-$access_point_search = new \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest(); // \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest
+$access_point_search = new \kruegge82\jumingo\Model\PostAccessPointsSearchRequest(); // \kruegge82\jumingo\Model\PostAccessPointsSearchRequest
 
 try {
-    $result = $apiInstance->v1CarrierAccessPointsSearchPost($access_point_search);
+    $result = $apiInstance->postAccessPointsSearch($access_point_search);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CarrierApi->v1CarrierAccessPointsSearchPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CarrierApi->postAccessPointsSearch: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -50,7 +50,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **access_point_search** | [**\kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest**](../Model/V1CarrierAccessPointsSearchPostRequest.md)|  | |
+| **access_point_search** | [**\kruegge82\jumingo\Model\PostAccessPointsSearchRequest**](../Model/PostAccessPointsSearchRequest.md)|  | |
 
 ### Return type
 

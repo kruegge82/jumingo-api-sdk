@@ -7,14 +7,14 @@ All URIs are relative to https://api.jumingo.com, except if the operation define
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createShipment()**](ShipmentApi.md#createShipment) | **POST** /v1/shipments | Create a Shipment |
+| [**deleteShipment()**](ShipmentApi.md#deleteShipment) | **DELETE** /v1/shipments/{shipment_id} | Removes the Shipment resource. |
+| [**deleteShipmentFile()**](ShipmentApi.md#deleteShipmentFile) | **DELETE** /v1/shipments/{uuid}/file/upload/{type} | Deletes a commercial invoice or an export declaration for a shipment |
 | [**getShipment()**](ShipmentApi.md#getShipment) | **GET** /v1/shipments/{shipment_id} | Retrieve a Shipment |
 | [**getShipments()**](ShipmentApi.md#getShipments) | **GET** /v1/shipments | Get Shipments |
 | [**patchV1ShipmentItem()**](ShipmentApi.md#patchV1ShipmentItem) | **PATCH** /v1/shipments/{shipment_id} | Updates the Shipment resource. |
+| [**putShipment()**](ShipmentApi.md#putShipment) | **PUT** /v1/shipments/{shipment_id} | Replaces the Shipment resource. |
 | [**updateShipmentRateCheapestTariffV1()**](ShipmentApi.md#updateShipmentRateCheapestTariffV1) | **POST** /v1/shipments/cheapest | Update shipments rate |
-| [**v1ShipmentsShipmentIdDelete()**](ShipmentApi.md#v1ShipmentsShipmentIdDelete) | **DELETE** /v1/shipments/{shipment_id} | Removes the Shipment resource. |
-| [**v1ShipmentsShipmentIdPut()**](ShipmentApi.md#v1ShipmentsShipmentIdPut) | **PUT** /v1/shipments/{shipment_id} | Replaces the Shipment resource. |
-| [**v1ShipmentsUuidFileUploadTypeDelete()**](ShipmentApi.md#v1ShipmentsUuidFileUploadTypeDelete) | **DELETE** /v1/shipments/{uuid}/file/upload/{type} | Deletes a commercial invoice or an export declaration for a shipment |
-| [**v1ShipmentsUuidFileUploadTypePost()**](ShipmentApi.md#v1ShipmentsUuidFileUploadTypePost) | **POST** /v1/shipments/{uuid}/file/upload/{type} | Uploads a commercial invoice or an export declaration for a shipment |
+| [**uploadShipmentFile()**](ShipmentApi.md#uploadShipmentFile) | **POST** /v1/shipments/{uuid}/file/upload/{type} | Uploads a commercial invoice or an export declaration for a shipment |
 
 
 ## `createShipment()`
@@ -73,6 +73,126 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteShipment()`
+
+```php
+deleteShipment($shipment_id)
+```
+
+Removes the Shipment resource.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$shipment_id = 'shipment_id_example'; // string
+
+try {
+    $apiInstance->deleteShipment($shipment_id);
+} catch (Exception $e) {
+    echo 'Exception when calling ShipmentApi->deleteShipment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **shipment_id** | **string**|  | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteShipmentFile()`
+
+```php
+deleteShipmentFile($uuid, $type)
+```
+
+Deletes a commercial invoice or an export declaration for a shipment
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$uuid = 'uuid_example'; // string | The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388
+$type = 'type_example'; // string | The document type for the shipment to be deleted. E.g. <b>commercial-invoice</b> or <b>export-declaration</b>
+
+try {
+    $apiInstance->deleteShipmentFile($uuid, $type);
+} catch (Exception $e) {
+    echo 'Exception when calling ShipmentApi->deleteShipmentFile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **uuid** | **string**| The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 | |
+| **type** | **string**| The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -285,6 +405,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `putShipment()`
+
+```php
+putShipment($shipment_id, $shipment): \kruegge82\jumingo\Model\Shipment
+```
+
+Replaces the Shipment resource.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$shipment_id = 'shipment_id_example'; // string
+$shipment = new \kruegge82\jumingo\Model\UpdateShipment(); // \kruegge82\jumingo\Model\UpdateShipment | The updated Shipment resource
+
+try {
+    $result = $apiInstance->putShipment($shipment_id, $shipment);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ShipmentApi->putShipment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **shipment_id** | **string**|  | |
+| **shipment** | [**\kruegge82\jumingo\Model\UpdateShipment**](../Model/UpdateShipment.md)| The updated Shipment resource | [optional] |
+
+### Return type
+
+[**\kruegge82\jumingo\Model\Shipment**](../Model/Shipment.md)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateShipmentRateCheapestTariffV1()`
 
 ```php
@@ -354,192 +536,10 @@ void (empty response body)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `v1ShipmentsShipmentIdDelete()`
+## `uploadShipmentFile()`
 
 ```php
-v1ShipmentsShipmentIdDelete($shipment_id)
-```
-
-Removes the Shipment resource.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$shipment_id = 'shipment_id_example'; // string
-
-try {
-    $apiInstance->v1ShipmentsShipmentIdDelete($shipment_id);
-} catch (Exception $e) {
-    echo 'Exception when calling ShipmentApi->v1ShipmentsShipmentIdDelete: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **shipment_id** | **string**|  | |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1ShipmentsShipmentIdPut()`
-
-```php
-v1ShipmentsShipmentIdPut($shipment_id, $shipment): \kruegge82\jumingo\Model\Shipment
-```
-
-Replaces the Shipment resource.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$shipment_id = 'shipment_id_example'; // string
-$shipment = new \kruegge82\jumingo\Model\UpdateShipment(); // \kruegge82\jumingo\Model\UpdateShipment | The updated Shipment resource
-
-try {
-    $result = $apiInstance->v1ShipmentsShipmentIdPut($shipment_id, $shipment);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ShipmentApi->v1ShipmentsShipmentIdPut: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **shipment_id** | **string**|  | |
-| **shipment** | [**\kruegge82\jumingo\Model\UpdateShipment**](../Model/UpdateShipment.md)| The updated Shipment resource | [optional] |
-
-### Return type
-
-[**\kruegge82\jumingo\Model\Shipment**](../Model/Shipment.md)
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1ShipmentsUuidFileUploadTypeDelete()`
-
-```php
-v1ShipmentsUuidFileUploadTypeDelete($uuid, $type)
-```
-
-Deletes a commercial invoice or an export declaration for a shipment
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\ShipmentApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$uuid = 'uuid_example'; // string | The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388
-$type = 'type_example'; // string | The document type for the shipment to be deleted. E.g. <b>commercial-invoice</b> or <b>export-declaration</b>
-
-try {
-    $apiInstance->v1ShipmentsUuidFileUploadTypeDelete($uuid, $type);
-} catch (Exception $e) {
-    echo 'Exception when calling ShipmentApi->v1ShipmentsUuidFileUploadTypeDelete: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **uuid** | **string**| The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 | |
-| **type** | **string**| The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; | |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1ShipmentsUuidFileUploadTypePost()`
-
-```php
-v1ShipmentsUuidFileUploadTypePost($uuid, $type, $file)
+uploadShipmentFile($uuid, $type, $file)
 ```
 
 Uploads a commercial invoice or an export declaration for a shipment
@@ -568,9 +568,9 @@ $type = 'type_example'; // string | The document type for the shipment to be upl
 $file = '/path/to/file.txt'; // \SplFileObject
 
 try {
-    $apiInstance->v1ShipmentsUuidFileUploadTypePost($uuid, $type, $file);
+    $apiInstance->uploadShipmentFile($uuid, $type, $file);
 } catch (Exception $e) {
-    echo 'Exception when calling ShipmentApi->v1ShipmentsUuidFileUploadTypePost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ShipmentApi->uploadShipmentFile: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

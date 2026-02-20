@@ -98,7 +98,7 @@ class CartTotalCalculatorResult implements ModelInterface, ArrayAccess, \JsonSer
         'voucher_code' => null,
         'voucher_type' => null,
         'voucher_order_numbers' => null,
-        'gross' => 'floatt',
+        'gross' => 'float',
         'subtotal' => 'float',
         'surcharges' => 'float',
         'plus_product_surcharges' => null,

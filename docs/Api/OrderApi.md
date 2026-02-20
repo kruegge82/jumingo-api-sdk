@@ -7,9 +7,9 @@ All URIs are relative to https://api.jumingo.com, except if the operation define
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getAppOrderCollection()**](OrderApi.md#getAppOrderCollection) | **GET** /v1/orders | Retrieves the collection of Order resources. |
+| [**getOrder()**](OrderApi.md#getOrder) | **GET** /v1/orders/{id} | Retrieves a Order resource. |
+| [**getOrderDouments()**](OrderApi.md#getOrderDouments) | **GET** /v1/orders/{id}/documents | Retrieves a OrderDocuments resource. |
 | [**postOrders()**](OrderApi.md#postOrders) | **POST** /v1/orders | Make a payment. |
-| [**v1OrdersIdDocumentsGet()**](OrderApi.md#v1OrdersIdDocumentsGet) | **GET** /v1/orders/{id}/documents | Retrieves a OrderDocuments resource. |
-| [**v1OrdersIdGet()**](OrderApi.md#v1OrdersIdGet) | **GET** /v1/orders/{id} | Retrieves a Order resource. |
 
 
 ## `getAppOrderCollection()`
@@ -94,6 +94,126 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getOrder()`
+
+```php
+getOrder($id): \kruegge82\jumingo\Model\OrderOutput
+```
+
+Retrieves a Order resource.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\OrderApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->getOrder($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrderApi->getOrder: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\kruegge82\jumingo\Model\OrderOutput**](../Model/OrderOutput.md)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getOrderDouments()`
+
+```php
+getOrderDouments($id): \kruegge82\jumingo\Model\OrderDocuments
+```
+
+Retrieves a OrderDocuments resource.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: v1
+$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
+
+
+$apiInstance = new kruegge82\jumingo\Api\OrderApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Order number
+
+try {
+    $result = $apiInstance->getOrderDouments($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrderApi->getOrderDouments: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Order number | |
+
+### Return type
+
+[**\kruegge82\jumingo\Model\OrderDocuments**](../Model/OrderDocuments.md)
+
+### Authorization
+
+[v1](../../README.md#v1)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `postOrders()`
 
 ```php
@@ -148,126 +268,6 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1OrdersIdDocumentsGet()`
-
-```php
-v1OrdersIdDocumentsGet($id): \kruegge82\jumingo\Model\OrderDocuments
-```
-
-Retrieves a OrderDocuments resource.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\OrderApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string | Order number
-
-try {
-    $result = $apiInstance->v1OrdersIdDocumentsGet($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling OrderApi->v1OrdersIdDocumentsGet: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Order number | |
-
-### Return type
-
-[**\kruegge82\jumingo\Model\OrderDocuments**](../Model/OrderDocuments.md)
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `v1OrdersIdGet()`
-
-```php
-v1OrdersIdGet($id): \kruegge82\jumingo\Model\OrderOutput
-```
-
-Retrieves a Order resource.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: v1
-$config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKey('X-AUTH-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = kruegge82\jumingo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-AUTH-TOKEN', 'Bearer');
-
-
-$apiInstance = new kruegge82\jumingo\Api\OrderApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string
-
-try {
-    $result = $apiInstance->v1OrdersIdGet($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling OrderApi->v1OrdersIdGet: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
-
-### Return type
-
-[**\kruegge82\jumingo\Model\OrderOutput**](../Model/OrderOutput.md)
-
-### Authorization
-
-[v1](../../README.md#v1)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

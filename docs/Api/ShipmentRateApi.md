@@ -6,13 +6,13 @@ All URIs are relative to https://api.jumingo.com, except if the operation define
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**v1ShipmentRatesPost()**](ShipmentRateApi.md#v1ShipmentRatesPost) | **POST** /v1/shipment-rates | Returns shipment rates for a given shipment. |
+| [**postShipmentRates()**](ShipmentRateApi.md#postShipmentRates) | **POST** /v1/shipment-rates | Returns shipment rates for a given shipment. |
 
 
-## `v1ShipmentRatesPost()`
+## `postShipmentRates()`
 
 ```php
-v1ShipmentRatesPost($shipment_rate): \kruegge82\jumingo\Model\ShipmentRateOutput
+postShipmentRates($shipment_rate): \kruegge82\jumingo\Model\ShipmentRateOutput
 ```
 
 Returns shipment rates for a given shipment.
@@ -41,10 +41,10 @@ $apiInstance = new kruegge82\jumingo\Api\ShipmentRateApi(
 $shipment_rate = new \kruegge82\jumingo\Model\ShipmentRateInput(); // \kruegge82\jumingo\Model\ShipmentRateInput
 
 try {
-    $result = $apiInstance->v1ShipmentRatesPost($shipment_rate);
+    $result = $apiInstance->postShipmentRates($shipment_rate);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ShipmentRateApi->v1ShipmentRatesPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ShipmentRateApi->postShipmentRates: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

@@ -75,7 +75,7 @@ class ShipmentRateApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v1ShipmentRatesPost' => [
+        'postShipmentRates' => [
             'application/json',
         ],
     ];
@@ -127,38 +127,38 @@ class ShipmentRateApi
     }
 
     /**
-     * Operation v1ShipmentRatesPost
+     * Operation postShipmentRates
      *
      * Returns shipment rates for a given shipment.
      *
      * @param  \kruegge82\jumingo\Model\ShipmentRateInput|null $shipment_rate shipment_rate (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentRatesPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postShipmentRates'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \kruegge82\jumingo\Model\ShipmentRateOutput|\kruegge82\jumingo\Model\ErrorResponse
      */
-    public function v1ShipmentRatesPost($shipment_rate = null, string $contentType = self::contentTypes['v1ShipmentRatesPost'][0])
+    public function postShipmentRates($shipment_rate = null, string $contentType = self::contentTypes['postShipmentRates'][0])
     {
-        list($response) = $this->v1ShipmentRatesPostWithHttpInfo($shipment_rate, $contentType);
+        list($response) = $this->postShipmentRatesWithHttpInfo($shipment_rate, $contentType);
         return $response;
     }
 
     /**
-     * Operation v1ShipmentRatesPostWithHttpInfo
+     * Operation postShipmentRatesWithHttpInfo
      *
      * Returns shipment rates for a given shipment.
      *
      * @param  \kruegge82\jumingo\Model\ShipmentRateInput|null $shipment_rate (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentRatesPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postShipmentRates'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \kruegge82\jumingo\Model\ShipmentRateOutput|\kruegge82\jumingo\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v1ShipmentRatesPostWithHttpInfo($shipment_rate = null, string $contentType = self::contentTypes['v1ShipmentRatesPost'][0])
+    public function postShipmentRatesWithHttpInfo($shipment_rate = null, string $contentType = self::contentTypes['postShipmentRates'][0])
     {
-        $request = $this->v1ShipmentRatesPostRequest($shipment_rate, $contentType);
+        $request = $this->postShipmentRatesRequest($shipment_rate, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -244,19 +244,19 @@ class ShipmentRateApi
     }
 
     /**
-     * Operation v1ShipmentRatesPostAsync
+     * Operation postShipmentRatesAsync
      *
      * Returns shipment rates for a given shipment.
      *
      * @param  \kruegge82\jumingo\Model\ShipmentRateInput|null $shipment_rate (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentRatesPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postShipmentRates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ShipmentRatesPostAsync($shipment_rate = null, string $contentType = self::contentTypes['v1ShipmentRatesPost'][0])
+    public function postShipmentRatesAsync($shipment_rate = null, string $contentType = self::contentTypes['postShipmentRates'][0])
     {
-        return $this->v1ShipmentRatesPostAsyncWithHttpInfo($shipment_rate, $contentType)
+        return $this->postShipmentRatesAsyncWithHttpInfo($shipment_rate, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -265,20 +265,20 @@ class ShipmentRateApi
     }
 
     /**
-     * Operation v1ShipmentRatesPostAsyncWithHttpInfo
+     * Operation postShipmentRatesAsyncWithHttpInfo
      *
      * Returns shipment rates for a given shipment.
      *
      * @param  \kruegge82\jumingo\Model\ShipmentRateInput|null $shipment_rate (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentRatesPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postShipmentRates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ShipmentRatesPostAsyncWithHttpInfo($shipment_rate = null, string $contentType = self::contentTypes['v1ShipmentRatesPost'][0])
+    public function postShipmentRatesAsyncWithHttpInfo($shipment_rate = null, string $contentType = self::contentTypes['postShipmentRates'][0])
     {
         $returnType = '\kruegge82\jumingo\Model\ShipmentRateOutput';
-        $request = $this->v1ShipmentRatesPostRequest($shipment_rate, $contentType);
+        $request = $this->postShipmentRatesRequest($shipment_rate, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -317,15 +317,15 @@ class ShipmentRateApi
     }
 
     /**
-     * Create request for operation 'v1ShipmentRatesPost'
+     * Create request for operation 'postShipmentRates'
      *
      * @param  \kruegge82\jumingo\Model\ShipmentRateInput|null $shipment_rate (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentRatesPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postShipmentRates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v1ShipmentRatesPostRequest($shipment_rate = null, string $contentType = self::contentTypes['v1ShipmentRatesPost'][0])
+    public function postShipmentRatesRequest($shipment_rate = null, string $contentType = self::contentTypes['postShipmentRates'][0])
     {
 
 

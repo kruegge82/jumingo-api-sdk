@@ -78,13 +78,13 @@ class OrderApi
         'getAppOrderCollection' => [
             'application/json',
         ],
+        'getOrder' => [
+            'application/json',
+        ],
+        'getOrderDouments' => [
+            'application/json',
+        ],
         'postOrders' => [
-            'application/json',
-        ],
-        'v1OrdersIdDocumentsGet' => [
-            'application/json',
-        ],
-        'v1OrdersIdGet' => [
             'application/json',
         ],
     ];
@@ -569,6 +569,552 @@ class OrderApi
     }
 
     /**
+     * Operation getOrder
+     *
+     * Retrieves a Order resource.
+     *
+     * @param  string $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrder'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \kruegge82\jumingo\Model\OrderOutput
+     */
+    public function getOrder($id, string $contentType = self::contentTypes['getOrder'][0])
+    {
+        list($response) = $this->getOrderWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getOrderWithHttpInfo
+     *
+     * Retrieves a Order resource.
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrder'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \kruegge82\jumingo\Model\OrderOutput, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getOrderWithHttpInfo($id, string $contentType = self::contentTypes['getOrder'][0])
+    {
+        $request = $this->getOrderRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\kruegge82\jumingo\Model\OrderOutput',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\kruegge82\jumingo\Model\OrderOutput',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\OrderOutput',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getOrderAsync
+     *
+     * Retrieves a Order resource.
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOrderAsync($id, string $contentType = self::contentTypes['getOrder'][0])
+    {
+        return $this->getOrderAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getOrderAsyncWithHttpInfo
+     *
+     * Retrieves a Order resource.
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOrderAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getOrder'][0])
+    {
+        $returnType = '\kruegge82\jumingo\Model\OrderOutput';
+        $request = $this->getOrderRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getOrder'
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getOrderRequest($id, string $contentType = self::contentTypes['getOrder'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getOrder'
+            );
+        }
+
+
+        $resourcePath = '/v1/orders/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getOrderDouments
+     *
+     * Retrieves a OrderDocuments resource.
+     *
+     * @param  string $id Order number (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDouments'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \kruegge82\jumingo\Model\OrderDocuments
+     */
+    public function getOrderDouments($id, string $contentType = self::contentTypes['getOrderDouments'][0])
+    {
+        list($response) = $this->getOrderDoumentsWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getOrderDoumentsWithHttpInfo
+     *
+     * Retrieves a OrderDocuments resource.
+     *
+     * @param  string $id Order number (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDouments'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \kruegge82\jumingo\Model\OrderDocuments, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getOrderDoumentsWithHttpInfo($id, string $contentType = self::contentTypes['getOrderDouments'][0])
+    {
+        $request = $this->getOrderDoumentsRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\kruegge82\jumingo\Model\OrderDocuments',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\kruegge82\jumingo\Model\OrderDocuments',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\OrderDocuments',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getOrderDoumentsAsync
+     *
+     * Retrieves a OrderDocuments resource.
+     *
+     * @param  string $id Order number (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDouments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOrderDoumentsAsync($id, string $contentType = self::contentTypes['getOrderDouments'][0])
+    {
+        return $this->getOrderDoumentsAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getOrderDoumentsAsyncWithHttpInfo
+     *
+     * Retrieves a OrderDocuments resource.
+     *
+     * @param  string $id Order number (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDouments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getOrderDoumentsAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getOrderDouments'][0])
+    {
+        $returnType = '\kruegge82\jumingo\Model\OrderDocuments';
+        $request = $this->getOrderDoumentsRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getOrderDouments'
+     *
+     * @param  string $id Order number (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDouments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getOrderDoumentsRequest($id, string $contentType = self::contentTypes['getOrderDouments'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getOrderDouments'
+            );
+        }
+
+
+        $resourcePath = '/v1/orders/{id}/documents';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation postOrders
      *
      * Make a payment.
@@ -856,552 +1402,6 @@ class OrderApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1OrdersIdDocumentsGet
-     *
-     * Retrieves a OrderDocuments resource.
-     *
-     * @param  string $id Order number (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdDocumentsGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \kruegge82\jumingo\Model\OrderDocuments
-     */
-    public function v1OrdersIdDocumentsGet($id, string $contentType = self::contentTypes['v1OrdersIdDocumentsGet'][0])
-    {
-        list($response) = $this->v1OrdersIdDocumentsGetWithHttpInfo($id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v1OrdersIdDocumentsGetWithHttpInfo
-     *
-     * Retrieves a OrderDocuments resource.
-     *
-     * @param  string $id Order number (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdDocumentsGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \kruegge82\jumingo\Model\OrderDocuments, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1OrdersIdDocumentsGetWithHttpInfo($id, string $contentType = self::contentTypes['v1OrdersIdDocumentsGet'][0])
-    {
-        $request = $this->v1OrdersIdDocumentsGetRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\kruegge82\jumingo\Model\OrderDocuments',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\kruegge82\jumingo\Model\OrderDocuments',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\OrderDocuments',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1OrdersIdDocumentsGetAsync
-     *
-     * Retrieves a OrderDocuments resource.
-     *
-     * @param  string $id Order number (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdDocumentsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1OrdersIdDocumentsGetAsync($id, string $contentType = self::contentTypes['v1OrdersIdDocumentsGet'][0])
-    {
-        return $this->v1OrdersIdDocumentsGetAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1OrdersIdDocumentsGetAsyncWithHttpInfo
-     *
-     * Retrieves a OrderDocuments resource.
-     *
-     * @param  string $id Order number (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdDocumentsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1OrdersIdDocumentsGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['v1OrdersIdDocumentsGet'][0])
-    {
-        $returnType = '\kruegge82\jumingo\Model\OrderDocuments';
-        $request = $this->v1OrdersIdDocumentsGetRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1OrdersIdDocumentsGet'
-     *
-     * @param  string $id Order number (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdDocumentsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1OrdersIdDocumentsGetRequest($id, string $contentType = self::contentTypes['v1OrdersIdDocumentsGet'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling v1OrdersIdDocumentsGet'
-            );
-        }
-
-
-        $resourcePath = '/v1/orders/{id}/documents';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1OrdersIdGet
-     *
-     * Retrieves a Order resource.
-     *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \kruegge82\jumingo\Model\OrderOutput
-     */
-    public function v1OrdersIdGet($id, string $contentType = self::contentTypes['v1OrdersIdGet'][0])
-    {
-        list($response) = $this->v1OrdersIdGetWithHttpInfo($id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v1OrdersIdGetWithHttpInfo
-     *
-     * Retrieves a Order resource.
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdGet'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \kruegge82\jumingo\Model\OrderOutput, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1OrdersIdGetWithHttpInfo($id, string $contentType = self::contentTypes['v1OrdersIdGet'][0])
-    {
-        $request = $this->v1OrdersIdGetRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\kruegge82\jumingo\Model\OrderOutput',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\kruegge82\jumingo\Model\OrderOutput',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\OrderOutput',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1OrdersIdGetAsync
-     *
-     * Retrieves a Order resource.
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1OrdersIdGetAsync($id, string $contentType = self::contentTypes['v1OrdersIdGet'][0])
-    {
-        return $this->v1OrdersIdGetAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1OrdersIdGetAsyncWithHttpInfo
-     *
-     * Retrieves a Order resource.
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1OrdersIdGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['v1OrdersIdGet'][0])
-    {
-        $returnType = '\kruegge82\jumingo\Model\OrderOutput';
-        $request = $this->v1OrdersIdGetRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1OrdersIdGet'
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1OrdersIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1OrdersIdGetRequest($id, string $contentType = self::contentTypes['v1OrdersIdGet'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling v1OrdersIdGet'
-            );
-        }
-
-
-        $resourcePath = '/v1/orders/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

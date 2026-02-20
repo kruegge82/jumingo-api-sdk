@@ -78,6 +78,12 @@ class ShipmentApi
         'createShipment' => [
             'application/json',
         ],
+        'deleteShipment' => [
+            'application/json',
+        ],
+        'deleteShipmentFile' => [
+            'application/json',
+        ],
         'getShipment' => [
             'application/json',
         ],
@@ -87,19 +93,13 @@ class ShipmentApi
         'patchV1ShipmentItem' => [
             'application/merge-patch+json',
         ],
+        'putShipment' => [
+            'application/json',
+        ],
         'updateShipmentRateCheapestTariffV1' => [
             'application/json',
         ],
-        'v1ShipmentsShipmentIdDelete' => [
-            'application/json',
-        ],
-        'v1ShipmentsShipmentIdPut' => [
-            'application/json',
-        ],
-        'v1ShipmentsUuidFileUploadTypeDelete' => [
-            'application/json',
-        ],
-        'v1ShipmentsUuidFileUploadTypePost' => [
+        'uploadShipmentFile' => [
             'multipart/form-data',
         ],
     ];
@@ -430,6 +430,488 @@ class ShipmentApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteShipment
+     *
+     * Removes the Shipment resource.
+     *
+     * @param  string $shipment_id shipment_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipment'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function deleteShipment($shipment_id, string $contentType = self::contentTypes['deleteShipment'][0])
+    {
+        $this->deleteShipmentWithHttpInfo($shipment_id, $contentType);
+    }
+
+    /**
+     * Operation deleteShipmentWithHttpInfo
+     *
+     * Removes the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipment'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteShipmentWithHttpInfo($shipment_id, string $contentType = self::contentTypes['deleteShipment'][0])
+    {
+        $request = $this->deleteShipmentRequest($shipment_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\Exception',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteShipmentAsync
+     *
+     * Removes the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteShipmentAsync($shipment_id, string $contentType = self::contentTypes['deleteShipment'][0])
+    {
+        return $this->deleteShipmentAsyncWithHttpInfo($shipment_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteShipmentAsyncWithHttpInfo
+     *
+     * Removes the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteShipmentAsyncWithHttpInfo($shipment_id, string $contentType = self::contentTypes['deleteShipment'][0])
+    {
+        $returnType = '';
+        $request = $this->deleteShipmentRequest($shipment_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteShipment'
+     *
+     * @param  string $shipment_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteShipmentRequest($shipment_id, string $contentType = self::contentTypes['deleteShipment'][0])
+    {
+
+        // verify the required parameter 'shipment_id' is set
+        if ($shipment_id === null || (is_array($shipment_id) && count($shipment_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $shipment_id when calling deleteShipment'
+            );
+        }
+
+
+        $resourcePath = '/v1/shipments/{shipment_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($shipment_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'shipment_id' . '}',
+                ObjectSerializer::toPathValue($shipment_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteShipmentFile
+     *
+     * Deletes a commercial invoice or an export declaration for a shipment
+     *
+     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
+     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipmentFile'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function deleteShipmentFile($uuid, $type, string $contentType = self::contentTypes['deleteShipmentFile'][0])
+    {
+        $this->deleteShipmentFileWithHttpInfo($uuid, $type, $contentType);
+    }
+
+    /**
+     * Operation deleteShipmentFileWithHttpInfo
+     *
+     * Deletes a commercial invoice or an export declaration for a shipment
+     *
+     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
+     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipmentFile'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteShipmentFileWithHttpInfo($uuid, $type, string $contentType = self::contentTypes['deleteShipmentFile'][0])
+    {
+        $request = $this->deleteShipmentFileRequest($uuid, $type, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\Exception',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteShipmentFileAsync
+     *
+     * Deletes a commercial invoice or an export declaration for a shipment
+     *
+     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
+     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipmentFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteShipmentFileAsync($uuid, $type, string $contentType = self::contentTypes['deleteShipmentFile'][0])
+    {
+        return $this->deleteShipmentFileAsyncWithHttpInfo($uuid, $type, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteShipmentFileAsyncWithHttpInfo
+     *
+     * Deletes a commercial invoice or an export declaration for a shipment
+     *
+     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
+     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipmentFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteShipmentFileAsyncWithHttpInfo($uuid, $type, string $contentType = self::contentTypes['deleteShipmentFile'][0])
+    {
+        $returnType = '';
+        $request = $this->deleteShipmentFileRequest($uuid, $type, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteShipmentFile'
+     *
+     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
+     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteShipmentFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteShipmentFileRequest($uuid, $type, string $contentType = self::contentTypes['deleteShipmentFile'][0])
+    {
+
+        // verify the required parameter 'uuid' is set
+        if ($uuid === null || (is_array($uuid) && count($uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $uuid when calling deleteShipmentFile'
+            );
+        }
+
+        // verify the required parameter 'type' is set
+        if ($type === null || (is_array($type) && count($type) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $type when calling deleteShipmentFile'
+            );
+        }
+
+
+        $resourcePath = '/v1/shipments/{uuid}/file/upload/{type}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'uuid' . '}',
+                ObjectSerializer::toPathValue($uuid),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($type !== null) {
+            $resourcePath = str_replace(
+                '{' . 'type' . '}',
+                ObjectSerializer::toPathValue($type),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1470,6 +1952,320 @@ class ShipmentApi
     }
 
     /**
+     * Operation putShipment
+     *
+     * Replaces the Shipment resource.
+     *
+     * @param  string $shipment_id shipment_id (required)
+     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putShipment'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \kruegge82\jumingo\Model\Shipment|\kruegge82\jumingo\Model\Exception|\kruegge82\jumingo\Model\Exception
+     */
+    public function putShipment($shipment_id, $shipment = null, string $contentType = self::contentTypes['putShipment'][0])
+    {
+        list($response) = $this->putShipmentWithHttpInfo($shipment_id, $shipment, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation putShipmentWithHttpInfo
+     *
+     * Replaces the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putShipment'] to see the possible values for this operation
+     *
+     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \kruegge82\jumingo\Model\Shipment|\kruegge82\jumingo\Model\Exception|\kruegge82\jumingo\Model\Exception, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putShipmentWithHttpInfo($shipment_id, $shipment = null, string $contentType = self::contentTypes['putShipment'][0])
+    {
+        $request = $this->putShipmentRequest($shipment_id, $shipment, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\kruegge82\jumingo\Model\Shipment',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\kruegge82\jumingo\Model\Exception',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\kruegge82\jumingo\Model\Exception',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\kruegge82\jumingo\Model\Shipment',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\Shipment',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\Exception',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\kruegge82\jumingo\Model\Exception',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putShipmentAsync
+     *
+     * Replaces the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putShipmentAsync($shipment_id, $shipment = null, string $contentType = self::contentTypes['putShipment'][0])
+    {
+        return $this->putShipmentAsyncWithHttpInfo($shipment_id, $shipment, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putShipmentAsyncWithHttpInfo
+     *
+     * Replaces the Shipment resource.
+     *
+     * @param  string $shipment_id (required)
+     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putShipmentAsyncWithHttpInfo($shipment_id, $shipment = null, string $contentType = self::contentTypes['putShipment'][0])
+    {
+        $returnType = '\kruegge82\jumingo\Model\Shipment';
+        $request = $this->putShipmentRequest($shipment_id, $shipment, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putShipment'
+     *
+     * @param  string $shipment_id (required)
+     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putShipment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function putShipmentRequest($shipment_id, $shipment = null, string $contentType = self::contentTypes['putShipment'][0])
+    {
+
+        // verify the required parameter 'shipment_id' is set
+        if ($shipment_id === null || (is_array($shipment_id) && count($shipment_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $shipment_id when calling putShipment'
+            );
+        }
+
+
+
+        $resourcePath = '/v1/shipments/{shipment_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($shipment_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'shipment_id' . '}',
+                ObjectSerializer::toPathValue($shipment_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($shipment)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($shipment));
+            } else {
+                $httpBody = $shipment;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-AUTH-TOKEN'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateShipmentRateCheapestTariffV1
      *
      * Update shipments rate
@@ -1760,837 +2556,41 @@ class ShipmentApi
     }
 
     /**
-     * Operation v1ShipmentsShipmentIdDelete
-     *
-     * Removes the Shipment resource.
-     *
-     * @param  string $shipment_id shipment_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdDelete'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function v1ShipmentsShipmentIdDelete($shipment_id, string $contentType = self::contentTypes['v1ShipmentsShipmentIdDelete'][0])
-    {
-        $this->v1ShipmentsShipmentIdDeleteWithHttpInfo($shipment_id, $contentType);
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdDeleteWithHttpInfo
-     *
-     * Removes the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdDelete'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1ShipmentsShipmentIdDeleteWithHttpInfo($shipment_id, string $contentType = self::contentTypes['v1ShipmentsShipmentIdDelete'][0])
-    {
-        $request = $this->v1ShipmentsShipmentIdDeleteRequest($shipment_id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\Exception',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdDeleteAsync
-     *
-     * Removes the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsShipmentIdDeleteAsync($shipment_id, string $contentType = self::contentTypes['v1ShipmentsShipmentIdDelete'][0])
-    {
-        return $this->v1ShipmentsShipmentIdDeleteAsyncWithHttpInfo($shipment_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdDeleteAsyncWithHttpInfo
-     *
-     * Removes the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsShipmentIdDeleteAsyncWithHttpInfo($shipment_id, string $contentType = self::contentTypes['v1ShipmentsShipmentIdDelete'][0])
-    {
-        $returnType = '';
-        $request = $this->v1ShipmentsShipmentIdDeleteRequest($shipment_id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1ShipmentsShipmentIdDelete'
-     *
-     * @param  string $shipment_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1ShipmentsShipmentIdDeleteRequest($shipment_id, string $contentType = self::contentTypes['v1ShipmentsShipmentIdDelete'][0])
-    {
-
-        // verify the required parameter 'shipment_id' is set
-        if ($shipment_id === null || (is_array($shipment_id) && count($shipment_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $shipment_id when calling v1ShipmentsShipmentIdDelete'
-            );
-        }
-
-
-        $resourcePath = '/v1/shipments/{shipment_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($shipment_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'shipment_id' . '}',
-                ObjectSerializer::toPathValue($shipment_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdPut
-     *
-     * Replaces the Shipment resource.
-     *
-     * @param  string $shipment_id shipment_id (required)
-     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdPut'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \kruegge82\jumingo\Model\Shipment|\kruegge82\jumingo\Model\Exception|\kruegge82\jumingo\Model\Exception
-     */
-    public function v1ShipmentsShipmentIdPut($shipment_id, $shipment = null, string $contentType = self::contentTypes['v1ShipmentsShipmentIdPut'][0])
-    {
-        list($response) = $this->v1ShipmentsShipmentIdPutWithHttpInfo($shipment_id, $shipment, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdPutWithHttpInfo
-     *
-     * Replaces the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdPut'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \kruegge82\jumingo\Model\Shipment|\kruegge82\jumingo\Model\Exception|\kruegge82\jumingo\Model\Exception, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1ShipmentsShipmentIdPutWithHttpInfo($shipment_id, $shipment = null, string $contentType = self::contentTypes['v1ShipmentsShipmentIdPut'][0])
-    {
-        $request = $this->v1ShipmentsShipmentIdPutRequest($shipment_id, $shipment, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\kruegge82\jumingo\Model\Shipment',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\kruegge82\jumingo\Model\Exception',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\kruegge82\jumingo\Model\Exception',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\kruegge82\jumingo\Model\Shipment',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\Shipment',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\Exception',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\Exception',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdPutAsync
-     *
-     * Replaces the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdPut'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsShipmentIdPutAsync($shipment_id, $shipment = null, string $contentType = self::contentTypes['v1ShipmentsShipmentIdPut'][0])
-    {
-        return $this->v1ShipmentsShipmentIdPutAsyncWithHttpInfo($shipment_id, $shipment, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1ShipmentsShipmentIdPutAsyncWithHttpInfo
-     *
-     * Replaces the Shipment resource.
-     *
-     * @param  string $shipment_id (required)
-     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdPut'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsShipmentIdPutAsyncWithHttpInfo($shipment_id, $shipment = null, string $contentType = self::contentTypes['v1ShipmentsShipmentIdPut'][0])
-    {
-        $returnType = '\kruegge82\jumingo\Model\Shipment';
-        $request = $this->v1ShipmentsShipmentIdPutRequest($shipment_id, $shipment, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1ShipmentsShipmentIdPut'
-     *
-     * @param  string $shipment_id (required)
-     * @param  \kruegge82\jumingo\Model\UpdateShipment|null $shipment The updated Shipment resource (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsShipmentIdPut'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1ShipmentsShipmentIdPutRequest($shipment_id, $shipment = null, string $contentType = self::contentTypes['v1ShipmentsShipmentIdPut'][0])
-    {
-
-        // verify the required parameter 'shipment_id' is set
-        if ($shipment_id === null || (is_array($shipment_id) && count($shipment_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $shipment_id when calling v1ShipmentsShipmentIdPut'
-            );
-        }
-
-
-
-        $resourcePath = '/v1/shipments/{shipment_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($shipment_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'shipment_id' . '}',
-                ObjectSerializer::toPathValue($shipment_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($shipment)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($shipment));
-            } else {
-                $httpBody = $shipment;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'PUT',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1ShipmentsUuidFileUploadTypeDelete
-     *
-     * Deletes a commercial invoice or an export declaration for a shipment
-     *
-     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
-     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function v1ShipmentsUuidFileUploadTypeDelete($uuid, $type, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'][0])
-    {
-        $this->v1ShipmentsUuidFileUploadTypeDeleteWithHttpInfo($uuid, $type, $contentType);
-    }
-
-    /**
-     * Operation v1ShipmentsUuidFileUploadTypeDeleteWithHttpInfo
-     *
-     * Deletes a commercial invoice or an export declaration for a shipment
-     *
-     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
-     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'] to see the possible values for this operation
-     *
-     * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v1ShipmentsUuidFileUploadTypeDeleteWithHttpInfo($uuid, $type, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'][0])
-    {
-        $request = $this->v1ShipmentsUuidFileUploadTypeDeleteRequest($uuid, $type, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\kruegge82\jumingo\Model\Exception',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v1ShipmentsUuidFileUploadTypeDeleteAsync
-     *
-     * Deletes a commercial invoice or an export declaration for a shipment
-     *
-     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
-     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsUuidFileUploadTypeDeleteAsync($uuid, $type, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'][0])
-    {
-        return $this->v1ShipmentsUuidFileUploadTypeDeleteAsyncWithHttpInfo($uuid, $type, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v1ShipmentsUuidFileUploadTypeDeleteAsyncWithHttpInfo
-     *
-     * Deletes a commercial invoice or an export declaration for a shipment
-     *
-     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
-     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function v1ShipmentsUuidFileUploadTypeDeleteAsyncWithHttpInfo($uuid, $type, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'][0])
-    {
-        $returnType = '';
-        $request = $this->v1ShipmentsUuidFileUploadTypeDeleteRequest($uuid, $type, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v1ShipmentsUuidFileUploadTypeDelete'
-     *
-     * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
-     * @param  string $type The document type for the shipment to be deleted. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v1ShipmentsUuidFileUploadTypeDeleteRequest($uuid, $type, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypeDelete'][0])
-    {
-
-        // verify the required parameter 'uuid' is set
-        if ($uuid === null || (is_array($uuid) && count($uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $uuid when calling v1ShipmentsUuidFileUploadTypeDelete'
-            );
-        }
-
-        // verify the required parameter 'type' is set
-        if ($type === null || (is_array($type) && count($type) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $type when calling v1ShipmentsUuidFileUploadTypeDelete'
-            );
-        }
-
-
-        $resourcePath = '/v1/shipments/{uuid}/file/upload/{type}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'uuid' . '}',
-                ObjectSerializer::toPathValue($uuid),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($type !== null) {
-            $resourcePath = str_replace(
-                '{' . 'type' . '}',
-                ObjectSerializer::toPathValue($type),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-AUTH-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-AUTH-TOKEN'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v1ShipmentsUuidFileUploadTypePost
+     * Operation uploadShipmentFile
      *
      * Uploads a commercial invoice or an export declaration for a shipment
      *
      * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
      * @param  string $type The document type for the shipment to be uploaded. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
      * @param  \SplFileObject|null $file file (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShipmentFile'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function v1ShipmentsUuidFileUploadTypePost($uuid, $type, $file = null, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypePost'][0])
+    public function uploadShipmentFile($uuid, $type, $file = null, string $contentType = self::contentTypes['uploadShipmentFile'][0])
     {
-        $this->v1ShipmentsUuidFileUploadTypePostWithHttpInfo($uuid, $type, $file, $contentType);
+        $this->uploadShipmentFileWithHttpInfo($uuid, $type, $file, $contentType);
     }
 
     /**
-     * Operation v1ShipmentsUuidFileUploadTypePostWithHttpInfo
+     * Operation uploadShipmentFileWithHttpInfo
      *
      * Uploads a commercial invoice or an export declaration for a shipment
      *
      * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
      * @param  string $type The document type for the shipment to be uploaded. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
      * @param  \SplFileObject|null $file (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShipmentFile'] to see the possible values for this operation
      *
      * @throws \kruegge82\jumingo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v1ShipmentsUuidFileUploadTypePostWithHttpInfo($uuid, $type, $file = null, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypePost'][0])
+    public function uploadShipmentFileWithHttpInfo($uuid, $type, $file = null, string $contentType = self::contentTypes['uploadShipmentFile'][0])
     {
-        $request = $this->v1ShipmentsUuidFileUploadTypePostRequest($uuid, $type, $file, $contentType);
+        $request = $this->uploadShipmentFileRequest($uuid, $type, $file, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2634,21 +2634,21 @@ class ShipmentApi
     }
 
     /**
-     * Operation v1ShipmentsUuidFileUploadTypePostAsync
+     * Operation uploadShipmentFileAsync
      *
      * Uploads a commercial invoice or an export declaration for a shipment
      *
      * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
      * @param  string $type The document type for the shipment to be uploaded. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
      * @param  \SplFileObject|null $file (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShipmentFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ShipmentsUuidFileUploadTypePostAsync($uuid, $type, $file = null, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypePost'][0])
+    public function uploadShipmentFileAsync($uuid, $type, $file = null, string $contentType = self::contentTypes['uploadShipmentFile'][0])
     {
-        return $this->v1ShipmentsUuidFileUploadTypePostAsyncWithHttpInfo($uuid, $type, $file, $contentType)
+        return $this->uploadShipmentFileAsyncWithHttpInfo($uuid, $type, $file, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2657,22 +2657,22 @@ class ShipmentApi
     }
 
     /**
-     * Operation v1ShipmentsUuidFileUploadTypePostAsyncWithHttpInfo
+     * Operation uploadShipmentFileAsyncWithHttpInfo
      *
      * Uploads a commercial invoice or an export declaration for a shipment
      *
      * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
      * @param  string $type The document type for the shipment to be uploaded. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
      * @param  \SplFileObject|null $file (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShipmentFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function v1ShipmentsUuidFileUploadTypePostAsyncWithHttpInfo($uuid, $type, $file = null, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypePost'][0])
+    public function uploadShipmentFileAsyncWithHttpInfo($uuid, $type, $file = null, string $contentType = self::contentTypes['uploadShipmentFile'][0])
     {
         $returnType = '';
-        $request = $this->v1ShipmentsUuidFileUploadTypePostRequest($uuid, $type, $file, $contentType);
+        $request = $this->uploadShipmentFileRequest($uuid, $type, $file, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2698,30 +2698,30 @@ class ShipmentApi
     }
 
     /**
-     * Create request for operation 'v1ShipmentsUuidFileUploadTypePost'
+     * Create request for operation 'uploadShipmentFile'
      *
      * @param  string $uuid The shipment uuid. E.g. s_fbf8e2a57185478194fa264583b5b388 (required)
      * @param  string $type The document type for the shipment to be uploaded. E.g. &lt;b&gt;commercial-invoice&lt;/b&gt; or &lt;b&gt;export-declaration&lt;/b&gt; (required)
      * @param  \SplFileObject|null $file (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v1ShipmentsUuidFileUploadTypePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShipmentFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v1ShipmentsUuidFileUploadTypePostRequest($uuid, $type, $file = null, string $contentType = self::contentTypes['v1ShipmentsUuidFileUploadTypePost'][0])
+    public function uploadShipmentFileRequest($uuid, $type, $file = null, string $contentType = self::contentTypes['uploadShipmentFile'][0])
     {
 
         // verify the required parameter 'uuid' is set
         if ($uuid === null || (is_array($uuid) && count($uuid) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $uuid when calling v1ShipmentsUuidFileUploadTypePost'
+                'Missing the required parameter $uuid when calling uploadShipmentFile'
             );
         }
 
         // verify the required parameter 'type' is set
         if ($type === null || (is_array($type) && count($type) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $type when calling v1ShipmentsUuidFileUploadTypePost'
+                'Missing the required parameter $type when calling uploadShipmentFile'
             );
         }
 

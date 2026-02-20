@@ -106,13 +106,13 @@ $apiInstance = new kruegge82\jumingo\Api\CarrierApi(
     new GuzzleHttp\Client(),
     $config
 );
-$access_point_search = new \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest(); // \kruegge82\jumingo\Model\V1CarrierAccessPointsSearchPostRequest
+$access_point_search = new \kruegge82\jumingo\Model\PostAccessPointsSearchRequest(); // \kruegge82\jumingo\Model\PostAccessPointsSearchRequest
 
 try {
-    $result = $apiInstance->v1CarrierAccessPointsSearchPost($access_point_search);
+    $result = $apiInstance->postAccessPointsSearch($access_point_search);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CarrierApi->v1CarrierAccessPointsSearchPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CarrierApi->postAccessPointsSearch: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -123,25 +123,25 @@ All URIs are relative to *https://api.jumingo.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CarrierApi* | [**v1CarrierAccessPointsSearchPost**](docs/Api/CarrierApi.md#v1carrieraccesspointssearchpost) | **POST** /v1/carrier/access-points-search | Get carrier aaccess points by an address with some radius in kilometers
+*CarrierApi* | [**postAccessPointsSearch**](docs/Api/CarrierApi.md#postaccesspointssearch) | **POST** /v1/carrier/access-points-search | Get carrier aaccess points by an address with some radius in kilometers
 *CartApi* | [**postCartTotal**](docs/Api/CartApi.md#postcarttotal) | **POST** /v1/cart/total | Get cart total
 *ConnectionApi* | [**createConnection**](docs/Api/ConnectionApi.md#createconnection) | **POST** /v1/connections | Create a Connection
-*ConnectionApi* | [**v1ConnectionsGet**](docs/Api/ConnectionApi.md#v1connectionsget) | **GET** /v1/connections | Retrieves the collection of Connection resources.
-*ConnectionApi* | [**v1ConnectionsUuidGet**](docs/Api/ConnectionApi.md#v1connectionsuuidget) | **GET** /v1/connections/{uuid} | Get the Connection
+*ConnectionApi* | [**getConnection**](docs/Api/ConnectionApi.md#getconnection) | **GET** /v1/connections/{uuid} | Get the Connection
+*ConnectionApi* | [**getConnections**](docs/Api/ConnectionApi.md#getconnections) | **GET** /v1/connections | Retrieves the collection of Connection resources.
 *OrderApi* | [**getAppOrderCollection**](docs/Api/OrderApi.md#getappordercollection) | **GET** /v1/orders | Retrieves the collection of Order resources.
+*OrderApi* | [**getOrder**](docs/Api/OrderApi.md#getorder) | **GET** /v1/orders/{id} | Retrieves a Order resource.
+*OrderApi* | [**getOrderDouments**](docs/Api/OrderApi.md#getorderdouments) | **GET** /v1/orders/{id}/documents | Retrieves a OrderDocuments resource.
 *OrderApi* | [**postOrders**](docs/Api/OrderApi.md#postorders) | **POST** /v1/orders | Make a payment.
-*OrderApi* | [**v1OrdersIdDocumentsGet**](docs/Api/OrderApi.md#v1ordersiddocumentsget) | **GET** /v1/orders/{id}/documents | Retrieves a OrderDocuments resource.
-*OrderApi* | [**v1OrdersIdGet**](docs/Api/OrderApi.md#v1ordersidget) | **GET** /v1/orders/{id} | Retrieves a Order resource.
 *ShipmentApi* | [**createShipment**](docs/Api/ShipmentApi.md#createshipment) | **POST** /v1/shipments | Create a Shipment
+*ShipmentApi* | [**deleteShipment**](docs/Api/ShipmentApi.md#deleteshipment) | **DELETE** /v1/shipments/{shipment_id} | Removes the Shipment resource.
+*ShipmentApi* | [**deleteShipmentFile**](docs/Api/ShipmentApi.md#deleteshipmentfile) | **DELETE** /v1/shipments/{uuid}/file/upload/{type} | Deletes a commercial invoice or an export declaration for a shipment
 *ShipmentApi* | [**getShipment**](docs/Api/ShipmentApi.md#getshipment) | **GET** /v1/shipments/{shipment_id} | Retrieve a Shipment
 *ShipmentApi* | [**getShipments**](docs/Api/ShipmentApi.md#getshipments) | **GET** /v1/shipments | Get Shipments
 *ShipmentApi* | [**patchV1ShipmentItem**](docs/Api/ShipmentApi.md#patchv1shipmentitem) | **PATCH** /v1/shipments/{shipment_id} | Updates the Shipment resource.
+*ShipmentApi* | [**putShipment**](docs/Api/ShipmentApi.md#putshipment) | **PUT** /v1/shipments/{shipment_id} | Replaces the Shipment resource.
 *ShipmentApi* | [**updateShipmentRateCheapestTariffV1**](docs/Api/ShipmentApi.md#updateshipmentratecheapesttariffv1) | **POST** /v1/shipments/cheapest | Update shipments rate
-*ShipmentApi* | [**v1ShipmentsShipmentIdDelete**](docs/Api/ShipmentApi.md#v1shipmentsshipmentiddelete) | **DELETE** /v1/shipments/{shipment_id} | Removes the Shipment resource.
-*ShipmentApi* | [**v1ShipmentsShipmentIdPut**](docs/Api/ShipmentApi.md#v1shipmentsshipmentidput) | **PUT** /v1/shipments/{shipment_id} | Replaces the Shipment resource.
-*ShipmentApi* | [**v1ShipmentsUuidFileUploadTypeDelete**](docs/Api/ShipmentApi.md#v1shipmentsuuidfileuploadtypedelete) | **DELETE** /v1/shipments/{uuid}/file/upload/{type} | Deletes a commercial invoice or an export declaration for a shipment
-*ShipmentApi* | [**v1ShipmentsUuidFileUploadTypePost**](docs/Api/ShipmentApi.md#v1shipmentsuuidfileuploadtypepost) | **POST** /v1/shipments/{uuid}/file/upload/{type} | Uploads a commercial invoice or an export declaration for a shipment
-*ShipmentRateApi* | [**v1ShipmentRatesPost**](docs/Api/ShipmentRateApi.md#v1shipmentratespost) | **POST** /v1/shipment-rates | Returns shipment rates for a given shipment.
+*ShipmentApi* | [**uploadShipmentFile**](docs/Api/ShipmentApi.md#uploadshipmentfile) | **POST** /v1/shipments/{uuid}/file/upload/{type} | Uploads a commercial invoice or an export declaration for a shipment
+*ShipmentRateApi* | [**postShipmentRates**](docs/Api/ShipmentRateApi.md#postshipmentrates) | **POST** /v1/shipment-rates | Returns shipment rates for a given shipment.
 
 ## Models
 
@@ -203,6 +203,7 @@ Class | Method | HTTP request | Description
 - [PackageTypeDescription](docs/Model/PackageTypeDescription.md)
 - [PackagingType](docs/Model/PackagingType.md)
 - [PaymentMethodsOutput](docs/Model/PaymentMethodsOutput.md)
+- [PostAccessPointsSearchRequest](docs/Model/PostAccessPointsSearchRequest.md)
 - [ProformaDocument](docs/Model/ProformaDocument.md)
 - [Shipment](docs/Model/Shipment.md)
 - [ShipmentAddress](docs/Model/ShipmentAddress.md)
@@ -254,7 +255,6 @@ Class | Method | HTTP request | Description
 - [TrackingStep](docs/Model/TrackingStep.md)
 - [UpdateShipment](docs/Model/UpdateShipment.md)
 - [UpdateShipmentRateCheapestTariffV1Request](docs/Model/UpdateShipmentRateCheapestTariffV1Request.md)
-- [V1CarrierAccessPointsSearchPostRequest](docs/Model/V1CarrierAccessPointsSearchPostRequest.md)
 
 ## Authorization
 
