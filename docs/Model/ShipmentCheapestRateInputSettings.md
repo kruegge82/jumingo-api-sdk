@@ -1,4 +1,4 @@
-# # ShipmentCheapestRateInputSettings
+# ShipmentCheapestRateInputSettings
 
 ## Properties
 

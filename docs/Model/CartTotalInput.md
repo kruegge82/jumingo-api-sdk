@@ -1,4 +1,4 @@
-# # CartTotalInput
+# CartTotalInput
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # ShipmentTrackingProgress
+# ShipmentTrackingProgress
 
 ## Properties
 

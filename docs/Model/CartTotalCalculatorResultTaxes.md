@@ -1,4 +1,4 @@
-# # CartTotalCalculatorResultTaxes
+# CartTotalCalculatorResultTaxes
 
 ## Properties
 

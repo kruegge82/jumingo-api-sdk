@@ -1,4 +1,4 @@
-# # ShipmentTrackingData
+# ShipmentTrackingData
 
 ## Properties
 

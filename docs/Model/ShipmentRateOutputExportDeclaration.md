@@ -1,4 +1,4 @@
-# # ShipmentRateOutputExportDeclaration
+# ShipmentRateOutputExportDeclaration
 
 ## Properties
 

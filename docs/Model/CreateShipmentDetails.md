@@ -1,4 +1,4 @@
-# # CreateShipmentDetails
+# CreateShipmentDetails
 
 ## Properties
 

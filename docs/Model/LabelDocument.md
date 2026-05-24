@@ -1,4 +1,4 @@
-# # LabelDocument
+# LabelDocument
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # TariffTariffDatesTransitTimeRange
+# TariffTariffDatesTransitTimeRange
 
 ## Properties
 

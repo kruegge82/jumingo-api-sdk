@@ -1,4 +1,4 @@
-# # ShipmentRateSummaryPackage
+# ShipmentRateSummaryPackage
 
 ## Properties
 

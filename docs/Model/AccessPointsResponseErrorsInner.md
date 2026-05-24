@@ -1,4 +1,4 @@
-# # AccessPointsResponseErrorsInner
+# AccessPointsResponseErrorsInner
 
 ## Properties
 

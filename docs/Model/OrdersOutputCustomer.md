@@ -1,4 +1,4 @@
-# # OrdersOutputCustomer
+# OrdersOutputCustomer
 
 ## Properties
 

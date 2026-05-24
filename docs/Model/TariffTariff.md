@@ -1,4 +1,4 @@
-# # TariffTariff
+# TariffTariff
 
 ## Properties
 

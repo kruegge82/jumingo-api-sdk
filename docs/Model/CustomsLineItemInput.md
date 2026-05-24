@@ -1,4 +1,4 @@
-# # CustomsLineItemInput
+# CustomsLineItemInput
 
 ## Properties
 

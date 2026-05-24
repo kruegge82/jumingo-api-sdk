@@ -1,4 +1,4 @@
-# # ShipmentRateOutputInsurance
+# ShipmentRateOutputInsurance
 
 ## Properties
 

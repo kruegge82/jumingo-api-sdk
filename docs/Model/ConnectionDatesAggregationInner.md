@@ -1,4 +1,4 @@
-# # ConnectionDatesAggregationInner
+# ConnectionDatesAggregationInner
 
 ## Properties
 

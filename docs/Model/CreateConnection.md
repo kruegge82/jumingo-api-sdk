@@ -1,4 +1,4 @@
-# # CreateConnection
+# CreateConnection
 
 ## Properties
 

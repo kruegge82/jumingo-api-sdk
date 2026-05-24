@@ -1,4 +1,4 @@
-# # TariffItem
+# TariffItem
 
 ## Properties
 

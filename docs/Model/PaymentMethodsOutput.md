@@ -1,4 +1,4 @@
-# # PaymentMethodsOutput
+# PaymentMethodsOutput
 
 ## Properties
 

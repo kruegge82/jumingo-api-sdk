@@ -1,4 +1,4 @@
-# # ConnectionType
+# ConnectionType
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # ConfirmationDocument
+# ConfirmationDocument
 
 ## Properties
 

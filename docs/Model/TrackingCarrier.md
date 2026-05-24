@@ -1,4 +1,4 @@
-# # TrackingCarrier
+# TrackingCarrier
 
 ## Properties
 

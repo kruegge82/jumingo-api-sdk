@@ -1,4 +1,4 @@
-# # CartTotalCalculatorResultAdditionalServicesSeparately
+# CartTotalCalculatorResultAdditionalServicesSeparately
 
 ## Properties
 

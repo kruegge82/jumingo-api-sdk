@@ -1,4 +1,4 @@
-# # PackageTypeDescription
+# PackageTypeDescription
 
 ## Properties
 

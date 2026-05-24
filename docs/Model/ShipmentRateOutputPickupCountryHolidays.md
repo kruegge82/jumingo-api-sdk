@@ -1,4 +1,4 @@
-# # ShipmentRateOutputPickupCountryHolidays
+# ShipmentRateOutputPickupCountryHolidays
 
 ## Properties
 

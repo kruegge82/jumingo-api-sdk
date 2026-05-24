@@ -1,4 +1,4 @@
-# # ShipmentRate
+# ShipmentRate
 
 ## Properties
 

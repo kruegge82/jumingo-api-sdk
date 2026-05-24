@@ -1,4 +1,4 @@
-# # OrdersOutputShipmentsInner
+# OrdersOutputShipmentsInner
 
 ## Properties
 

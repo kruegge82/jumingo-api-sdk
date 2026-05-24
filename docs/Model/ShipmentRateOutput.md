@@ -1,4 +1,4 @@
-# # ShipmentRateOutput
+# ShipmentRateOutput
 
 ## Properties
 

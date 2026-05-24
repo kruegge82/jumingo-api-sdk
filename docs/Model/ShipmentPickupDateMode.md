@@ -1,4 +1,4 @@
-# # ShipmentPickupDateMode
+# ShipmentPickupDateMode
 
 ## Properties
 

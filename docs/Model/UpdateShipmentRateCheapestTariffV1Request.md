@@ -1,4 +1,4 @@
-# # UpdateShipmentRateCheapestTariffV1Request
+# UpdateShipmentRateCheapestTariffV1Request
 
 ## Properties
 

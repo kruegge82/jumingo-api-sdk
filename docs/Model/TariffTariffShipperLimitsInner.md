@@ -1,4 +1,4 @@
-# # TariffTariffShipperLimitsInner
+# TariffTariffShipperLimitsInner
 
 ## Properties
 

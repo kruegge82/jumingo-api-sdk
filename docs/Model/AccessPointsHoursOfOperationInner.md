@@ -1,4 +1,4 @@
-# # AccessPointsHoursOfOperationInner
+# AccessPointsHoursOfOperationInner
 
 ## Properties
 

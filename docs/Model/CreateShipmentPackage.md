@@ -1,4 +1,4 @@
-# # CreateShipmentPackage
+# CreateShipmentPackage
 
 ## Properties
 

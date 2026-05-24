@@ -1,4 +1,4 @@
-# # AccessPoints
+# AccessPoints
 
 ## Properties
 

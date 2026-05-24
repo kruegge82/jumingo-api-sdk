@@ -1,4 +1,4 @@
-# # PostAccessPointsSearchRequest
+# PostAccessPointsSearchRequest
 
 ## Properties
 

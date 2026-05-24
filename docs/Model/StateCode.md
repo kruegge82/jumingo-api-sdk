@@ -1,4 +1,4 @@
-# # StateCode
+# StateCode
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # ShipmentFileDocument
+# ShipmentFileDocument
 
 ## Properties
 

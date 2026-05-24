@@ -1,4 +1,4 @@
-# # AccessPointsResponse
+# AccessPointsResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # ConnectionCustomData
+# ConnectionCustomData
 
 ## Properties
 

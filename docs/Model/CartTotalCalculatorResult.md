@@ -1,4 +1,4 @@
-# # CartTotalCalculatorResult
+# CartTotalCalculatorResult
 
 ## Properties
 

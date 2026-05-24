@@ -1,4 +1,4 @@
-# # PackagingType
+# PackagingType
 
 ## Properties
 

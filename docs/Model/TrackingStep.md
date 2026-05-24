@@ -1,4 +1,4 @@
-# # TrackingStep
+# TrackingStep
 
 ## Properties
 

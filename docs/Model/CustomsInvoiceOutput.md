@@ -1,4 +1,4 @@
-# # CustomsInvoiceOutput
+# CustomsInvoiceOutput
 
 ## Properties
 

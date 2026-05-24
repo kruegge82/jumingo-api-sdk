@@ -1,4 +1,4 @@
-# # ShipmentConnection
+# ShipmentConnection
 
 ## Properties
 

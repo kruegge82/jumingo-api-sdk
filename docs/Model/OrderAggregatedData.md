@@ -1,4 +1,4 @@
-# # OrderAggregatedData
+# OrderAggregatedData
 
 ## Properties
 

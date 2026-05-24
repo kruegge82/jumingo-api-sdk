@@ -1,4 +1,4 @@
-# # ConnectionTypeFormFieldsInner
+# ConnectionTypeFormFieldsInner
 
 ## Properties
 

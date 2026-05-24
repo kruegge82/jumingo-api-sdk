@@ -1,4 +1,4 @@
-# # CustomsInvoiceInput
+# CustomsInvoiceInput
 
 ## Properties
 
