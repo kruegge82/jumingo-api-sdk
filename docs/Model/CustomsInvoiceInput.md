@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **invoice_number** | **string** | Invoice Number | [optional]
 **invoice_date** | **\DateTime** | Invoice Date | [optional]
 **currency** | [**\kruegge82\jumingo\Model\CurrencyCode**](CurrencyCode.md) |  | [optional]
+**use_commercial_invoice** | **bool** | An indicator that shows whether to use a commercial invoice or a proforma invoice | [optional]
+**use_commercial_invoice** | **bool** | An indicator that shows whether to use a commercial invoice or a proforma invoice | [optional]
 **export_reason** | **string** |  | [optional]
 **remarks** | **string[]** | Remarks | [optional]
 **line_items** | [**\kruegge82\jumingo\Model\CustomsLineItemInput[]**](CustomsLineItemInput.md) |  | [optional]

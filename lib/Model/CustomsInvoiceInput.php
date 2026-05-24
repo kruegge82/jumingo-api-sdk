@@ -61,6 +61,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => 'string',
         'invoice_date' => '\DateTime',
         'currency' => '\kruegge82\jumingo\Model\CurrencyCode',
+        'use_commercial_invoice' => 'bool',
+        'use_commercial_invoice' => 'bool',
         'export_reason' => 'string',
         'remarks' => 'string[]',
         'line_items' => '\kruegge82\jumingo\Model\CustomsLineItemInput[]'
@@ -77,6 +79,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => null,
         'invoice_date' => 'date',
         'currency' => null,
+        'use_commercial_invoice' => null,
+        'use_commercial_invoice' => null,
         'export_reason' => null,
         'remarks' => null,
         'line_items' => null
@@ -91,6 +95,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => false,
         'invoice_date' => false,
         'currency' => false,
+        'use_commercial_invoice' => false,
+        'use_commercial_invoice' => false,
         'export_reason' => false,
         'remarks' => false,
         'line_items' => false
@@ -185,6 +191,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => 'invoiceNumber',
         'invoice_date' => 'invoiceDate',
         'currency' => 'currency',
+        'use_commercial_invoice' => 'use_commercial_invoice',
+        'use_commercial_invoice' => 'useCommercialInvoice',
         'export_reason' => 'exportReason',
         'remarks' => 'remarks',
         'line_items' => 'lineItems'
@@ -199,6 +207,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => 'setInvoiceNumber',
         'invoice_date' => 'setInvoiceDate',
         'currency' => 'setCurrency',
+        'use_commercial_invoice' => 'setUseCommercialInvoice',
+        'use_commercial_invoice' => 'setUseCommercialInvoice',
         'export_reason' => 'setExportReason',
         'remarks' => 'setRemarks',
         'line_items' => 'setLineItems'
@@ -213,6 +223,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => 'getInvoiceNumber',
         'invoice_date' => 'getInvoiceDate',
         'currency' => 'getCurrency',
+        'use_commercial_invoice' => 'getUseCommercialInvoice',
+        'use_commercial_invoice' => 'getUseCommercialInvoice',
         'export_reason' => 'getExportReason',
         'remarks' => 'getRemarks',
         'line_items' => 'getLineItems'
@@ -305,6 +317,8 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('invoice_number', $data ?? [], null);
         $this->setIfExists('invoice_date', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('use_commercial_invoice', $data ?? [], null);
+        $this->setIfExists('use_commercial_invoice', $data ?? [], null);
         $this->setIfExists('export_reason', $data ?? [], null);
         $this->setIfExists('remarks', $data ?? [], null);
         $this->setIfExists('line_items', $data ?? [], null);
@@ -446,6 +460,60 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
         $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_commercial_invoice
+     *
+     * @return bool|null
+     */
+    public function getUseCommercialInvoice()
+    {
+        return $this->container['use_commercial_invoice'];
+    }
+
+    /**
+     * Sets use_commercial_invoice
+     *
+     * @param bool|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
+     *
+     * @return self
+     */
+    public function setUseCommercialInvoice($use_commercial_invoice)
+    {
+        if (is_null($use_commercial_invoice)) {
+            throw new \InvalidArgumentException('non-nullable use_commercial_invoice cannot be null');
+        }
+        $this->container['use_commercial_invoice'] = $use_commercial_invoice;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_commercial_invoice
+     *
+     * @return bool|null
+     */
+    public function getUseCommercialInvoice()
+    {
+        return $this->container['use_commercial_invoice'];
+    }
+
+    /**
+     * Sets use_commercial_invoice
+     *
+     * @param bool|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
+     *
+     * @return self
+     */
+    public function setUseCommercialInvoice($use_commercial_invoice)
+    {
+        if (is_null($use_commercial_invoice)) {
+            throw new \InvalidArgumentException('non-nullable use_commercial_invoice cannot be null');
+        }
+        $this->container['use_commercial_invoice'] = $use_commercial_invoice;
 
         return $this;
     }
