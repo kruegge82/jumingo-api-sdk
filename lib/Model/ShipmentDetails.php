@@ -71,6 +71,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => 'float',
         'export_license' => 'bool',
         'extra_insurance_value' => 'float',
+        'use_commercial_invoice' => 'int',
         'extra_insurance_type' => 'string',
         'export_license_price_brutto' => 'float',
         'shipment_order_number_short' => 'string',
@@ -101,6 +102,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => 'float',
         'export_license' => null,
         'extra_insurance_value' => 'float',
+        'use_commercial_invoice' => null,
         'extra_insurance_type' => null,
         'export_license_price_brutto' => 'float',
         'shipment_order_number_short' => null,
@@ -129,6 +131,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => false,
         'export_license' => false,
         'extra_insurance_value' => false,
+        'use_commercial_invoice' => false,
         'extra_insurance_type' => false,
         'export_license_price_brutto' => false,
         'shipment_order_number_short' => false,
@@ -237,6 +240,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => 'extra_insurance_price_brutto',
         'export_license' => 'export_license',
         'extra_insurance_value' => 'extra_insurance_value',
+        'use_commercial_invoice' => 'useCommercialInvoice',
         'extra_insurance_type' => 'extra_insurance_type',
         'export_license_price_brutto' => 'export_license_price_brutto',
         'shipment_order_number_short' => 'shipment_order_number_short',
@@ -265,6 +269,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => 'setExtraInsurancePriceBrutto',
         'export_license' => 'setExportLicense',
         'extra_insurance_value' => 'setExtraInsuranceValue',
+        'use_commercial_invoice' => 'setUseCommercialInvoice',
         'extra_insurance_type' => 'setExtraInsuranceType',
         'export_license_price_brutto' => 'setExportLicensePriceBrutto',
         'shipment_order_number_short' => 'setShipmentOrderNumberShort',
@@ -293,6 +298,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'extra_insurance_price_brutto' => 'getExtraInsurancePriceBrutto',
         'export_license' => 'getExportLicense',
         'extra_insurance_value' => 'getExtraInsuranceValue',
+        'use_commercial_invoice' => 'getUseCommercialInvoice',
         'extra_insurance_type' => 'getExtraInsuranceType',
         'export_license_price_brutto' => 'getExportLicensePriceBrutto',
         'shipment_order_number_short' => 'getShipmentOrderNumberShort',
@@ -387,6 +393,7 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('extra_insurance_price_brutto', $data ?? [], null);
         $this->setIfExists('export_license', $data ?? [], null);
         $this->setIfExists('extra_insurance_value', $data ?? [], null);
+        $this->setIfExists('use_commercial_invoice', $data ?? [], null);
         $this->setIfExists('extra_insurance_type', $data ?? [], 'standard');
         $this->setIfExists('export_license_price_brutto', $data ?? [], null);
         $this->setIfExists('shipment_order_number_short', $data ?? [], null);
@@ -866,6 +873,33 @@ class ShipmentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable extra_insurance_value cannot be null');
         }
         $this->container['extra_insurance_value'] = $extra_insurance_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_commercial_invoice
+     *
+     * @return int|null
+     */
+    public function getUseCommercialInvoice()
+    {
+        return $this->container['use_commercial_invoice'];
+    }
+
+    /**
+     * Sets use_commercial_invoice
+     *
+     * @param int|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
+     *
+     * @return self
+     */
+    public function setUseCommercialInvoice($use_commercial_invoice)
+    {
+        if (is_null($use_commercial_invoice)) {
+            throw new \InvalidArgumentException('non-nullable use_commercial_invoice cannot be null');
+        }
+        $this->container['use_commercial_invoice'] = $use_commercial_invoice;
 
         return $this;
     }

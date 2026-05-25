@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **extra_insurance_price_brutto** | **float** | Amount of extra insurance value brutto | [optional]
 **export_license** | **bool** | Indicate if you need an export license and want to buy it along with the shipment | [optional]
 **extra_insurance_value** | **float** | Amount of extra insurance value | [optional]
+**use_commercial_invoice** | **int** | An indicator that shows whether to use a commercial invoice or a proforma invoice | [optional]
 **extra_insurance_type** | **string** | Type of insurance. Possible values: standard | premium | [optional] [default to 'standard']
 **export_license_price_brutto** | **float** | Amount of extra license price brutto | [optional]
 **shipment_order_number_short** | **string** | Shipment order number (only after the order has been placed) | [optional]

@@ -340,6 +340,10 @@ class CustomsLineItemInput implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['content']) && (mb_strlen($this->container['content']) > 35)) {
+            $invalidProperties[] = "invalid value for 'content', the character length must be smaller than or equal to 35.";
+        }
+
         $allowedValues = $this->getUnitOfMeasurementAllowableValues();
         if (!is_null($this->container['unit_of_measurement']) && !in_array($this->container['unit_of_measurement'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -386,6 +390,10 @@ class CustomsLineItemInput implements ModelInterface, ArrayAccess, \JsonSerializ
         if (is_null($content)) {
             throw new \InvalidArgumentException('non-nullable content cannot be null');
         }
+        if ((mb_strlen($content) > 35)) {
+            throw new \InvalidArgumentException('invalid length for $content when calling CustomsLineItemInput., must be smaller than or equal to 35.');
+        }
+
         $this->container['content'] = $content;
 
         return $this;

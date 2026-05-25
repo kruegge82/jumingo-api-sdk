@@ -61,7 +61,7 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'invoice_number' => 'string',
         'invoice_date' => '\DateTime',
         'currency' => '\kruegge82\jumingo\Model\CurrencyCode',
-        'use_commercial_invoice' => 'bool',
+        'use_commercial_invoice' => 'int',
         'export_reason' => 'string',
         'remarks' => 'string[]',
         'line_items' => '\kruegge82\jumingo\Model\CustomsLineItemInput[]'
@@ -460,7 +460,7 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets use_commercial_invoice
      *
-     * @return bool|null
+     * @return int|null
      */
     public function getUseCommercialInvoice()
     {
@@ -470,7 +470,7 @@ class CustomsInvoiceInput implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets use_commercial_invoice
      *
-     * @param bool|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
+     * @param int|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
      *
      * @return self
      */
