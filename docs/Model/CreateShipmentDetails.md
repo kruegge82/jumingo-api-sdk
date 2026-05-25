@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **insurance_amount** | **int** | Amount of additional insurance value | [optional]
 **insurance_currency** | [**\kruegge82\jumingo\Model\CurrencyCode**](CurrencyCode.md) |  | [optional]
 **extra_insurance_value** | **int** | Amount of extra insurance value | [optional]
+**use_commercial_invoice** | **int** | An indicator that shows whether to use a commercial invoice or a proforma invoice | [optional]
 **extra_insurance_type** | **string** | Type of insurance. Possible values: standard | premium | [optional]
 **export_license** | **bool** | Indicate if you need an export license and want to buy it along with the shipment | [optional]
 **packaging_type** | [**\kruegge82\jumingo\Model\PackagingType**](PackagingType.md) |  | [optional]
