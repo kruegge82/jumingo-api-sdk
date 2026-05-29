@@ -68,7 +68,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => 'int',
         'insurance_currency' => '\kruegge82\jumingo\Model\CurrencyCode',
         'extra_insurance_value' => 'int',
-        'use_commercial_invoice' => 'int',
+        'settings' => 'array<string,mixed>',
         'extra_insurance_type' => 'string',
         'export_license' => 'bool',
         'packaging_type' => '\kruegge82\jumingo\Model\PackagingType',
@@ -94,7 +94,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => 'int32',
         'insurance_currency' => null,
         'extra_insurance_value' => null,
-        'use_commercial_invoice' => null,
+        'settings' => null,
         'extra_insurance_type' => null,
         'export_license' => null,
         'packaging_type' => null,
@@ -118,7 +118,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => false,
         'insurance_currency' => false,
         'extra_insurance_value' => false,
-        'use_commercial_invoice' => false,
+        'settings' => false,
         'extra_insurance_type' => false,
         'export_license' => false,
         'packaging_type' => false,
@@ -222,7 +222,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => 'insurance_amount',
         'insurance_currency' => 'insurance_currency',
         'extra_insurance_value' => 'extra_insurance_value',
-        'use_commercial_invoice' => 'useCommercialInvoice',
+        'settings' => 'settings',
         'extra_insurance_type' => 'extra_insurance_type',
         'export_license' => 'export_license',
         'packaging_type' => 'packaging_type',
@@ -246,7 +246,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => 'setInsuranceAmount',
         'insurance_currency' => 'setInsuranceCurrency',
         'extra_insurance_value' => 'setExtraInsuranceValue',
-        'use_commercial_invoice' => 'setUseCommercialInvoice',
+        'settings' => 'setSettings',
         'extra_insurance_type' => 'setExtraInsuranceType',
         'export_license' => 'setExportLicense',
         'packaging_type' => 'setPackagingType',
@@ -270,7 +270,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         'insurance_amount' => 'getInsuranceAmount',
         'insurance_currency' => 'getInsuranceCurrency',
         'extra_insurance_value' => 'getExtraInsuranceValue',
-        'use_commercial_invoice' => 'getUseCommercialInvoice',
+        'settings' => 'getSettings',
         'extra_insurance_type' => 'getExtraInsuranceType',
         'export_license' => 'getExportLicense',
         'packaging_type' => 'getPackagingType',
@@ -360,7 +360,7 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('insurance_amount', $data ?? [], null);
         $this->setIfExists('insurance_currency', $data ?? [], null);
         $this->setIfExists('extra_insurance_value', $data ?? [], null);
-        $this->setIfExists('use_commercial_invoice', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('extra_insurance_type', $data ?? [], null);
         $this->setIfExists('export_license', $data ?? [], null);
         $this->setIfExists('packaging_type', $data ?? [], null);
@@ -774,28 +774,28 @@ class CreateShipmentDetails implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets use_commercial_invoice
+     * Gets settings
      *
-     * @return int|null
+     * @return array<string,mixed>|null
      */
-    public function getUseCommercialInvoice()
+    public function getSettings()
     {
-        return $this->container['use_commercial_invoice'];
+        return $this->container['settings'];
     }
 
     /**
-     * Sets use_commercial_invoice
+     * Sets settings
      *
-     * @param int|null $use_commercial_invoice An indicator that shows whether to use a commercial invoice or a proforma invoice
+     * @param array<string,mixed>|null $settings Additional shipment details settings.
      *
      * @return self
      */
-    public function setUseCommercialInvoice($use_commercial_invoice)
+    public function setSettings($settings)
     {
-        if (is_null($use_commercial_invoice)) {
-            throw new \InvalidArgumentException('non-nullable use_commercial_invoice cannot be null');
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
-        $this->container['use_commercial_invoice'] = $use_commercial_invoice;
+        $this->container['settings'] = $settings;
 
         return $this;
     }

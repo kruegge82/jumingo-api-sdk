@@ -66,8 +66,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => '\kruegge82\jumingo\Model\CustomsInvoiceInput',
         'connection' => '\kruegge82\jumingo\Model\CreateShipmentConnection',
         'rate' => '\kruegge82\jumingo\Model\CreateShipmentRate',
-        'label_format' => 'string',
-        'settings' => '\kruegge82\jumingo\Model\ShipmentSettings'
+        'label_format' => 'string'
     ];
 
     /**
@@ -86,8 +85,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => null,
         'connection' => null,
         'rate' => null,
-        'label_format' => null,
-        'settings' => null
+        'label_format' => null
     ];
 
     /**
@@ -104,8 +102,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => false,
         'connection' => false,
         'rate' => false,
-        'label_format' => false,
-        'settings' => false
+        'label_format' => false
     ];
 
     /**
@@ -202,8 +199,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => 'customs_invoice',
         'connection' => 'connection',
         'rate' => 'rate',
-        'label_format' => 'label_format',
-        'settings' => 'settings'
+        'label_format' => 'label_format'
     ];
 
     /**
@@ -220,8 +216,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => 'setCustomsInvoice',
         'connection' => 'setConnection',
         'rate' => 'setRate',
-        'label_format' => 'setLabelFormat',
-        'settings' => 'setSettings'
+        'label_format' => 'setLabelFormat'
     ];
 
     /**
@@ -238,8 +233,7 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         'customs_invoice' => 'getCustomsInvoice',
         'connection' => 'getConnection',
         'rate' => 'getRate',
-        'label_format' => 'getLabelFormat',
-        'settings' => 'getSettings'
+        'label_format' => 'getLabelFormat'
     ];
 
     /**
@@ -323,7 +317,6 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('connection', $data ?? [], null);
         $this->setIfExists('rate', $data ?? [], null);
         $this->setIfExists('label_format', $data ?? [], null);
-        $this->setIfExists('settings', $data ?? [], null);
     }
 
     /**
@@ -638,33 +631,6 @@ class UpdateShipment implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
         $this->container['label_format'] = $label_format;
-
-        return $this;
-    }
-
-    /**
-     * Gets settings
-     *
-     * @return \kruegge82\jumingo\Model\ShipmentSettings|null
-     */
-    public function getSettings()
-    {
-        return $this->container['settings'];
-    }
-
-    /**
-     * Sets settings
-     *
-     * @param \kruegge82\jumingo\Model\ShipmentSettings|null $settings settings
-     *
-     * @return self
-     */
-    public function setSettings($settings)
-    {
-        if (is_null($settings)) {
-            throw new \InvalidArgumentException('non-nullable settings cannot be null');
-        }
-        $this->container['settings'] = $settings;
 
         return $this;
     }
